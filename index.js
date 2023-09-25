@@ -1,0 +1,18 @@
+const express = require('express');
+const mongoose = require('mongoose');
+
+require('dotenv').config();
+
+const andrewRoute = require('./routes/andrew');
+
+mongoose
+    .connect(process.env.DB_URI, { useNewUrlParser: true })
+    .then(() => {
+        const app = express();
+        app.use(express.json());
+        app.use("/andrew", andrewRoute);
+
+        app.listen(process.env.PORT, () => {
+            console.log("Successfully connected to database!");
+        })
+    })

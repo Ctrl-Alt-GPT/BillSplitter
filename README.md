@@ -1,25 +1,14 @@
-# Bill Splitter backend server
-To install server dependencies, go to the project's directory and use the command:
-```
-npm install
-```
----
-To run the server locally, use the command:
-```
-npm start
-```
+# Bill Splitter backend
+### Installation
+To install all the required dependencies:
 
-For development (DEBUG mode), use:
-```
-DEBUG=myapp:* npm start
-```
+```npm install```
 
-Index route set to port `3000`. To access the index page, go to `http://localhost:3000`.
+Then, import secured credentials from `dotenv-vault`:
 
----
+```npx dotenv-vault@latest pull```
 
-### GET request for Andrew
-```
-http://localhost:3000/andrew
-```
-It should return a simple message from Andrew.
+### Running the server
+To run the server, simply run:
+
+```node .```
