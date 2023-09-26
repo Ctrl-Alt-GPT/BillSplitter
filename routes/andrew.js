@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
+var uid = require('uid/secure');
 
 router.get("/", async (req, res) => {
-    res.send("Hello, you're on /andrew route.")
+    const generatedUid = uid();
+
+    res.send(generatedUid);
 });
 
 module.exports = router;
