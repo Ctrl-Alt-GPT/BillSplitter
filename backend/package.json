@@ -1,0 +1,22 @@
+{
+  "name": "billsplitter-backend",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ctrl+Alt+GPT",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.8",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mocha": "^10.2.0",
+    "mongoose": "^7.5.3",
+    "short-uuid": "^4.2.2"
+  },
+  "devDependencies": {
+    "chai-http": "^4.4.0"
+  }
+}
