@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost&family=Jura&family=Roboto:wght@100&display=swap');
+
+
+.tax-tips-add-component {
+  width: 348px;
+  height: 227px;
+  flex-shrink: 0;
+  border-radius: 3.125rem;
+  background: #FCFDFF;
+  float: right;
+}
+
+.new-item-title-input{
+  width: 21.9375rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  border-radius: 1.875rem;
+  background: #FFF;
+}
+
+.items-component {
+  width: 628px;
+  height: 452px;
+  flex-shrink: 0;
+  border-radius: 50px;
+  background: #FCFDFF;
+  margin-top: 20px;
+}
+
+.new-item-component {
+  width: 600px;
+  height: 112px;
+  flex-shrink: 0;
+  border-radius: 1.875rem;
+  background: #B2C1FA;
+  padding-top: .81rem;
+  padding-left: 2.06rem;
+  
+}
+
+.new-item-party-input {
+  width: 18.5625rem;
+  height: 1.875rem;
+  flex-shrink: 0;
+  border-radius: 1.875rem;
+  background: #FFF;
+  margin-top: .5rem;
+}
+
+.title {
+  color: #000;
+  font-family: Jura;
+  font-size: 4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.board {
+  width: 66.375rem;
+  height: 68rem;
+  flex-shrink: 0;
+  border-radius: 3.125rem;
+  background: #E8EDFF;
+  box-sizing: border-box;
+
+  margin-top: auto;
+  margin-right: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  
+  padding-top: 1.81rem;
+  padding-right: 1.81rem;
+  padding-bottom: 1.81rem;
+  padding-left: 1.81rem;
+
+}

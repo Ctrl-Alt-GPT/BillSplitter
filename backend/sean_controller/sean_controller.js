@@ -57,7 +57,7 @@ const deletePerson = async (req, res) => {
 }
 
 
-// Update a workout
+// Update a record
 const updatePerson = async (req, res) => {
     const {id} = req.params;
 
