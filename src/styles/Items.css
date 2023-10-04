@@ -6,3 +6,8 @@
   max-height: fit-content;
   box-shadow: none;
 }
+
+.no-items {
+  color: lightgrey;
+  text-align: center;
+}
