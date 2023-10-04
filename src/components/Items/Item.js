@@ -1,15 +1,7 @@
 import Card from '../UI/Card';
 import '../../styles/Item.css';
 
-const Item = ({
-  title,
-  party,
-  amount,
-}: {
-  title: string;
-  party: string;
-  amount: number;
-}) => {
+const Item = ({ title, party, amount }) => {
   return (
     <Card className="item">
       <h2>{title}</h2>
