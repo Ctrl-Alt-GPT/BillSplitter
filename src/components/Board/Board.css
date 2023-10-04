@@ -9,5 +9,10 @@
 .board h1 {
   font-size: 2rem;
   font-family: monospace;
+  margin: 1rem 2rem;
+}
+
+.board header {
+  display: flex;
   margin: 1rem 1rem;
 }
