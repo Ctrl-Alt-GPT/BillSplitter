@@ -6,6 +6,7 @@ import '../../styles/Board.css';
 import NewItem from '../NewItem/NewItem';
 import Image from 'next/image';
 import ctrlaltgptlogo from '../../../public/ctrlaltgptlogo-nobg.png';
+import DisplayTotal from '../DisplayTotal/DisplayTotal';
 
 const DEFAULT_ITEMS = [];
 
@@ -31,6 +32,7 @@ const Board = () => {
       </header>
       <NewItem onAddItems={addItemHandler} />
       <Items datas={items} />
+      <DisplayTotal />
     </Card>
   );
 };
