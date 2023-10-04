@@ -1,4 +1,4 @@
-import './NewItemForm.css';
+import '../../styles/NewItemForm.css';
 
 const NewItemForm = () => {
   return (

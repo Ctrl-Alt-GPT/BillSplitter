@@ -1,5 +1,5 @@
 import Card from '../UI/Card';
-import './NewItem.css';
+import '../../styles/NewItem.css';
 import NewItemForm from './NewItemForm';
 
 const NewItem = () => {

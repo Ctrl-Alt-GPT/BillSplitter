@@ -1,5 +1,5 @@
 import Card from '../UI/Card';
-import './Item.css';
+import '../../styles/Item.css';
 
 const Item = ({
   title,

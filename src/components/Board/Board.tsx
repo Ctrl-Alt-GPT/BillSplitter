@@ -1,6 +1,6 @@
 import Card from '../UI/Card';
 import Items from '../Items/Items';
-import './Board.css';
+import '../../styles/Board.css';
 import NewItem from '../NewItem/NewItem';
 import Image from 'next/image';
 import ctrlaltgptlogo from '../../../public/ctrlaltgptlogo-nobg.png';

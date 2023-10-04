@@ -1,6 +1,6 @@
 import Card from '../UI/Card';
 import Item from './Item';
-import './Items.css';
+import '../../styles/Items.css';
 
 const Items = () => {
   return (
