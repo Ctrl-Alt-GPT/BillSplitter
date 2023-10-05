@@ -6,3 +6,7 @@
   max-height: fit-content;
   box-shadow: none;
 }
+
+.display-items {
+  text-align: right;
+}
