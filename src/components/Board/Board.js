@@ -32,7 +32,7 @@ const Board = () => {
       </header>
       <NewItem onAddItems={addItemHandler} />
       <Items datas={items} />
-      <DisplayTotal />
+      <DisplayTotal datas={items} />
     </Card>
   );
 };
