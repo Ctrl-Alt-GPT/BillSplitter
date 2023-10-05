@@ -1,5 +1,6 @@
 import '../../styles/DisplayTotal.css';
 import Card from '../UI/Card';
+import GrandTotal from './GrandTotal';
 import Subtotal from './Subtotal';
 
 const DisplayTotal = (props) => {
@@ -8,9 +9,14 @@ const DisplayTotal = (props) => {
   return (
     <Card className="display-total">
       <Subtotal itemAmounts={extractedItemAmounts} />
+      {/* TODO: total tax and total tips */}
       <p>Total tax: </p>
       <p>Total tips:</p>
-      <p>Grand total: </p>
+      <GrandTotal
+        itemAmounts={extractedItemAmounts}
+        totalTax={0}
+        totalTips={0}
+      />
     </Card>
   );
 };
