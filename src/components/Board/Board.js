@@ -13,24 +13,26 @@ const DEFAULT_ITEMS = [];
 
 const Board = () => {
 
-
-  // For retrieving tax values from TaxTipsAddComponent
-  const [data, setData] = useState({
+  const [data, setTaxTips] = useState({
     tax: 0,
     tips: 0
   });
 
   const childToParent = (childData) => {
-    setData(childData);
+   setTaxTips(childData);
   }
   
   const [items, setItems] = useState(DEFAULT_ITEMS);
 
   const addItemHandler = (item) => {
+    DEFAULT_ITEMS.push(data.tax);
+    DEFAULT_ITEMS.push(data.tips);
+    console.log(DEFAULT_ITEMS);
     setItems((prevItems) => {
       return [item, ...prevItems];
     });
   };
+
 
   return (
     <Card className="board">

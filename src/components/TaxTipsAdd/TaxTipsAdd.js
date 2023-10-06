@@ -1,4 +1,5 @@
 'use client';
+import '../../styles/TaxTipsAdd.css';
 import { useState } from 'react';
 
 export default function TaxTipsAddComponent({childToParent}) {
@@ -16,14 +17,13 @@ export default function TaxTipsAddComponent({childToParent}) {
   };
   
   return (
-  <div className='tax-tips-add-component'>
-    <div className='value-inputs'>
-
-      <label className='item-name'>Tax:</label>
+  <div className='tax-tips-add'>
+    <div className='new-item__control'>
+      <label>Tax</label>
       <input name='tax' onChange={handleChange}></input><br></br>
-      <label className='item-name'>Tip:</label>
+      <label>Tip</label>
       <input  name='tips' onChange={handleChange}></input><br></br>
-      <button onClick={() => {
+      <button type='submit' onClick={() => {
         setPrint(true);
         childToParent(data);
       }}>Submit</button>
