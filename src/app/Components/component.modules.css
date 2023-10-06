@@ -1,13 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost&family=Jura&family=Roboto:wght@100&display=swap');
 
 
+.individual-tips-component {
+  width: 348px;
+  height: 350px;
+  flex-shrink: 0;
+  border-radius: 50px;
+  background: #FCFDFF;
+  float: right;
+  margin-top: 20px;
+}
+
+
 .tax-tips-add-component {
+
   width: 348px;
   height: 227px;
   flex-shrink: 0;
   border-radius: 3.125rem;
   background: #FCFDFF;
   float: right;
+  margin-top: auto;
+  padding-top: .5rem;
+}
+
+.new-item-amount-input {
+  width: 11rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  border-radius: 1.875rem;
+  background: #FFF;
+  float: right;
+  margin-top: -79px;
+  margin-right: .5rem;
+  /* position: absolute; */
 }
 
 .new-item-title-input{
@@ -19,6 +45,7 @@
 }
 
 .items-component {
+  float: left;
   width: 628px;
   height: 452px;
   flex-shrink: 0;
@@ -28,13 +55,31 @@
 }
 
 .new-item-component {
+
   width: 600px;
   height: 112px;
   flex-shrink: 0;
   border-radius: 1.875rem;
   background: #B2C1FA;
-  padding-top: .81rem;
-  padding-left: 2.06rem;
+  padding-top: .5rem;
+  /* padding-left: 2.06rem; */
+  padding-left: .5rem;
+}
+
+
+.party-member-names {
+  color: #414a51;
+  font-family: Jost;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.value-inputs {
+  z-index: 100;
+  margin-top: 5px;
+  margin-left: 80px;
   
 }
 
@@ -47,6 +92,35 @@
   margin-top: .5rem;
 }
 
+/* .tax-tip-item-name {
+  color: #414a51;
+  font-family: Jost;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-left: 10px;
+  float: top;
+} */
+
+.item-name {
+  color: #414a51;
+  font-family: Jost;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+
+.new-item-title-input {
+  width: 351px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 30px;
+  background: #FFF;
+} 
+
 .title {
   color: #000;
   font-family: Jura;
@@ -57,6 +131,7 @@
 }
 
 .board {
+  
   width: 66.375rem;
   height: 68rem;
   flex-shrink: 0;
