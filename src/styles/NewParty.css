@@ -1,0 +1,9 @@
+.new-party {
+  text-align: center;
+  padding: 0.75rem;
+  background-color: #b2c1fa;
+  margin: 1rem;
+  width: auto;
+  max-height: fit-content;
+  box-shadow: none;
+}

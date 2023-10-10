@@ -10,6 +10,7 @@ import DisplayTotal from '../DisplayTotal/DisplayTotal';
 import TaxTipsAddComponent from '../TaxTipsAdd/TaxTipsAdd';
 import IndividualTotals from '../IndividualTotals/IndividualTotals';
 import SplitParty from '../SplitParty/SplitParty';
+import NewParty from '../NewParty/NewParty';
 
 const DEFAULT_ITEMS = [];
 
@@ -66,6 +67,9 @@ const Board = () => {
       <TaxTipsAddComponent getTaxVal={getTaxVal} getTipsVal={getTipsVal}/>
       <SplitParty total={grandTotal} />
       <IndividualTotals items={items} tax={tax} tips={tips}/>
+      <NewParty />
+      <Items datas={items} />
+      <DisplayTotal datas={items} />
     </Card>
   );
 };
