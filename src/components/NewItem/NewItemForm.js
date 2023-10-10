@@ -36,6 +36,7 @@ const NewItemForm = (props) => {
   };
 
   return (
+    // TODO: Party Dropdown Menu
     <form onSubmit={submitHandler}>
       <div className="new-item__controls">
         <div className="new-item__control">

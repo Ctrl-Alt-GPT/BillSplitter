@@ -7,6 +7,7 @@ import NewItem from '../NewItem/NewItem';
 import Image from 'next/image';
 import ctrlaltgptlogo from '../../../public/ctrlaltgptlogo-nobg.png';
 import DisplayTotal from '../DisplayTotal/DisplayTotal';
+import NewParty from '../NewParty/NewParty';
 
 const DEFAULT_ITEMS = [];
 
@@ -31,6 +32,7 @@ const Board = () => {
         <h1>Bill Splitter</h1>
       </header>
       <NewItem onAddItems={addItemHandler} />
+      <NewParty />
       <Items datas={items} />
       <DisplayTotal datas={items} />
     </Card>
