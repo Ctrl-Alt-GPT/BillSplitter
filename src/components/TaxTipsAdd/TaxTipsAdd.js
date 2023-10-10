@@ -2,18 +2,15 @@
 import '../../styles/TaxTipsAdd.css';
 import { useState } from 'react';
 
-export default function TaxTipsAddComponent({childToParent}) {
-
-  const [print, setPrint] = useState(false);
-
-  const [data, setData] = useState({
+export default function TaxTipsAddComponent({sendToParent}) {
+  
+  const [taxAndTips, setTaxAndTips] = useState({
     tax: 0,
     tips: 0
   });
 
   const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
-    setPrint(false);
+    setTaxAndTips({ ...taxAndTips, [e.target.name]: e.target.value });
   };
   
   return (
@@ -24,8 +21,7 @@ export default function TaxTipsAddComponent({childToParent}) {
       <label>Tip</label>
       <input  name='tips' onChange={handleChange}></input><br></br>
       <button type='submit' onClick={() => {
-        setPrint(true);
-        childToParent(data);
+        sendToParent(taxAndTips);
       }}>Submit</button>
     </div>
   </div>

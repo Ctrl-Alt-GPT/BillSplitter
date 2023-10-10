@@ -13,26 +13,22 @@ const DEFAULT_ITEMS = [];
 
 const Board = () => {
 
-  const [data, setTaxTips] = useState({
+  const [taxTips, setTaxTips] = useState({
     tax: 0,
     tips: 0
   });
 
-  const childToParent = (childData) => {
+  const getTaxAndTips = (childData) => {
    setTaxTips(childData);
-  }
+  };
   
   const [items, setItems] = useState(DEFAULT_ITEMS);
 
   const addItemHandler = (item) => {
-    DEFAULT_ITEMS.push(data.tax);
-    DEFAULT_ITEMS.push(data.tips);
-    console.log(DEFAULT_ITEMS);
     setItems((prevItems) => {
       return [item, ...prevItems];
     });
   };
-
 
   return (
     <Card className="board">
@@ -45,12 +41,10 @@ const Board = () => {
         />
         <h1>Bill Splitter</h1>
       </header>
-      <NewItem onAddItems={addItemHandler} />
-      <Items datas={items} />
-      <DisplayTotal datas={items} />
-      <TaxTipsAddComponent childToParent={childToParent} />
-      Tax : {data.tax}<br></br>
-      Tips : {data.tips}
+      <NewItem onAddItems={addItemHandler}/>
+      <Items datas={items}/>
+      <DisplayTotal datas={items} taxTipsData={taxTips}/>
+      <TaxTipsAddComponent sendToParent={getTaxAndTips}/>
     </Card>
   );
 };

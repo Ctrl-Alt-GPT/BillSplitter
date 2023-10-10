@@ -5,17 +5,17 @@ import Subtotal from './Subtotal';
 
 const DisplayTotal = (props) => {
   const extractedItemAmounts = props.datas.map((data) => data.amount);
-
+  const receivedTaxTips = props.taxTipsData;
+  
   return (
     <Card className="display-total">
       <Subtotal itemAmounts={extractedItemAmounts} />
-      {/* TODO: total tax and total tips */}
-      <p className="display-items">Total tax: </p>
-      <p className="display-items">Total tips:</p>
+      <p className="display-items">Total tax: {receivedTaxTips.tax}</p>
+      <p className="display-items">Total tips: {receivedTaxTips.tips}</p>
       <GrandTotal
         itemAmounts={extractedItemAmounts}
-        totalTax={0}
-        totalTips={0}
+        totalTax={receivedTaxTips.tax}
+        totalTips={receivedTaxTips.tips}
       />
     </Card>
   );
