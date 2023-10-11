@@ -20,7 +20,7 @@ export default function TaxTipsAddComponent({sendToParent}) {
       <input name='tax' onChange={handleChange}></input><br></br>
       <label>Tip</label>
       <input  name='tips' onChange={handleChange}></input><br></br>
-      <button type='submit' onClick={() => {
+      <button className='blue-button' type='submit' onClick={() => {
         sendToParent(taxAndTips);
       }}>Submit</button>
     </div>

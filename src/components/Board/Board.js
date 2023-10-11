@@ -30,6 +30,12 @@ const Board = () => {
     });
   };
 
+  const removeItem = () => {
+    var newArray = items.slice(0, items.length - 1);
+    setItems(newArray);
+  }
+
+
   return (
     <Card className="board">
       <header>
@@ -42,7 +48,7 @@ const Board = () => {
         <h1>Bill Splitter</h1>
       </header>
       <NewItem onAddItems={addItemHandler}/>
-      <Items datas={items}/>
+      <Items datas={items} remove={removeItem}/>
       <DisplayTotal datas={items} taxTipsData={taxTips}/>
       <TaxTipsAddComponent sendToParent={getTaxAndTips}/>
     </Card>
