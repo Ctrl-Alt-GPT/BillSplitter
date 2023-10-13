@@ -8,6 +8,7 @@ import Image from 'next/image';
 import ctrlaltgptlogo from '../../../public/ctrlaltgptlogo-nobg.png';
 import DisplayTotal from '../DisplayTotal/DisplayTotal';
 import TaxTipsAddComponent from '../TaxTipsAdd/TaxTipsAdd';
+import IndividualTotals from '../IndividualTotals/IndividualTotals';
 
 const DEFAULT_ITEMS = [];
 
@@ -26,15 +27,17 @@ const Board = () => {
 
   const addItemHandler = (item) => {
     setItems((prevItems) => {
-      return [item, ...prevItems];
+      return [...prevItems, item];
     });
   };
 
-  const removeItem = () => {
+  const removeItem = (idx) => {
     var newArray = items.slice(0, items.length - 1);
-    setItems(newArray);
-  }
-
+    
+    const filteredArray = items.filter(item => item.sequenceNumber !== idx);
+    // setItems(newArray);
+    setItems(filteredArray);
+  };
 
   return (
     <Card className="board">
@@ -51,6 +54,7 @@ const Board = () => {
       <Items datas={items} remove={removeItem}/>
       <DisplayTotal datas={items} taxTipsData={taxTips}/>
       <TaxTipsAddComponent sendToParent={getTaxAndTips}/>
+      <IndividualTotals items={items} taxAndTips={taxTips}/>
     </Card>
   );
 };

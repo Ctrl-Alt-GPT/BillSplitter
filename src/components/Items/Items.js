@@ -26,10 +26,13 @@ const Items = (props) => {
             title={item.title}
             party={item.party}
             amount={item.amount}
+            remove={props.remove}
+            idx={allItems[allItems.length-1].sequenceNumber}
           />
         ))
       )}
-      <button className='blue-button' onClick={props.remove}>Remove Item</button>
+      {/* Replacing this 'Remove' button with a different remove feature */}
+      {/* <button className='blue-button' onClick={props.remove}>Remove Item</button> */}
     </Card>
   );
 };

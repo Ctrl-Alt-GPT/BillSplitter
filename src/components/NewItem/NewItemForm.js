@@ -8,6 +8,9 @@ const NewItemForm = (props) => {
   const [enteredParty, setEnteredParty] = useState('');
   const [enteredAmount, setEnteredAmount] = useState('');
 
+  // Maybe try a sequence ID.
+  const [sequenceID, setSequenceID] = useState(0);
+
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
   };
@@ -22,11 +25,16 @@ const NewItemForm = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-
+    
+    // Increment the sequence ID.
+    var nextNum = sequenceID;
+    setSequenceID(++nextNum);
+    
     const itemData = {
       title: enteredTitle,
       party: enteredParty,
       amount: enteredAmount,
+      sequenceNumber: sequenceID,
     };
 
     props.onSaveItemData(itemData);
