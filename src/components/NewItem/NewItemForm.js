@@ -25,11 +25,11 @@ const NewItemForm = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    
+
     // Increment the sequence ID.
     var nextNum = sequenceID;
     setSequenceID(++nextNum);
-    
+
     const itemData = {
       title: enteredTitle,
       party: enteredParty,
@@ -52,6 +52,7 @@ const NewItemForm = (props) => {
             type="text"
             value={enteredTitle}
             onChange={titleChangeHandler}
+            required
           />
         </div>
         <div className="new-item__control">
@@ -60,6 +61,7 @@ const NewItemForm = (props) => {
             type="text"
             value={enteredParty}
             onChange={partyChangeHandler}
+            required
           />
         </div>
         <div className="new-item__control">
@@ -70,6 +72,7 @@ const NewItemForm = (props) => {
             step="0.01"
             value={enteredAmount}
             onChange={amountChangeHandler}
+            required
           />
         </div>
       </div>
