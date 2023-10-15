@@ -2,14 +2,17 @@ import { useState } from 'react';
 import '../../styles/NewItemForm.css';
 import '../../styles/NewItem.css';
 
-const SplitPartyForm = () => {
+const SplitPartyForm = (props) => {
   const [enteredParty, setEnteredParty] = useState('');
 
   const partyChangeHandler = (event) => {
     setEnteredParty(event.target.value);
   };
 
-  const submitHandler = () => {};
+  const submitHandler = (event) => {
+    event.preventDefault();
+    props.onPartyAmountSubmit(enteredParty);
+  };
 
   return (
     <form onSubmit={submitHandler}>

@@ -39,6 +39,12 @@ const Board = () => {
     setItems(filteredArray);
   };
 
+  const [grandTotal, setGrandTotal] = useState(0);
+
+  const calculatedGrandTotalHandler = (total) => {
+    setGrandTotal(total);
+  };
+
   return (
     <Card className="board">
       <header>
@@ -52,9 +58,13 @@ const Board = () => {
       </header>
       <NewItem onAddItems={addItemHandler} />
       <Items datas={items} remove={removeItem} />
-      <DisplayTotal datas={items} taxTipsData={taxTips} />
+      <DisplayTotal
+        datas={items}
+        taxTipsData={taxTips}
+        calculatedGrandTotal={calculatedGrandTotalHandler}
+      />
       <TaxTipsAddComponent sendToParent={getTaxAndTips} />
-      <SplitParty />
+      <SplitParty total={grandTotal} />
       <IndividualTotals items={items} taxAndTips={taxTips} />
     </Card>
   );

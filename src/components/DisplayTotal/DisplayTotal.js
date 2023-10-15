@@ -6,7 +6,11 @@ import Subtotal from './Subtotal';
 const DisplayTotal = (props) => {
   const extractedItemAmounts = props.datas.map((data) => data.amount);
   const receivedTaxTips = props.taxTipsData;
-  
+
+  const calculateGrandTotalHandler = (grandTotal) => {
+    props.calculatedGrandTotal(grandTotal);
+  };
+
   return (
     <Card className="display-total">
       <Subtotal itemAmounts={extractedItemAmounts} />
@@ -16,6 +20,7 @@ const DisplayTotal = (props) => {
         itemAmounts={extractedItemAmounts}
         totalTax={receivedTaxTips.tax}
         totalTips={receivedTaxTips.tips}
+        onCalculateGrandTotal={calculateGrandTotalHandler}
       />
     </Card>
   );
