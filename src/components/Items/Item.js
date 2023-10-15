@@ -17,6 +17,7 @@ const Item = (props) => {
 
   const removeThisItem = () => {
     props.remove(arrIdx);
+    // props.remove(props.key);
   }
 
   return (

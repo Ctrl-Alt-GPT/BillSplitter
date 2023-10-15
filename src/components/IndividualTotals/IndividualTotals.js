@@ -6,32 +6,51 @@ const IndividualTotals = (props) => {
 
   const [items, setItems] = useState([]);
   
-  // These can probably be changed to an onClick function.
+  // These can probably be changed to an onClick function?
   useEffect(() => {
     setItems(props.items);
   });
 
-  const [partyMembers, setPartyMembers] = useState([]);
   const [tallies, setTallies] = useState({});
 
-  // Iterate through items.
-  // Parse the 'party' string.
-  // For each parsed name in the party string - add the requisite value to the name:total pair.
+  const splitBill = () => {
 
-
-  const parseMembers = () => {
-
+    var subtotal = 0;
     var memberMap = {};
     for (var i = 0; i < items.length; i++) {
-      const memberString = items[i].party;
+      // Get the string of names - convert to lowercase.
+      const memberString = items[i].party.toLowerCase();
+      // Split into individual names. 
       const memberArray = memberString.split(/\s*,\s*/);
-      const price = Number(items[i].amount) / memberArray.length;
+      // Get the total value of the line item. 
+      const price = Number(items[i].amount);
+      // Determine the individual cost for the line item. 
+      const individualCost = price / memberArray.length;
+      // Add the line item value to the grand total.
+      subtotal += price;
       for (const person of memberArray) {
         if (memberMap.hasOwnProperty(person)) {
-          memberMap[person] += price;
+          memberMap[person] += individualCost;
         } else {
-          memberMap[person] = price;
+          memberMap[person] = individualCost;
         }
+      }
+    }
+
+    // Iterate through member map.
+    for (const person in memberMap) {
+      if (memberMap.hasOwnProperty(person)) {
+        // Get the value of each members total.
+        const individualAmount = memberMap[person];
+        // Divide individual total by subtotal to get proportion.
+        const proportion = individualAmount / subtotal;
+        // Multiply proportion by tax and tips and add the result to each member total.
+        // const individualTax = props.taxAndTips.tax * proportion;
+        // const individualTips = props.taxAndTips.tips * proportion;
+        const individualTax = props.tax * proportion;
+        const individualTips = props.tips * proportion;
+        memberMap[person] += individualTax;
+        memberMap[person] += individualTips;
       }
     }
     setTallies(memberMap);
@@ -40,7 +59,7 @@ const IndividualTotals = (props) => {
   return (
     <>
       Items : {JSON.stringify(items)}<br></br>
-      <button onClick={parseMembers}>Show members</button><br></br>
+      <button onClick={splitBill}>Split Bill</button><br></br>
       Tallies : {JSON.stringify(tallies)}
     </>
   )

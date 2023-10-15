@@ -14,14 +14,16 @@ const DEFAULT_ITEMS = [];
 
 const Board = () => {
 
-  const [taxTips, setTaxTips] = useState({
-    tax: 0,
-    tips: 0
-  });
+  const [tax, setTax] = useState(0);
+  const [tips, setTips] = useState(0);
 
-  const getTaxAndTips = (childData) => {
-   setTaxTips(childData);
-  };
+  const getTaxVal = (taxVal) => {
+    setTax(taxVal);
+  }
+
+  const getTipsVal = (tipsVal) => {
+    setTips(tipsVal);
+  }
   
   const [items, setItems] = useState(DEFAULT_ITEMS);
 
@@ -32,10 +34,7 @@ const Board = () => {
   };
 
   const removeItem = (idx) => {
-    var newArray = items.slice(0, items.length - 1);
-    
     const filteredArray = items.filter(item => item.sequenceNumber !== idx);
-    // setItems(newArray);
     setItems(filteredArray);
   };
 
@@ -52,9 +51,9 @@ const Board = () => {
       </header>
       <NewItem onAddItems={addItemHandler}/>
       <Items datas={items} remove={removeItem}/>
-      <DisplayTotal datas={items} taxTipsData={taxTips}/>
-      <TaxTipsAddComponent sendToParent={getTaxAndTips}/>
-      <IndividualTotals items={items} taxAndTips={taxTips}/>
+      <DisplayTotal datas={items} taxData={tax} tipsData={tips}/>
+      <TaxTipsAddComponent getTaxVal={getTaxVal} getTipsVal={getTipsVal}/>
+      <IndividualTotals items={items} tax={tax} tips={tips}/>
     </Card>
   );
 };
