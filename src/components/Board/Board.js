@@ -9,20 +9,20 @@ import ctrlaltgptlogo from '../../../public/ctrlaltgptlogo-nobg.png';
 import DisplayTotal from '../DisplayTotal/DisplayTotal';
 import TaxTipsAddComponent from '../TaxTipsAdd/TaxTipsAdd';
 import IndividualTotals from '../IndividualTotals/IndividualTotals';
+import SplitParty from '../SplitParty/SplitParty';
 
 const DEFAULT_ITEMS = [];
 
 const Board = () => {
-
   const [taxTips, setTaxTips] = useState({
     tax: 0,
-    tips: 0
+    tips: 0,
   });
 
   const getTaxAndTips = (childData) => {
-   setTaxTips(childData);
+    setTaxTips(childData);
   };
-  
+
   const [items, setItems] = useState(DEFAULT_ITEMS);
 
   const addItemHandler = (item) => {
@@ -33,8 +33,8 @@ const Board = () => {
 
   const removeItem = (idx) => {
     var newArray = items.slice(0, items.length - 1);
-    
-    const filteredArray = items.filter(item => item.sequenceNumber !== idx);
+
+    const filteredArray = items.filter((item) => item.sequenceNumber !== idx);
     // setItems(newArray);
     setItems(filteredArray);
   };
@@ -50,11 +50,12 @@ const Board = () => {
         />
         <h1>Bill Splitter</h1>
       </header>
-      <NewItem onAddItems={addItemHandler}/>
-      <Items datas={items} remove={removeItem}/>
-      <DisplayTotal datas={items} taxTipsData={taxTips}/>
-      <TaxTipsAddComponent sendToParent={getTaxAndTips}/>
-      <IndividualTotals items={items} taxAndTips={taxTips}/>
+      <NewItem onAddItems={addItemHandler} />
+      <Items datas={items} remove={removeItem} />
+      <DisplayTotal datas={items} taxTipsData={taxTips} />
+      <TaxTipsAddComponent sendToParent={getTaxAndTips} />
+      <SplitParty />
+      <IndividualTotals items={items} taxAndTips={taxTips} />
     </Card>
   );
 };
