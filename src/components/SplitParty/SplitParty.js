@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../styles/TaxTipsAdd.css';
+import '../../styles/SplitParty.css';
 import SplitPartyForm from './SplitPartyForm';
 
 const SplitParty = (props) => {
@@ -11,8 +11,14 @@ const SplitParty = (props) => {
 
   return (
     <React.Fragment>
-      <div className="tax-tips-add">
-        Calculated split: {calculatedSplit}
+      <div className="backdrop">
+        {calculatedSplit === 0 ? (
+          <div className="content">
+            Enter the amount of people in the party:
+          </div>
+        ) : (
+          <div className="content">Calculated split: ${calculatedSplit}</div>
+        )}
         <SplitPartyForm onPartyAmountSubmit={partyAmountSubmitHandler} />
       </div>
     </React.Fragment>
