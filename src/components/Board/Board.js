@@ -7,16 +7,35 @@ import NewItem from '../NewItem/NewItem';
 import Image from 'next/image';
 import ctrlaltgptlogo from '../../../public/ctrlaltgptlogo-nobg.png';
 import DisplayTotal from '../DisplayTotal/DisplayTotal';
+<<<<<<< HEAD
 import TaxTipsAddComponent from '../TaxTipsAdd/TaxTipsAdd';
 import IndividualTotals from '../IndividualTotals/IndividualTotals';
 import SplitParty from '../SplitParty/SplitParty';
+=======
+<<<<<<< HEAD
+import TaxTipsAddComponent from '../TaxTipsAdd/TaxTipsAdd';
+import IndividualTotals from '../IndividualTotals/IndividualTotals';
+import SplitParty from '../SplitParty/SplitParty';
+=======
+>>>>>>> 89a1bfd5e427c78bb0ef87e66c7fd2b21ca6dd01
+>>>>>>> 79f78cd6a78bd5145ceffab0a0f6be028455f575
 import NewParty from '../NewParty/NewParty';
 import IndividualTotal from '../IndividualTotal/IndividualTotal';
 
 const DEFAULT_ITEMS = [];
 
 const Board = () => {
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
+=======
+  const [items, setItems] = useState([]);
+  const [parties, setParties] = useState([]);
   
+>>>>>>> 89a1bfd5e427c78bb0ef87e66c7fd2b21ca6dd01
+
+>>>>>>> 79f78cd6a78bd5145ceffab0a0f6be028455f575
   const [items, setItems] = useState([]);
   const [parties, setParties] = useState([]);
   const [tax, setTax] = useState(0);
@@ -44,7 +63,15 @@ const Board = () => {
   const addItemHandler = (item) => {
     let parties = Array.isArray(item.party) ? item.party : [item.party];
     parties = parties.map((party) => party.trim());
+<<<<<<< HEAD
  
+=======
+<<<<<<< HEAD
+ 
+=======
+  
+>>>>>>> 89a1bfd5e427c78bb0ef87e66c7fd2b21ca6dd01
+>>>>>>> 79f78cd6a78bd5145ceffab0a0f6be028455f575
     const partiesCount = parties.length;
     if (partiesCount > 1) {
       const totalAmount = parseFloat(item.amount);
@@ -56,7 +83,15 @@ const Board = () => {
           party: partyMember,
           amount: splitAmount,
         };
+<<<<<<< HEAD
  
+=======
+<<<<<<< HEAD
+ 
+=======
+  
+>>>>>>> 89a1bfd5e427c78bb0ef87e66c7fd2b21ca6dd01
+>>>>>>> 79f78cd6a78bd5145ceffab0a0f6be028455f575
         setItems((prevItems) => {
           return [newItem, ...prevItems];
         });
@@ -67,7 +102,15 @@ const Board = () => {
       });
     }
   };
+<<<<<<< HEAD
    
+=======
+<<<<<<< HEAD
+   
+=======
+    
+>>>>>>> 89a1bfd5e427c78bb0ef87e66c7fd2b21ca6dd01
+>>>>>>> 79f78cd6a78bd5145ceffab0a0f6be028455f575
   const addPartyHandler = (partyName) => {
     setParties((prevParties) => {
       return [...prevParties, partyName];
@@ -95,6 +138,7 @@ const Board = () => {
         />
         <h1>Bill Splitter</h1>
       </header>
+<<<<<<< HEAD
       
      <NewItem onAddItems={addItemHandler} />
       {items.map((item, idx) => (
@@ -108,12 +152,18 @@ const Board = () => {
         />
       ))}
       
+=======
+<<<<<<< HEAD
+      <NewItem onAddItems={addItemHandler} />
+      <Items datas={items} remove={removeItem} />
+>>>>>>> 79f78cd6a78bd5145ceffab0a0f6be028455f575
       <DisplayTotal
         datas={items}
         taxData={tax}
         tipsData={tips}
         calculatedGrandTotal={calculatedGrandTotalHandler}
       />
+<<<<<<< HEAD
      
 
      <div className="card-content">
@@ -130,6 +180,42 @@ const Board = () => {
           </div>
           
       </div>
+=======
+      <TaxTipsAddComponent getTaxVal={getTaxVal} getTipsVal={getTipsVal}/>
+      <SplitParty total={grandTotal} />
+      <IndividualTotals items={items} tax={tax} tips={tips}/>
+      <NewParty />
+      <Items datas={items} />
+=======
+      <NewItem onSaveItemData={addItemHandler} />
+>>>>>>> 89a1bfd5e427c78bb0ef87e66c7fd2b21ca6dd01
+      <NewParty onAddParty={addPartyHandler} />
+      <Items datas={items} />    
+      <DisplayTotal datas={items} />
+      <IndividualTotal datas={items} />
+<<<<<<< HEAD
+      
+      <div className="right-content">
+=======
+>>>>>>> 89a1bfd5e427c78bb0ef87e66c7fd2b21ca6dd01
+      {parties.map((party) => (
+        <div key={party}>
+          <h2>{party}</h2>
+          <Items datas={items.filter((item) => item.party === party)} />
+        </div>
+      ))}
+      {Object.keys(groupedItems).map((party) => (
+        <div key={party}>
+          <h2>{party}</h2>
+          <Items datas={groupedItems[party]} />
+        </div>
+      ))}
+<<<<<<< HEAD
+     </div>
+     
+=======
+>>>>>>> 89a1bfd5e427c78bb0ef87e66c7fd2b21ca6dd01
+>>>>>>> 79f78cd6a78bd5145ceffab0a0f6be028455f575
     </Card>
   );
 };
