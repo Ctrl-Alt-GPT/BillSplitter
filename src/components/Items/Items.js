@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import Card from '../UI/Card';
 import Item from './Item';
 import '../../styles/Items.css';
@@ -8,12 +8,11 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 const Items = (props) => {
-
   const [allItems, setAllItems] = useState([]);
 
   useEffect(() => {
     setAllItems(props.datas);
-  });
+  }, [props.datas]);
 
   return (
     <Card className="items">
@@ -27,7 +26,7 @@ const Items = (props) => {
             party={item.party}
             amount={item.amount}
             remove={props.remove}
-            idx={allItems[allItems.length-1].sequenceNumber}
+            idx={allItems[allItems.length - 1].sequenceNumber}
           />
         ))
       )}

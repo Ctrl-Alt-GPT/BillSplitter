@@ -1,30 +1,27 @@
-'use client'
+'use client';
 import { useEffect, useState } from 'react';
 
-
 const IndividualTotals = (props) => {
-
   const [items, setItems] = useState([]);
-  
+
   // These can probably be changed to an onClick function?
   useEffect(() => {
     setItems(props.items);
-  });
+  }, [props.items]);
 
   const [tallies, setTallies] = useState({});
 
   const splitBill = () => {
-
     var subtotal = 0;
     var memberMap = {};
     for (var i = 0; i < items.length; i++) {
       // Get the string of names - convert to lowercase.
       const memberString = items[i].party.toLowerCase();
-      // Split into individual names. 
+      // Split into individual names.
       const memberArray = memberString.split(/\s*,\s*/);
-      // Get the total value of the line item. 
+      // Get the total value of the line item.
       const price = Number(items[i].amount);
-      // Determine the individual cost for the line item. 
+      // Determine the individual cost for the line item.
       const individualCost = price / memberArray.length;
       // Add the line item value to the grand total.
       subtotal += price;
@@ -54,16 +51,17 @@ const IndividualTotals = (props) => {
       }
     }
     setTallies(memberMap);
-  }
-  
+  };
+
   return (
     <>
-      Items : {JSON.stringify(items)}<br></br>
-      <button onClick={splitBill}>Split Bill</button><br></br>
+      Items : {JSON.stringify(items)}
+      <br></br>
+      <button onClick={splitBill}>Split Bill</button>
+      <br></br>
       Tallies : {JSON.stringify(tallies)}
     </>
-  )
-
+  );
 };
 
 export default IndividualTotals;
