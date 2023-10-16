@@ -16,3 +16,15 @@
   display: flex;
   margin: 1rem 1rem;
 }
+
+.right-content {
+  
+    padding: 1rem;
+    background-color: #ffffff;
+    margin: 10px;
+    max-height: fit-content;
+    border-radius: 3.125rem;
+    box-shadow: none;
+    float: right; /* Float the right content to the right */
+    width: 50%; /* Adjust the width to your preference */
+}

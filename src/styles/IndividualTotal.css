@@ -1,0 +1,19 @@
+.IndividualTotal {
+    text-align: center;
+    padding: 1rem;
+    background-color: #ffffff;
+    margin: 10px 0 10px 27rem;
+    width: 30rem;
+    max-height: fit-content;
+    flex-shrink: 0;
+    border-radius: 3.125rem;
+    box-shadow: none;
+  }
+  
+  .IndividualTotal h2 {
+    text-align: center; /* Center the title */
+  }
+  
+  .IndividualTotal ul {
+    text-align: left; /* Right-align the list items */
+  }
