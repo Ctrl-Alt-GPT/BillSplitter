@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .IndividualTotal {
     text-align: center;
     padding: 1rem;
@@ -17,3 +18,14 @@
   .IndividualTotal ul {
     text-align: left; /* Right-align the list items */
   }
+=======
+.individualtotal {
+    text-align: center;
+    padding: 0.75rem;
+    background-color: #b2c1fa;
+    margin: 1rem;
+    width: auto;
+    max-height: fit-content;
+    box-shadow: none;
+  }
+>>>>>>> 89a1bfd5e427c78bb0ef87e66c7fd2b21ca6dd01
