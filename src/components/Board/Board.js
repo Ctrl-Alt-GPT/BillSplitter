@@ -16,7 +16,7 @@ import IndividualTotal from '../IndividualTotal/IndividualTotal';
 const DEFAULT_ITEMS = [];
 
 const Board = () => {
-
+  
   const [items, setItems] = useState([]);
   const [parties, setParties] = useState([]);
   const [tax, setTax] = useState(0);
@@ -45,6 +45,7 @@ const Board = () => {
     let parties = Array.isArray(item.party) ? item.party : [item.party];
     parties = parties.map((party) => party.trim());
  
+  
     const partiesCount = parties.length;
     if (partiesCount > 1) {
       const totalAmount = parseFloat(item.amount);
@@ -57,6 +58,7 @@ const Board = () => {
           amount: splitAmount,
         };
  
+  
         setItems((prevItems) => {
           return [newItem, ...prevItems];
         });
@@ -68,6 +70,7 @@ const Board = () => {
     }
   };
    
+    
   const addPartyHandler = (partyName) => {
     setParties((prevParties) => {
       return [...prevParties, partyName];
@@ -107,6 +110,7 @@ const Board = () => {
       <IndividualTotals items={items} tax={tax} tips={tips}/>
       <NewParty />
       <Items datas={items} />
+      <NewItem onSaveItemData={addItemHandler} />
       <NewParty onAddParty={addPartyHandler} />
       <Items datas={items} />    
       <DisplayTotal datas={items} />

@@ -24,6 +24,8 @@ const Item = (props) => {
     <Card className="item">
       {/* <h2>{title}</h2> */}
       <h2>{props.title}</h2>
+        Item: <br />
+      <h2>{title}</h2>
       <div className="item__party">
         Party: <br />
         {/* {party} */}
@@ -33,6 +35,9 @@ const Item = (props) => {
       <div className="item__amount">${props.amount}</div>
       {/* <button onClick={props.remove}>Remove</button> */}
       <button className='remove-button' onClick={removeThisItem}></button>
+      <div className="item__amount">
+        Amount: <br />
+        ${amount}</div>
     </Card>
   );
 };
