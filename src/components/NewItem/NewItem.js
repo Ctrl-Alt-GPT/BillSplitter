@@ -8,7 +8,7 @@ const NewItem = (props) => {
   const saveItemDataHandler = (enteredItemData) => {
     const itemData = {
       ...enteredItemData,
-      id: nanoid(),
+        id: nanoid(),
     };
     props.onAddItems(itemData);
   };

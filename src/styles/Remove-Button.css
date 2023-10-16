@@ -1,0 +1,28 @@
+.remove-button {
+  background-color: rgba(145, 10, 10, 0.711);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 0 5px rgb(81, 1, 1); 
+  text-align: center;
+}
+
+/* Define the 'x' element style */
+.remove-button::before {
+  content: 'x';
+  font-size: 24px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Style the button on hover (optional) */
+.remove-button:hover {
+  background-color: rgba(83, 1, 1, 0.7);
+  box-shadow: 0 0 5px black;
+}
