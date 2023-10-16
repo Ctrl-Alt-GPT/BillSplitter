@@ -1,7 +1,6 @@
 'use client';
 import React from 'react';
 import '../../styles/IndividualTotal.css';
-import React from 'react';
 
 const IndividualTotal = ({ datas }) => {
   const individualTotals = {};
@@ -30,7 +29,7 @@ const IndividualTotal = ({ datas }) => {
 
   return (
       
-    <div className="individual-total">
+    <div className="IndividualTotal">
       <h2>Individual Totals</h2>
       <ul>
         {Object.entries(individualTotals).map(([partyMember, total]) => (

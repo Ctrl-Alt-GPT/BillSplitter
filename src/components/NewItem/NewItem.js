@@ -10,7 +10,7 @@ const NewItem = (props) => {
       ...enteredItemData,
         id: nanoid(),
     };
-    props.onSaveItemData(itemData);
+    props.onAddItems(itemData);
   };
 
   return (

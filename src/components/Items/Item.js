@@ -29,15 +29,16 @@ const Item = (props) => {
       <div className="item__party">
         Party: <br />
         {/* {party} */}
-        {props.party}
+        <h2>{props.party}</h2>
       </div>
-      {/* <div className="item__amount">${amount}</div> */}
-      <div className="item__amount">${props.amount}</div>
-      {/* <button onClick={props.remove}>Remove</button> */}
-      <button className='remove-button' onClick={removeThisItem}></button>
       <div className="item__amount">
         Amount: <br />
         ${amount}</div>
+
+        {/* <div className="item__amount">${amount}</div> */}
+      <div className="item__amount">${props.amount}</div>
+      {/* <button onClick={props.remove}>Remove</button> */}
+      <button className='remove-button' onClick={removeThisItem}></button>
     </Card>
   );
 };

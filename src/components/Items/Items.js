@@ -1,40 +1,34 @@
 'use client'
 import Card from '../UI/Card';
-import Item from './Item';
-import '../../styles/Items.css';
-import '../../styles/Blue-Button.css';
-
+import '../../styles/Item.css';
+import '../../styles/Remove-Button.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-const Items = (props) => {
-
-  const [allItems, setAllItems] = useState([]);
-
+const Item = (props) => {
+  const [arrIdx, setArrIdx] = useState(props.idx);
+  
   useEffect(() => {
-    setAllItems(props.datas);
-  });
+    setArrIdx(props.idx);
+  }, [props.idx]);
+
+  const removeThisItem = () => {
+    props.remove(arrIdx);
+  }
 
   return (
-    <Card className="items">
-      {props.datas.length <= 0 ? (
-        <div className="no-items">Add an item to get started.</div>
-      ) : (
-        allItems.map((item) => (
-          <Item
-            key={item.id}
-            title={item.title}
-            party={item.party}
-            amount={item.amount}
-            remove={props.remove}
-            idx={allItems[allItems.length-1].sequenceNumber}
-          />
-        ))
-      )}
-      {/* Replacing this 'Remove' button with a different remove feature */}
-      {/* <button className='blue-button' onClick={props.remove}>Remove Item</button> */}
+    <Card className="item">
+      Item: <br />
+      <h2>{props.title}</h2>
+      <div className="item__party">
+        Party: <br />
+        <h2>{props.party}</h2>
+      </div>
+      <div className="item__amount">Amount: ${props.amount}</div>
+      <button className='remove-button' onClick={removeThisItem}></button>
+      
     </Card>
   );
 };
 
-export default Items;
+export default Item;

@@ -2,8 +2,8 @@
     text-align: center;
     padding: 1rem;
     background-color: #ffffff;
-    margin: 10px 0 10px 27rem;
-    width: 30rem;
+    margin: 10px;
+    width: 25rem;
     max-height: fit-content;
     flex-shrink: 0;
     border-radius: 3.125rem;
@@ -12,10 +12,14 @@
   
   .IndividualTotal h2 {
     text-align: center; /* Center the title */
+    margin: 0;
   }
   
   .IndividualTotal ul {
     text-align: left; /* Right-align the list items */
+    padding: 0; /* Remove padding for the list */
+    list-style: none; /* Remove the list bullet points */
+
   }
 .individualtotal {
     text-align: center;
@@ -26,3 +30,20 @@
     max-height: fit-content;
     box-shadow: none;
   }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+ 
+  

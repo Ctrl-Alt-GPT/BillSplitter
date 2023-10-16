@@ -45,7 +45,6 @@ const Board = () => {
     let parties = Array.isArray(item.party) ? item.party : [item.party];
     parties = parties.map((party) => party.trim());
  
-  
     const partiesCount = parties.length;
     if (partiesCount > 1) {
       const totalAmount = parseFloat(item.amount);
@@ -58,7 +57,6 @@ const Board = () => {
           amount: splitAmount,
         };
  
-  
         setItems((prevItems) => {
           return [newItem, ...prevItems];
         });
@@ -70,7 +68,6 @@ const Board = () => {
     }
   };
    
-    
   const addPartyHandler = (partyName) => {
     setParties((prevParties) => {
       return [...prevParties, partyName];
@@ -98,39 +95,41 @@ const Board = () => {
         />
         <h1>Bill Splitter</h1>
       </header>
-      <NewItem onAddItems={addItemHandler} />
-      <Items datas={items} remove={removeItem} />
+      
+     <NewItem onAddItems={addItemHandler} />
+      {items.map((item, idx) => (
+        <Items
+          key={idx}
+          title={item.title}
+          party={item.party}
+          amount={item.amount}
+          idx={idx}
+          remove={removeItem}
+        />
+      ))}
+      
       <DisplayTotal
         datas={items}
-        taxData={tax} tipsData={tips}
+        taxData={tax}
+        tipsData={tips}
         calculatedGrandTotal={calculatedGrandTotalHandler}
       />
-      <TaxTipsAddComponent getTaxVal={getTaxVal} getTipsVal={getTipsVal}/>
-      <SplitParty total={grandTotal} />
-      <IndividualTotals items={items} tax={tax} tips={tips}/>
-      <NewParty />
-      <Items datas={items} />
-      <NewItem onSaveItemData={addItemHandler} />
-      <NewParty onAddParty={addPartyHandler} />
-      <Items datas={items} />    
-      <DisplayTotal datas={items} />
-      <IndividualTotal datas={items} />
-      
-      <div className="right-content">
-      {parties.map((party) => (
-        <div key={party}>
-          <h2>{party}</h2>
-          <Items datas={items.filter((item) => item.party === party)} />
-        </div>
-      ))}
-      {Object.keys(groupedItems).map((party) => (
-        <div key={party}>
-          <h2>{party}</h2>
-          <Items datas={groupedItems[party]} />
-        </div>
-      ))}
-     </div>
      
+
+     <div className="card-content">
+        
+        <div className="left-content">
+          <TaxTipsAddComponent getTaxVal={getTaxVal} getTipsVal={getTipsVal} />
+          <SplitParty total={grandTotal} />
+        </div>
+        
+        
+        
+          <div className="right-content">
+            <IndividualTotals items={items} tax={tax} tips={tips} />
+          </div>
+          
+      </div>
     </Card>
   );
 };
