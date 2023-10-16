@@ -1,16 +1,6 @@
-<<<<<<< HEAD
 'use client';
 import React from 'react';
 import '../../styles/IndividualTotal.css';
-=======
-<<<<<<< HEAD
-'use client';
-import React from 'react';
-import '../../styles/IndividualTotal.css';
-=======
-import React from 'react';
->>>>>>> 89a1bfd5e427c78bb0ef87e66c7fd2b21ca6dd01
->>>>>>> 79f78cd6a78bd5145ceffab0a0f6be028455f575
 
 const IndividualTotal = ({ datas }) => {
   const individualTotals = {};
@@ -38,16 +28,7 @@ const IndividualTotal = ({ datas }) => {
   });
 
   return (
-<<<<<<< HEAD
-      
-    <div className="IndividualTotal">
-=======
-<<<<<<< HEAD
       <div className="IndividualTotal">
-=======
-    <div className="individual-total">
->>>>>>> 89a1bfd5e427c78bb0ef87e66c7fd2b21ca6dd01
->>>>>>> 79f78cd6a78bd5145ceffab0a0f6be028455f575
       <h2>Individual Totals</h2>
       <ul>
         {Object.entries(individualTotals).map(([partyMember, total]) => (
@@ -60,12 +41,4 @@ const IndividualTotal = ({ datas }) => {
   );
 };
 
-<<<<<<< HEAD
 export default IndividualTotal;
-=======
-<<<<<<< HEAD
-export default IndividualTotal;
-=======
-export default IndividualTotal;
->>>>>>> 89a1bfd5e427c78bb0ef87e66c7fd2b21ca6dd01
->>>>>>> 79f78cd6a78bd5145ceffab0a0f6be028455f575
