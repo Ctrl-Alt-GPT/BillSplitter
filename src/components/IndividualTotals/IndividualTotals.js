@@ -5,7 +5,6 @@ const IndividualTotals = (props) => {
 
   const [items, setItems] = useState([]);
   
-  // These can probably be changed to an onClick function?
   useEffect(() => {
     setItems(props.items);
   });
@@ -47,6 +46,37 @@ const IndividualTotals = (props) => {
       }
     }
     setTallies(memberMap);
+  }
+
+  
+  const postBill = async () => {
+
+    // Can we create an array of names for 'party' instead of one string?
+    const lineItems = {
+      "lineItems" : items,
+      "tallies":  tallies
+    };
+
+    try {
+      const response = await fetch('http://localhost:3333/sean/create', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+          body: JSON.stringify(lineItems)
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      // const responseData = await response.json();
+      setItems([]);
+      setTallies({});
+    
+    } catch (error) {
+      console.error('Error creating record.', error);
+    }
   }
   
   return (

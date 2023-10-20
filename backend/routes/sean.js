@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {
     createPerson,
+    createBillRecord,
     getAllPersons,
     getPerson,
     deletePerson,
@@ -19,7 +20,10 @@ router.get("/getAll", getAllPersons);
 router.get("/:id", getPerson);
 
 // CREATE a record
-router.post("/create", createPerson);
+router.post("/createPerson", createPerson);
+
+// CREATE a record
+router.post("/create", createBillRecord);
 
 // DELET a record
 router.delete("/:id", deletePerson);
