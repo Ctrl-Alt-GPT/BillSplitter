@@ -1,0 +1,15 @@
+.backdrop {
+  width: 21.75rem;
+  height: 14.1875rem;
+  flex-shrink: 0;
+  border-radius: 3.125rem;
+  background: #fcfdff;
+  padding: 1rem;
+  margin: 10px;
+  text-align: center;
+}
+
+.content {
+  font-size: large;
+  margin: 15px;
+}
