@@ -1,18 +1,16 @@
-'use client'
+'use client';
 import { useEffect, useState } from 'react';
 
 const IndividualTotals = (props) => {
-
   const [items, setItems] = useState([]);
   
   useEffect(() => {
     setItems(props.items);
-  });
+  }, [props.items]);
 
   const [tallies, setTallies] = useState({});
 
   const splitBill = () => {
-
     var subtotal = 0;
     var memberMap = {};
 
@@ -81,12 +79,13 @@ const IndividualTotals = (props) => {
   
   return (
     <>
-      Items : {JSON.stringify(items)}<br></br>
-      <button onClick={splitBill}>Split Bill</button><br></br>
+      Items : {JSON.stringify(items)}
+      <br></br>
+      <button onClick={splitBill}>Split Bill</button>
+      <br></br>
       Tallies : {JSON.stringify(tallies)}
     </>
-  )
-
+  );
 };
 
 export default IndividualTotals;
