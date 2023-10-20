@@ -10,15 +10,11 @@ import DisplayTotal from '../DisplayTotal/DisplayTotal';
 import TaxTipsAddComponent from '../TaxTipsAdd/TaxTipsAdd';
 import IndividualTotals from '../IndividualTotals/IndividualTotals';
 import SplitParty from '../SplitParty/SplitParty';
-import NewParty from '../NewParty/NewParty';
-import IndividualTotal from '../IndividualTotal/IndividualTotal';
 
 const DEFAULT_ITEMS = [];
 
 const Board = () => {
 
-  const [items, setItems] = useState([]);
-  const [parties, setParties] = useState([]);
   const [tax, setTax] = useState(0);
   const [tips, setTips] = useState(0);
 
@@ -30,6 +26,8 @@ const Board = () => {
     setTips(tipsVal);
   }
   
+  const [items, setItems] = useState([]);
+
   const removeItem = (idx) => {
     const filteredArray = items.filter((item) => item.sequenceNumber !== idx);
     setItems(filteredArray);
@@ -96,17 +94,14 @@ const Board = () => {
         <h1>Bill Splitter</h1>
       </header>
      
-     <NewItem onAddItems={addItemHandler} />
-      {items.map((item, idx) => (
-        <Items
-          key={idx}
-          title={item.title}
-          party={item.party}
-          amount={item.amount}
-          idx={idx}
-          remove={removeItem}
-        />
-      ))}
+      <NewItem onAddItems={addItemHandler} />
+      
+      {/* Check if items are available before rendering Items component */}
+      {items.length > 0 ? (
+        <Items datas={items} removeItem={removeItem} />
+      ) : (
+        <div className="no-items">Add an item to get started.</div>
+      )}
       
       <DisplayTotal
         datas={items}
