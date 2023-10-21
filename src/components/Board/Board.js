@@ -98,11 +98,11 @@ const Board = () => {
       
       {/* Check if items are available before rendering Items component */}
       {items.length > 0 ? (
-        <Items datas={items} removeItem={removeItem} />
+        <Items datas={items} remove={removeItem} /> 
       ) : (
         <div className="no-items">Add an item to get started.</div>
       )}
-      
+            
       <DisplayTotal
         datas={items}
         taxData={tax}
