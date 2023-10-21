@@ -7,7 +7,8 @@ const {
     getPerson,
     deletePerson,
     updatePerson,
-    getAllBills 
+    getAllBills,
+    clearAllBills
 } = require('../sean_controller/sean_controller');
 
 router.get("/", async (req, res) => {
@@ -25,11 +26,11 @@ router.get("/getAll", getAllPersons);
 // GET all bill records
 router.get("/getAllBills", getAllBills)
 
-
 // CREATE a record
 router.post("/createBill", createBillRecord);
 
-
+// DELETE all bill records
+router.delete("/clearAllBills", clearAllBills);
 
 
 

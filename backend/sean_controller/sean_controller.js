@@ -2,6 +2,7 @@ const Person = require('../models/person');
 const Bill = require('../models/bill');
 const mongoose = require('mongoose');
 
+////////////////////////////////////////////////////////////////////////////////////////
 
 // Get all bill records
 const getAllBills = async (req, res) => {
@@ -9,24 +10,38 @@ const getAllBills = async (req, res) => {
   res.status(200).json(bill);
 }
 
-////////////////////////////////////////////////////////////////////////////////////////
+
 const createBillRecord = async (req, res) => {
-  const {lineItems, tallies} = req.body;
 
   // Not ideal
-  if (!Object.keys(tallies).length) {
+  if (!Object.keys(req.body.tallies).length) {
     return;
   }
 
+  const {lineItems, tallies} = req.body;
+  const combined = new Bill({lineItems, tallies});
+
   try {
-    // There's an ssue here - incorrect syntax for create() ?
-    const bill = await Bill.create({"lineItems":lineItems, "tallies": tallies});
+    const bill = await Bill.create(combined);
     res.status(200).json(bill);
-    
   } catch (err) {
     res.status(400).json({error: err.message});
   }
 }
+
+
+const clearAllBills = async (req, res) => {
+
+  Bill.deleteMany({}, function(err) {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log("All documents have been deleted");
+      res.status(200);
+    }
+  });
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -118,5 +133,6 @@ module.exports  = {
   getPerson,
   deletePerson,
   updatePerson,
-  getAllBills 
+  getAllBills,
+  clearAllBills
 }

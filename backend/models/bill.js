@@ -20,30 +20,4 @@ const billSchema = new Schema({
   tallies: [tallySchema],
 }, {timestamps: true});
 
-
-// const billSchema = new Schema({
-
-//   "lineItems": [{
-//     "title": String,
-//     "party": String,
-//     "amount": String
-//   }],
-//   "tallies": {
-//     "party": String,
-//     "share": Number
-//   },
-
-  // Keys might need to be strings.
-  // lineItems: [{
-  //   title: String,
-  //   party: String,
-  //   amount: Number
-  // }],
-  // tallies: {
-  //   party: String,
-  //   share: Number
-  // },
-	
-// }, {timestamps: true})
-
 module.exports = mongoose.model('Bill', billSchema);

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 const IndividualTotals = (props) => {
   const [items, setItems] = useState([]);
-  const [tallies, setTallies] = useState({});
+  const [tallies, setTallies] = useState([]);
 
   useEffect(() => {
     setItems(props.items);
@@ -36,6 +36,7 @@ const IndividualTotals = (props) => {
       }
     }
 
+    var memberMapArray = [];
     // Tax/tips share for each member. 
     for (const person in memberMap) {
       if (memberMap.hasOwnProperty(person)) {
@@ -46,11 +47,14 @@ const IndividualTotals = (props) => {
         memberMap[person] += individualTax;
         memberMap[person] += individualTips;
       }
+      memberMapArray.push({
+        "party": person,
+        "share": memberMap[person]
+      })
     }
-    setTallies(memberMap);
+    setTallies(memberMapArray);
   }
 
-  
   const postBill = async () => {
 
     const bill = {
@@ -59,7 +63,8 @@ const IndividualTotals = (props) => {
     };
     
     try {
-      const response = await fetch('http://localhost:3333/sean/createBill', {
+      // const response = await fetch('http://localhost:3333/sean/createBill', {
+      const response = await fetch('ec2-3-101-67-174.us-west-1.compute.amazonaws.com:3333/sean/createBill', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
