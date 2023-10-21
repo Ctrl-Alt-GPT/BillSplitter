@@ -9,7 +9,7 @@ const Search = () => {
 
     try {
       // const response = await fetch('http://localhost:3333/sean/clearAllBills');
-      const response = await fetch('ec2-3-101-67-174.us-west-1.compute.amazonaws.com:3333/sean/clearAllBills');
+      const response = await fetch('http://ec2-3-101-67-174.us-west-1.compute.amazonaws.com:3333/sean/clearAllBills');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -26,7 +26,7 @@ const Search = () => {
     const fetchrecords = async () => {
 
       try {
-        const response = await fetch('ec2-3-101-67-174.us-west-1.compute.amazonaws.com:3333/sean/getAllBills');
+        const response = await fetch('http://ec2-3-101-67-174.us-west-1.compute.amazonaws.com:3333/sean/getAllBills');
         // const response = await fetch('http://localhost:3333/sean/getAllBills');
         if (!response.ok) {
           throw new Error('Network response was not ok');
