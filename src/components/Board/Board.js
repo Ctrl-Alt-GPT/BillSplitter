@@ -97,11 +97,13 @@ const Board = () => {
       <NewItem onAddItems={addItemHandler} />
       
       {/* Check if items are available before rendering Items component */}
+      <div className="items">
       {items.length > 0 ? (
         <Items datas={items} remove={removeItem} /> 
       ) : (
         <div className="no-items">Add an item to get started.</div>
       )}
+      </div>
             
       <DisplayTotal
         datas={items}
