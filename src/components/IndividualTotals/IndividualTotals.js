@@ -3,28 +3,30 @@ import { useEffect, useState } from 'react';
 
 const IndividualTotals = (props) => {
   const [items, setItems] = useState([]);
+  const [tallies, setTallies] = useState({});
 
-  // These can probably be changed to an onClick function?
   useEffect(() => {
     setItems(props.items);
   }, [props.items]);
 
-  const [tallies, setTallies] = useState({});
+  // Not ideal
+  useEffect(() => {
+    postBill();
+  }, [tallies]);
 
   const splitBill = () => {
     var subtotal = 0;
     var memberMap = {};
+
+    // Cost per person for items ordered. 
     for (var i = 0; i < items.length; i++) {
-      // Get the string of names - convert to lowercase.
+      
       const memberString = items[i].party.toLowerCase();
-      // Split into individual names.
       const memberArray = memberString.split(/\s*,\s*/);
-      // Get the total value of the line item.
       const price = Number(items[i].amount);
-      // Determine the individual cost for the line item.
       const individualCost = price / memberArray.length;
-      // Add the line item value to the grand total.
       subtotal += price;
+
       for (const person of memberArray) {
         if (memberMap.hasOwnProperty(person)) {
           memberMap[person] += individualCost;
@@ -34,16 +36,11 @@ const IndividualTotals = (props) => {
       }
     }
 
-    // Iterate through member map.
+    // Tax/tips share for each member. 
     for (const person in memberMap) {
       if (memberMap.hasOwnProperty(person)) {
-        // Get the value of each members total.
         const individualAmount = memberMap[person];
-        // Divide individual total by subtotal to get proportion.
         const proportion = individualAmount / subtotal;
-        // Multiply proportion by tax and tips and add the result to each member total.
-        // const individualTax = props.taxAndTips.tax * proportion;
-        // const individualTips = props.taxAndTips.tips * proportion;
         const individualTax = props.tax * proportion;
         const individualTips = props.tips * proportion;
         memberMap[person] += individualTax;
@@ -51,8 +48,38 @@ const IndividualTotals = (props) => {
       }
     }
     setTallies(memberMap);
-  };
+  }
 
+  
+  const postBill = async () => {
+
+    const bill = {
+      "lineItems" : items,
+      "tallies":  tallies
+    };
+    
+    try {
+      const response = await fetch('http://localhost:3333/sean/createBill', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+          body: JSON.stringify(bill)
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const responseData = await response.json();
+      console.log(responseData);
+    
+    } catch (error) {
+      console.error('Error creating record.', error);
+    }
+    
+  }
+  
   return (
     <>
       Items : {JSON.stringify(items)}
