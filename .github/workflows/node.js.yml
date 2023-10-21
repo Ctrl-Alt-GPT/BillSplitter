@@ -53,6 +53,7 @@ jobs:
         port: ${{ secrets.DEPLOY_PORT }}
         script: |
           pm2 stop all
+          pm2 delete all
           sudo rm -rf BillSplitter
           
     - name: Send files to the instance
