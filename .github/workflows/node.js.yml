@@ -37,8 +37,14 @@ jobs:
 
       - name: Install backend dependencies
         run: cd backend && npm install
+
+      - name: Generate .env file
+        uses: iamsauravsharma/create-dotenv@v2.0.1
+        with:
+          file-path: 'backend/.env'
         env:
-          DOTENV_KEY: ${{ secrets.DOTENV_KEY }}
+          DB_URI: ${{ secrets.DB_URI }}
+          PORT: ${{ secrets.PORT }}
 
       - name: Remove previous deployment
         uses: appleboy/ssh-action@v1.0.0
