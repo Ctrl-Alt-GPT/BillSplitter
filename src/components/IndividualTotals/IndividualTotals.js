@@ -64,7 +64,7 @@ const IndividualTotals = (props) => {
     
     try {
       // const response = await fetch('http://localhost:3333/sean/createBill', {
-      const response = await fetch('ec2-3-101-67-174.us-west-1.compute.amazonaws.com:3333/sean/createBill', {
+      const response = await fetch('https://ec2-3-101-67-174.us-west-1.compute.amazonaws.com:3333/sean/createBill', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

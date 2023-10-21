@@ -15,7 +15,7 @@ mongoose
 
   app.use(cors({
     // origin: 'http://localhost:3000',
-    origin: 'ec2-3-101-67-174.us-west-1.compute.amazonaws.com:3000', 
+    origin: 'https://ec2-3-101-67-174.us-west-1.compute.amazonaws.com:3000', 
     optionsSuccessStatus: 200
   }));
 
