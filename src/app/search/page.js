@@ -5,6 +5,22 @@ const Search = () => {
 
   const [records, setrecords] = useState("");
 
+  const clearRecords = async () => {
+
+    try {
+      
+      const response = await fetch('http://localhost:3333/sean/clearAllBills');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      // setrecords(response.text());
+      setrecords('');
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+
+
   useEffect(() => {
 
     const fetchrecords = async () => {
@@ -24,7 +40,8 @@ const Search = () => {
 
   return (
     <>
-      Here are all the records:<br></br>
+      Records:
+      <br></br>
       <div>{records}</div>
     </>
   )
