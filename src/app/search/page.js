@@ -3,29 +3,29 @@ import { useEffect, useState } from 'react';
 
 const Search = () => {
 
-  const [persons, setPersons] = useState("");
+  const [records, setrecords] = useState("");
 
   useEffect(() => {
 
-    const fetchPersons = async () => {
+    const fetchrecords = async () => {
 
       try {
-        const response = await fetch('http://localhost:3333/sean/getAll');
+        const response = await fetch('http://localhost:3333/sean/getAllBills');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        setPersons(response.text());
+        setrecords(response.text());
       } catch (error) {
         console.error('Error fetching data:', error);
     }
   }
-  fetchPersons();
+  fetchrecords();
   }, [])
 
   return (
     <>
       Here are all the records:<br></br>
-      <div>{persons}</div>
+      <div>{records}</div>
     </>
   )
 };

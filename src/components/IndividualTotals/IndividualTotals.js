@@ -3,12 +3,16 @@ import { useEffect, useState } from 'react';
 
 const IndividualTotals = (props) => {
   const [items, setItems] = useState([]);
-  
+  const [tallies, setTallies] = useState({});
+
   useEffect(() => {
     setItems(props.items);
   }, [props.items]);
 
-  const [tallies, setTallies] = useState({});
+  // Not ideal
+  useEffect(() => {
+    postBill();
+  }, [tallies]);
 
   const splitBill = () => {
     var subtotal = 0;
@@ -49,32 +53,31 @@ const IndividualTotals = (props) => {
   
   const postBill = async () => {
 
-    // Can we create an array of names for 'party' instead of one string?
-    const lineItems = {
+    const bill = {
       "lineItems" : items,
       "tallies":  tallies
     };
-
+    
     try {
-      const response = await fetch('http://localhost:3333/sean/create', {
-        method: 'PUT',
+      const response = await fetch('http://localhost:3333/sean/createBill', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-          body: JSON.stringify(lineItems)
+          body: JSON.stringify(bill)
       });
   
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
   
-      // const responseData = await response.json();
-      setItems([]);
-      setTallies({});
+      const responseData = await response.json();
+      console.log(responseData);
     
     } catch (error) {
       console.error('Error creating record.', error);
     }
+    
   }
   
   return (

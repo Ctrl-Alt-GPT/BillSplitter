@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 require('dotenv').config();
 
@@ -11,6 +12,12 @@ mongoose
 .connect(process.env.DB_URI, { useNewUrlParser: true })
 .then(() => {
   const app = express();
+
+  app.use(cors({
+    origin: 'http://localhost:3000', 
+    optionsSuccessStatus: 200
+  }));
+
   app.use(express.json());
   app.use("/andrew", andrewRoute);
   app.use("/sean",seanRoute);

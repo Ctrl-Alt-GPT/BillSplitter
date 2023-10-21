@@ -2,11 +2,44 @@ const Person = require('../models/person');
 const Bill = require('../models/bill');
 const mongoose = require('mongoose');
 
+
+// Get all bill records
+const getAllBills = async (req, res) => {
+  const bill = await Bill.find({}).sort({createdAt: -1});
+  res.status(200).json(bill);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+const createBillRecord = async (req, res) => {
+  const {lineItems, tallies} = req.body;
+
+  // Not ideal
+  if (!Object.keys(tallies).length) {
+    return;
+  }
+
+  try {
+    // There's an ssue here - incorrect syntax for create() ?
+    const bill = await Bill.create({"lineItems":lineItems, "tallies": tallies});
+    res.status(200).json(bill);
+    
+  } catch (err) {
+    res.status(400).json({error: err.message});
+  }
+}
+////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
 // Get all person records
 const getAllPersons = async (req, res) => {
   const persons = await Person.find({}).sort({createdAt: -1});
   res.status(200).json(persons);
 }
+
 
 // Get single record
 const getPerson = async (req, res) => {
@@ -26,14 +59,7 @@ const getPerson = async (req, res) => {
 }
 
 
-////////////////////////////////////////////////////////////////////////////////////////
-const createBillRecord = async (req, res) => {
-
-}
-////////////////////////////////////////////////////////////////////////////////////////
-
-
-// Create a new record
+// Create a new Person record
 const createPerson = async (req, res) => {
   const {fname, age} = req.body;
   
@@ -65,7 +91,7 @@ const deletePerson = async (req, res) => {
 }
 
 
-// Update a workout
+// Update a record
 const updatePerson = async (req, res) => {
   const {id} = req.params;
 
@@ -91,5 +117,6 @@ module.exports  = {
   getAllPersons,
   getPerson,
   deletePerson,
-  updatePerson
+  updatePerson,
+  getAllBills 
 }
