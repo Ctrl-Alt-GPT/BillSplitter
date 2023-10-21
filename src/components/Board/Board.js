@@ -54,7 +54,7 @@ const Board = () => {
           width={75}
           height={75}
         />
-        <h1>Bill Splitter</h1>
+        <h1>Bill Splitter App</h1>
       </header>
       <NewItem onAddItems={addItemHandler} />
       <Items datas={items} remove={removeItem} />
