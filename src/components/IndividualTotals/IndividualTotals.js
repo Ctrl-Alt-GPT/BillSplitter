@@ -54,7 +54,6 @@ const IndividualTotals = (props) => {
       }
     }
     setTallies(memberMap);
-      party-handling
   }
   
   const itemsWithoutIdAndSequence = items.map(({ sequenceNumber, id, ...rest }) => rest);
