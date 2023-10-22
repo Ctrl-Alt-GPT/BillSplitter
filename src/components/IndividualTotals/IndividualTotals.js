@@ -18,9 +18,8 @@ const IndividualTotals = (props) => {
     var subtotal = 0;
     var memberMap = {};
 
-    // Cost per person for items ordered. 
+    // Cost per person for items ordered.
     for (var i = 0; i < items.length; i++) {
-      
       const memberString = items[i].party.toLowerCase();
       const memberArray = memberString.split(/\s*,\s*/);
       const price = Number(items[i].amount);
@@ -37,7 +36,7 @@ const IndividualTotals = (props) => {
     }
 
     var memberMapArray = [];
-    // Tax/tips share for each member. 
+    // Tax/tips share for each member.
     for (const person in memberMap) {
       if (memberMap.hasOwnProperty(person)) {
         const individualAmount = memberMap[person];
@@ -48,43 +47,43 @@ const IndividualTotals = (props) => {
         memberMap[person] += individualTips;
       }
       memberMapArray.push({
-        "party": person,
-        "share": memberMap[person]
-      })
+        party: person,
+        share: memberMap[person],
+      });
     }
     setTallies(memberMapArray);
-  }
+  };
 
   const postBill = async () => {
-
     const bill = {
-      "lineItems" : items,
-      "tallies":  tallies
+      lineItems: items,
+      tallies: tallies,
     };
-    
+
     try {
       // const response = await fetch('http://localhost:3333/sean/createBill', {
-      const response = await fetch('https://ec2-3-101-67-174.us-west-1.compute.amazonaws.com:3333/sean/createBill', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-          body: JSON.stringify(bill)
-      });
-  
+      const response = await fetch(
+        'https://gpt-billsplitter.com:3333/sean/createBill',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(bill),
+        }
+      );
+
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-  
+
       const responseData = await response.json();
       console.log(responseData);
-    
     } catch (error) {
       console.error('Error creating record.', error);
     }
-    
-  }
-  
+  };
+
   return (
     <>
       Items : {JSON.stringify(items)}
