@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-// const cors = require('cors');
+const cors = require('cors');
 
 require('dotenv').config();
 
@@ -11,13 +11,15 @@ const pabloRoute = require('./routes/pablo');
 mongoose.connect(process.env.DB_URI, { useNewUrlParser: true }).then(() => {
   const app = express();
 
-  // app.use(
-  //   cors({
-  //     // origin: 'http://localhost:3000',
-  //     origin: 'https://gpt-billsplitter.com:3000',
-  //     optionsSuccessStatus: 200,
-  //   })
-  // );
+  app.use(
+    cors({
+      // origin: 'http://localhost:3000',
+      origin: '*',
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      preflightContinue: false,
+      optionsSuccessStatus: 204,
+    })
+  );
 
   app.use(express.json());
   app.use('/andrew', andrewRoute);
