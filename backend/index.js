@@ -6,24 +6,24 @@ require('dotenv').config();
 
 const andrewRoute = require('./routes/andrew');
 const seanRoute = require('./routes/sean');
-const pabloRoute = require('./routes/pablo')
+const pabloRoute = require('./routes/pablo');
 
-mongoose
-.connect(process.env.DB_URI, { useNewUrlParser: true })
-.then(() => {
+mongoose.connect(process.env.DB_URI, { useNewUrlParser: true }).then(() => {
   const app = express();
 
-  app.use(cors({
-    // origin: 'http://localhost:3000',
-    origin: 'https://ec2-3-101-67-174.us-west-1.compute.amazonaws.com:3000', 
-    optionsSuccessStatus: 200
-  }));
+  app.use(
+    cors({
+      // origin: 'http://localhost:3000',
+      origin: 'https://gpt-billsplitter.com:3000',
+      optionsSuccessStatus: 200,
+    })
+  );
 
   app.use(express.json());
-  app.use("/andrew", andrewRoute);
-  app.use("/sean",seanRoute);
-  app.use("/pablo",pabloRoute);
+  app.use('/andrew', andrewRoute);
+  app.use('/sean', seanRoute);
+  app.use('/pablo', pabloRoute);
   app.listen(process.env.PORT, () => {
-    console.log("Successfully connected to database!");
-  })
-})
+    console.log('Successfully connected to database!');
+  });
+});
