@@ -6,28 +6,29 @@ import '../../styles/IndividualTotal.css';
 
 const IndividualTotals = (props) => {
   const [items, setItems] = useState([]);
+  const [tallies, setTallies] = useState([]);
 
-  // These can probably be changed to an onClick function?
   useEffect(() => {
     setItems(props.items);
   }, [props.items]);
 
-  const [tallies, setTallies] = useState({});
+  // Not ideal
+  useEffect(() => {
+    postBill();
+  }, [tallies]);
 
   const splitBill = () => {
     var subtotal = 0;
     var memberMap = {};
+
+    // Cost per person for items ordered.
     for (var i = 0; i < items.length; i++) {
-      // Get the string of names - convert to lowercase.
       const memberString = items[i].party.toLowerCase();
-      // Split into individual names.
       const memberArray = memberString.split(/\s*,\s*/);
-      // Get the total value of the line item.
       const price = Number(items[i].amount);
-      // Determine the individual cost for the line item.
       const individualCost = price / memberArray.length;
-      // Add the line item value to the grand total.
       subtotal += price;
+
       for (const person of memberArray) {
         if (memberMap.hasOwnProperty(person)) {
           memberMap[person] += individualCost;
@@ -37,24 +38,54 @@ const IndividualTotals = (props) => {
       }
     }
 
-    // Iterate through member map.
+    var memberMapArray = [];
+    // Tax/tips share for each member.
     for (const person in memberMap) {
       if (memberMap.hasOwnProperty(person)) {
-        // Get the value of each members total.
         const individualAmount = memberMap[person];
-        // Divide individual total by subtotal to get proportion.
         const proportion = individualAmount / subtotal;
-        // Multiply proportion by tax and tips and add the result to each member total.
-        // const individualTax = props.taxAndTips.tax * proportion;
-        // const individualTips = props.taxAndTips.tips * proportion;
         const individualTax = props.tax * proportion;
         const individualTips = props.tips * proportion;
         memberMap[person] += individualTax;
         memberMap[person] += individualTips;
       }
+      memberMapArray.push({
+        party: person,
+        share: memberMap[person],
+      });
     }
-    setTallies(memberMap);
-  }
+    setTallies(memberMapArray);
+  };
+
+  const postBill = async () => {
+    const bill = {
+      lineItems: items,
+      tallies: tallies,
+    };
+
+    try {
+      // const response = await fetch('http://localhost:3333/sean/createBill', {
+      const response = await fetch(
+        'https://gpt-billsplitter.com:3333/sean/createBill',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(bill),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const responseData = await response.json();
+      console.log(responseData);
+    } catch (error) {
+      console.error('Error creating record.', error);
+    }
+  };
   
   const itemsWithoutIdAndSequence = items.map(({ sequenceNumber, id, ...rest }) => rest);
 
@@ -66,7 +97,13 @@ const IndividualTotals = (props) => {
   ));
 
   // Create a formatted string for displaying the Tallies
-  const formattedTallies = formatTallies(tallies);
+  // Create a formatted string for displaying the Tallies
+const formattedTallies = tallies.map((tally, index) => (
+  <div key={index}>
+    <strong>Party:</strong> {tally.party}, <strong>Amount:</strong> ${tally.share.toFixed(2)}
+  </div>
+));
+
 
   return (
     <Card className="IndividualTotal">
@@ -92,11 +129,20 @@ const formatTallies = (tallies) => {
   const tallyList = [];
   for (const person in tallies) {
     if (tallies.hasOwnProperty(person)) {
-      const formattedAmount = tallies[person].toFixed(2); // Format to two decimal places
-      tallyList.push(`${person}: ${formattedAmount}`);
+      const tallyValue = tallies[person];
+      if (typeof tallyValue === 'number') {
+        const formattedAmount = tallyValue.toFixed(2); // Format to two decimal places
+        tallyList.push(`${person}: ${formattedAmount}`);
+      } else {
+        tallyList.push(`${person}: ${tallyValue}`);
+      }
     }
   }
-  return <ul>{tallyList.map((tally, index) => <li key={index}>{tally}</li>)}</ul>;
+  return (
+    <ul>
+      {tallyList.map((tally, index) => ( <li key={index}>{tally}</li>))} </ul>
+  );
 };
+
 
 export default IndividualTotals;
