@@ -13,8 +13,8 @@ const DisplayTotal = (props) => {
   return (
     <Card className="display-total">
       <Subtotal itemAmounts={extractedItemAmounts} />
-      <p className="display-items">Total tax: {props.taxData}</p>
-      <p className="display-items">Total tips: {props.tipsData}</p>
+      <p className="display-items">Total tax: ${props.taxData}</p>
+      <p className="display-items">Total tips: ${props.tipsData}</p>
       <GrandTotal
         itemAmounts={extractedItemAmounts}
         totalTax={props.taxData}
