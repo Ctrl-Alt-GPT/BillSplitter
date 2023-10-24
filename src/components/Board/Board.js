@@ -26,7 +26,7 @@ const Board = () => {
     setTips(tipsVal);
   }
   
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(DEFAULT_ITEMS);
 
   const removeItem = (idx) => {
     const filteredArray = items.filter((item) => item.sequenceNumber !== idx);
@@ -96,15 +96,8 @@ const Board = () => {
      
       <NewItem onAddItems={addItemHandler} />
       
-      {/* Check if items are available before rendering Items component */}
-      <div className="items">
-      {items.length > 0 ? (
-        <Items datas={items} remove={removeItem} /> 
-      ) : (
-        <div className="no-items">Add an item to get started.</div>
-      )}
-      </div>
-            
+      <Items datas={items} remove={removeItem} /> 
+                  
       <DisplayTotal
         datas={items}
         taxData={tax}

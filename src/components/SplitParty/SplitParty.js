@@ -15,7 +15,7 @@ const SplitParty = (props) => {
       <div className="backdrop">
         {calculatedSplit === 0 ? (
           <div className="content">
-            Calculated Enter the amount of people in the party:
+            Enter the amount of people in the party:
           </div>
         ) : (
           <div className="content">Calculated split: ${calculatedSplit}</div>
