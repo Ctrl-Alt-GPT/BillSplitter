@@ -9,10 +9,10 @@ const IndividualTotals = (props) => {
     setItems(props.items);
   }, [props.items]);
 
-  // Not ideal
-  useEffect(() => {
-    postBill();
-  }, [tallies]);
+  // // Not ideal
+  // useEffect(() => {
+  //   postBill();
+  // }, [tallies]);
 
   const splitBill = () => {
     var subtotal = 0;
@@ -63,8 +63,8 @@ const IndividualTotals = (props) => {
     };
     
     try {
-      // const response = await fetch('http://localhost:3333/sean/createBill', {
-      const response = await fetch('https://ec2-3-101-67-174.us-west-1.compute.amazonaws.com:3333/sean/createBill', {
+      const response = await fetch('http://localhost:3333/sean/createBill', {
+      // const response = await fetch('https://ec2-3-101-67-174.us-west-1.compute.amazonaws.com:3333/sean/createBill', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -74,10 +74,12 @@ const IndividualTotals = (props) => {
   
       if (!response.ok) {
         throw new Error('Network response was not ok');
+      } else {
+        alert("Bill has been saved.")
       }
   
-      const responseData = await response.json();
-      console.log(responseData);
+      // const responseData = await response.json();
+      // console.log(responseData);
     
     } catch (error) {
       console.error('Error creating record.', error);
@@ -92,6 +94,9 @@ const IndividualTotals = (props) => {
       <button onClick={splitBill}>Split Bill</button>
       <br></br>
       Tallies : {JSON.stringify(tallies)}
+      <br></br>
+      <button onClick={postBill}>Save Bill</button>
+      <br></br>
     </>
   );
 };
