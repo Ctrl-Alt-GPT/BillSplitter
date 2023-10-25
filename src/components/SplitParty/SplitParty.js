@@ -6,7 +6,8 @@ const SplitParty = (props) => {
   const [calculatedSplit, setCalculatedSplit] = useState(0);
 
   const partyAmountSubmitHandler = (amount) => {
-    setCalculatedSplit(props.total / amount);
+    const splitAmount = (props.total / amount).toFixed(2); // Format to two decimal places
+    setCalculatedSplit(splitAmount);
   };
 
   return (

@@ -1,3 +1,4 @@
+/* Board container styles */
 .board {
   padding: 1rem;
   background-color: rgb(232, 237, 255);
@@ -15,4 +16,44 @@
 .board header {
   display: flex;
   margin: 1rem 1rem;
+}
+
+/* .card-content styles */
+.card-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Left panel styles */
+.left-panel {
+  flex: 1;
+  padding: 1rem;
+  background-color: #ffffff;
+  box-shadow: none;
+}
+
+/* Right panel styles */
+.right-panel {
+  flex: 2;
+  display: flex;
+  align-items: flex-start;
+}
+
+/* .right-content styles */
+.right-content {
+  padding: 1rem;
+  background-color: #ffffff;
+  margin: 10px;
+  max-height: fit-content;
+  border-radius: 3.125rem;
+  box-shadow: none;
+}
+
+.left-content {
+  padding: 1rem;
+  background-color: #ffffff;
+  margin: 10px;
+  max-height: fit-content;
+  border-radius: 3.125rem;
+  box-shadow: none;
 }
