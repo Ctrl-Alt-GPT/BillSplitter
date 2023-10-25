@@ -11,14 +11,27 @@ const getAllBills = async (req, res) => {
 }
 
 
+// Needs work.
+// Get a bill by its Id
+const getBillById = async (req, res) => {
+  const id = req.params;
+  const bill = await Bill.find({'_id': id});
+  res.status(200).json(bill);
+}
+
+
+
 const createBillRecord = async (req, res) => {
 
+  // ¿¿¿Not needed after eliminating useEffect to trigger postBill in individualTotals???
   // Not ideal
-  if (!Object.keys(req.body.tallies).length) {
-    return;
-  }
+  // if (!(Object.keys(req.body.tallies).length)) {
+  //   return;
+  // }
 
   const {lineItems, tallies} = req.body;
+  // const {lineItems, tallies, tax, tips } = req.body;
+  // const combined = new Bill({lineItems, tallies, tax, tips});
   const combined = new Bill({lineItems, tallies});
 
   try {
@@ -32,15 +45,16 @@ const createBillRecord = async (req, res) => {
 
 const clearAllBills = async (req, res) => {
 
-  Bill.deleteMany({}, function(err) {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log("All documents have been deleted");
-      res.status(200);
-    }
-  });
+  try {
+    await Bill.deleteMany({});
+    res.status(200).json({ message: 'All records deleted successfully.' });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 }
+
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -134,5 +148,6 @@ module.exports  = {
   deletePerson,
   updatePerson,
   getAllBills,
-  clearAllBills
+  clearAllBills,
+  getBillById
 }

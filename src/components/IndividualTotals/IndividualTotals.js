@@ -12,10 +12,10 @@ const IndividualTotals = (props) => {
     setItems(props.items);
   }, [props.items]);
 
-  // Not ideal
-  useEffect(() => {
-    postBill();
-  }, [tallies]);
+  // // Not ideal
+  // useEffect(() => {
+  //   postBill();
+  // }, [tallies]);
 
   const splitBill = () => {
     var subtotal = 0;
@@ -63,9 +63,19 @@ const IndividualTotals = (props) => {
       tallies: tallies,
     };
 
+  // const postBill = async () => {
+  //   const bill = {
+  //     lineItems: items,
+  //     tallies: tallies,
+  //     tax: props.tax,
+  //     tips: props.tips
+  //   };
+
+  
+
     try {
-      // const response = await fetch('http://localhost:3333/sean/createBill', {
       const response = await fetch(
+        // 'http://localhost:3333/sean/createBill'
         'https://gpt-billsplitter.com:3333/sean/createBill',
         {
           method: 'POST',
@@ -78,10 +88,13 @@ const IndividualTotals = (props) => {
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
+      } else {
+        alert("Bill has been saved.")
       }
-
-      const responseData = await response.json();
-      console.log(responseData);
+  
+      // const responseData = await response.json();
+      // console.log(responseData);
+    
     } catch (error) {
       console.error('Error creating record.', error);
     }
@@ -121,6 +134,9 @@ const formattedTallies = tallies.map((tally, index) => (
         <ul>{formattedTallies}</ul>
         <li>------------------------------------------------------</li>
       </ul>
+      <br></br>
+      <button onClick={postBill}>Save Bill</button>
+      <br></br>
     </Card>
   );
 };
