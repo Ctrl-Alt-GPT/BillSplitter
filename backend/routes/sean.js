@@ -8,7 +8,8 @@ const {
     deletePerson,
     updatePerson,
     getAllBills,
-    clearAllBills
+    clearAllBills,
+    getBillById
 } = require('../sean_controller/sean_controller');
 
 router.get("/", async (req, res) => {
@@ -31,6 +32,9 @@ router.post("/createBill", createBillRecord);
 
 // DELETE all bill records
 router.delete("/clearAllBills", clearAllBills);
+
+// GET a specific bill by its ID
+router.get("/getBillById", getBillById);
 
 
 
