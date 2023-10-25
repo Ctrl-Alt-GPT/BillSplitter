@@ -29,8 +29,9 @@ const createBillRecord = async (req, res) => {
   //   return;
   // }
 
-  const {lineItems, tallies} = req.body;
-  const combined = new Bill({lineItems, tallies});
+  // const {lineItems, tallies} = req.body;
+  const {lineItems, tallies, tax, tips } = req.body;
+  const combined = new Bill({lineItems, tallies, tax, tips});
 
   try {
     const bill = await Bill.create(combined);

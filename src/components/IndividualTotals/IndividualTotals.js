@@ -63,10 +63,20 @@ const IndividualTotals = (props) => {
       tallies: tallies,
     };
 
+  // const postBill = async () => {
+  //   const bill = {
+  //     lineItems: items,
+  //     tallies: tallies,
+  //     tax: props.tax,
+  //     tips: props.tips
+  //   };
+
+  
+
     try {
       const response = await fetch(
-        'http://localhost:3333/sean/createBill'
-        /*'https://gpt-billsplitter.com:3333/sean/createBill'*/,
+        // 'http://localhost:3333/sean/createBill'
+        'https://gpt-billsplitter.com:3333/sean/createBill',
         {
           method: 'POST',
           headers: {
