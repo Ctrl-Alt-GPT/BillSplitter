@@ -1,5 +1,5 @@
 'use client';
-import Card from '../UI/Card';
+import { Card, CardContent } from '@mui/material';
 import '../../styles/NewItem.css';
 import NewItemForm from './NewItemForm';
 import { nanoid } from 'nanoid';
@@ -8,16 +8,12 @@ const NewItem = (props) => {
   const saveItemDataHandler = (enteredItemData) => {
     const itemData = {
       ...enteredItemData,
-        id: nanoid(),
+      id: nanoid(),
     };
     props.onAddItems(itemData);
   };
 
-  return (
-    <Card className="new-item">
-      <NewItemForm onSaveItemData={saveItemDataHandler} />
-    </Card>
-  );
+  return <NewItemForm onSaveItemData={saveItemDataHandler} />;
 };
 
 export default NewItem;

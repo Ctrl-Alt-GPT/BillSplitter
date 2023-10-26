@@ -1,7 +1,17 @@
 'use client';
 import { useState } from 'react';
-
 import '../../styles/NewItemForm.css';
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  FormControl,
+  InputAdornment,
+  TextField,
+  InputLabel,
+  FilledInput,
+} from '@mui/material';
 
 const NewItemForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState('');
@@ -44,43 +54,47 @@ const NewItemForm = (props) => {
   };
 
   return (
-    // TODO: Party Dropdown Menu
-    <form onSubmit={submitHandler}>
-      <div className="new-item__controls">
-        <div className="new-item__control">
-          <label>Title</label>
-          <input
-            type="text"
-            value={enteredTitle}
+    <Card>
+      <form onSubmit={submitHandler}>
+        <CardContent>
+          <TextField
+            required
+            label="Title"
             onChange={titleChangeHandler}
-            required
-          />
-        </div>
-        <div className="new-item__control">
-          <label>Party</label>
-          <input
+            value={enteredTitle}
             type="text"
-            value={enteredParty}
+            variant="standard"
+          />
+          <TextField
+            required
+            label="Party"
             onChange={partyChangeHandler}
-            required
+            value={enteredParty}
+            type="text"
+            variant="standard"
+            helperText="members, separated by commas (,)"
           />
-        </div>
-        <div className="new-item__control">
-          <label>Amount</label>
-          <input
-            type="number"
-            min="0.01"
-            step="0.01"
-            value={enteredAmount}
+          <TextField
+            required
+            label="Amount"
             onChange={amountChangeHandler}
-            required
+            value={enteredAmount}
+            type="text"
+            variant="standard"
+            inputProps={{
+              inputMode: 'numberic',
+              pattern: '[0-9]?[0-9]?(.[0-9][0-9]?)?',
+            }}
+            helperText="in dollars with two decimal places"
           />
-        </div>
-      </div>
-      <div className="new-item__actions">
-        <button type="submit">add item</button>
-      </div>
-    </form>
+        </CardContent>
+        <CardActions>
+          <Button type="submit" variant="contained">
+            add item
+          </Button>
+        </CardActions>
+      </form>
+    </Card>
   );
 };
 
