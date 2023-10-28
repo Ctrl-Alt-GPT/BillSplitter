@@ -1,18 +1,7 @@
 'use client';
 import { useState } from 'react';
 import '../../styles/NewItemForm.css';
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  FormControl,
-  InputAdornment,
-  TextField,
-  InputLabel,
-  FilledInput,
-  Grid,
-} from '@mui/material';
+import { Button, InputAdornment, TextField, Grid } from '@mui/material';
 
 const NewItemForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState('');
