@@ -8,8 +8,8 @@ const Search = () => {
   const clearRecords = async () => {
     try {
       const response = await fetch(
-        // 'http://localhost:3333/sean/clearAllBills'
-        'https://gpt-billsplitter.com:3333/sean/clearAllBills', {
+        'http://localhost:3333/sean/clearAllBills'
+        /*'https://gpt-billsplitter.com:3333/sean/clearAllBills'*/, {
           method: 'DELETE',
         });
       if (!response.ok) {
@@ -26,8 +26,8 @@ const Search = () => {
     
     try { 
       const response = await fetch(
-        // 'http://localhost:3333/sean/getAllBills'
-        'https://gpt-billsplitter.com:3333/sean/getAllBills', {
+        'http://localhost:3333/sean/getAllBills'
+        /*'https://gpt-billsplitter.com:3333/sean/getAllBills'*/, {
           method: 'GET',
         });
       if (!response.ok) {

@@ -6,7 +6,6 @@ const lineItemSchema = new Schema({
   title: String,
   party: String,
   amount: String,
-  sequenceNumber: Number,
   id: String,
 });
 

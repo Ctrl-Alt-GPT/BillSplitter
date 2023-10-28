@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Card from '../UI/Card';
 import Items from '../Items/Items';
 import '../../styles/Board.css';
@@ -15,9 +15,55 @@ const DEFAULT_ITEMS = [];
 
 const Board = () => {
 
+  const [tallies, setTallies] = useState([]);
+  const [items, setItems] = useState(DEFAULT_ITEMS);
   const [tax, setTax] = useState(0);
   const [tips, setTips] = useState(0);
 
+  const splitBill = (itemsVals, taxVals, tipsVals) => {
+    var subtotal = 0;
+    var memberMap = {};
+
+    // Cost per person for items ordered.
+    for (var i = 0; i < itemsVals.length; i++) {
+      const memberString = itemsVals[i].party.toLowerCase();
+      const memberArray = memberString.split(/\s*,\s*/);
+      const price = Number(itemsVals[i].amount);
+      const individualCost = price / memberArray.length;
+      subtotal += price;
+
+      for (const person of memberArray) {
+        if (memberMap.hasOwnProperty(person)) {
+          memberMap[person] += individualCost;
+        } else {
+          memberMap[person] = individualCost;
+        }
+      }
+    }
+
+    var memberMapArray = [];
+    // Tax/tips share for each member.
+    for (const person in memberMap) {
+      if (memberMap.hasOwnProperty(person)) {
+        const individualAmount = memberMap[person];
+        const proportion = individualAmount / subtotal;
+        const individualTax = taxVals * proportion;
+        const individualTips = tipsVals * proportion;
+        memberMap[person] += individualTax;
+        memberMap[person] += individualTips;
+      }
+      memberMapArray.push({
+        party: person,
+        share: memberMap[person],
+      });
+    }
+    setTallies(memberMapArray);
+  };
+
+  useEffect(() => {
+    splitBill(items, tax, tips);
+  }, [items, tax, tips])
+  
   const getTaxVal = (taxVal) => {
     setTax(taxVal);
   }
@@ -26,10 +72,17 @@ const Board = () => {
     setTips(tipsVal);
   }
   
-  const [items, setItems] = useState(DEFAULT_ITEMS);
+  const [removeIdx, setRemoveIdx] = useState(0);
+  const getRemoveIdx = (removeThis) => {
+    setRemoveIdx(removeThis);
+  }
 
-  const removeItem = (idx) => {
-    const filteredArray = items.filter((item) => item.sequenceNumber !== idx);
+  useEffect(()=> {
+    removeItem(removeIdx);
+  }, [removeIdx]);
+
+  const removeItem = (removeMe) => {
+    const filteredArray = items.filter((item) => item.id !== removeMe);
     setItems(filteredArray);
   };
 
@@ -96,7 +149,7 @@ const Board = () => {
      
       <NewItem onAddItems={addItemHandler} />
       
-      <Items datas={items} remove={removeItem} /> 
+      <Items datas={items} removeItem={getRemoveIdx}/>
                   
       <DisplayTotal
         datas={items}
@@ -108,12 +161,20 @@ const Board = () => {
      <div className="card-content">
         
         <div className="left-content">
-          <TaxTipsAddComponent getTaxVal={getTaxVal} getTipsVal={getTipsVal} />
+          <TaxTipsAddComponent 
+            getTaxVal={getTaxVal} 
+            getTipsVal={getTipsVal} 
+          />
           <SplitParty total={grandTotal} />
         </div>
         
           <div className="right-content">
-            <IndividualTotals items={items} tax={tax} tips={tips} />
+            <IndividualTotals 
+              items={items} 
+              tax={tax} 
+              tips={tips}
+              tallies={tallies}
+            />
           </div>
         </div>
     </Card>
