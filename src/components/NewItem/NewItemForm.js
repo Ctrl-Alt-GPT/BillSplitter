@@ -11,6 +11,7 @@ import {
   TextField,
   InputLabel,
   FilledInput,
+  Grid,
 } from '@mui/material';
 
 const NewItemForm = (props) => {
@@ -54,47 +55,55 @@ const NewItemForm = (props) => {
   };
 
   return (
-    <Card>
-      <form onSubmit={submitHandler}>
-        <CardContent>
+    <form onSubmit={submitHandler}>
+      <Grid container spacing={1}>
+        <Grid item md={4} sm={4} xs={12}>
           <TextField
             required
-            label="Title"
+            label="item name"
             onChange={titleChangeHandler}
             value={enteredTitle}
             type="text"
-            variant="standard"
+            fullWidth
           />
+        </Grid>
+        <Grid item md={5} sm={5} xs={12}>
           <TextField
             required
-            label="Party"
+            label="parties"
             onChange={partyChangeHandler}
             value={enteredParty}
             type="text"
-            variant="standard"
             helperText="members, separated by commas (,)"
+            fullWidth
           />
+        </Grid>
+        <Grid item md={3} sm={3} xs={12}>
           <TextField
             required
-            label="Amount"
+            label="amount"
             onChange={amountChangeHandler}
             value={enteredAmount}
             type="text"
-            variant="standard"
             inputProps={{
               inputMode: 'numberic',
               pattern: '[0-9]?[0-9]?(.[0-9][0-9]?)?',
             }}
-            helperText="in dollars with two decimal places"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">$</InputAdornment>
+              ),
+            }}
+            fullWidth
           />
-        </CardContent>
-        <CardActions>
+        </Grid>
+        <Grid item md={12} sm={12} container justifyContent="flex-end">
           <Button type="submit" variant="contained">
             add item
           </Button>
-        </CardActions>
-      </form>
-    </Card>
+        </Grid>
+      </Grid>
+    </form>
   );
 };
 
