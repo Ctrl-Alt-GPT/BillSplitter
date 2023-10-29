@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import '../../styles/NewItemForm.css';
 import { Button, InputAdornment, TextField, Grid } from '@mui/material';
+import { NumericFormat } from 'react-number-format';
 
 const NewItemForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState('');
@@ -68,21 +69,19 @@ const NewItemForm = (props) => {
           />
         </Grid>
         <Grid item md={3} sm={3} xs={12}>
-          <TextField
+          <NumericFormat
+            customInput={TextField}
             required
             label="amount"
             onChange={amountChangeHandler}
             value={enteredAmount}
-            type="text"
-            inputProps={{
-              inputMode: 'numberic',
-              pattern: '[0-9]?[0-9]?(.[0-9][0-9]?)?',
-            }}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">$</InputAdornment>
               ),
             }}
+            allowNegative={false}
+            decimalScale={2}
             fullWidth
           />
         </Grid>
