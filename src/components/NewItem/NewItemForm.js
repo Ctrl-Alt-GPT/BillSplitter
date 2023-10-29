@@ -55,6 +55,7 @@ const NewItemForm = (props) => {
             value={enteredTitle}
             type="text"
             fullWidth
+            id="field1"
           />
         </Grid>
         <Grid item md={5} sm={5} xs={12}>
@@ -66,6 +67,7 @@ const NewItemForm = (props) => {
             type="text"
             helperText="members, separated by commas (,)"
             fullWidth
+            id="field2"
           />
         </Grid>
         <Grid item md={3} sm={3} xs={12}>
@@ -83,6 +85,7 @@ const NewItemForm = (props) => {
             allowNegative={false}
             decimalScale={2}
             fullWidth
+            id="field3"
           />
         </Grid>
         <Grid item md={12} sm={12} container justifyContent="flex-end">
