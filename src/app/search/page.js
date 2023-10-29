@@ -1,9 +1,11 @@
 'use client';
+import { setRequestMeta } from 'next/dist/server/request-meta';
 import { useEffect, useState } from 'react';
 
 const Search = () => {
 
   const [records, setrecords] = useState('');
+  const [bill, setBill] = useState('');
 
   const clearRecords = async () => {
     try {
@@ -33,6 +35,8 @@ const Search = () => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
+      
+      // setBill(JSON.stringify(response.tallies));
       setrecords(response.text());
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -46,6 +50,7 @@ const Search = () => {
       <button onClick={fetchrecords}>Get Records</button>
       <br></br>
       <div>{records}</div>
+      {/* <div>{bill}</div> */}
       <br></br>
       <button onClick={clearRecords}>Clear records</button>
     </>

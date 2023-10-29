@@ -1,60 +1,9 @@
 'use client';
-import { useEffect, useState } from 'react';
 import Card from '../UI/Card';
 import '../../styles/IndividualTotal.css';
 
 
 const IndividualTotals = (props) => {
-  // console.log(props.items);
-  
-  // const [items, setItems] = useState([]);
-  // const [tallies, setTallies] = useState([]);
-
-  // useEffect(() => {
-  //   setItems(props.items);
-  //   splitBill();
-  //   // formatTallies(tallies);
-  // }, [props.items, props.tax, props.tips]);
-
-  // const splitBill = () => {
-  //   var subtotal = 0;
-  //   var memberMap = {};
-
-  //   // Cost per person for items ordered.
-  //   for (var i = 0; i < items.length; i++) {
-  //     const memberString = items[i].party.toLowerCase();
-  //     const memberArray = memberString.split(/\s*,\s*/);
-  //     const price = Number(items[i].amount);
-  //     const individualCost = price / memberArray.length;
-  //     subtotal += price;
-
-  //     for (const person of memberArray) {
-  //       if (memberMap.hasOwnProperty(person)) {
-  //         memberMap[person] += individualCost;
-  //       } else {
-  //         memberMap[person] = individualCost;
-  //       }
-  //     }
-  //   }
-
-  //   var memberMapArray = [];
-  //   // Tax/tips share for each member.
-  //   for (const person in memberMap) {
-  //     if (memberMap.hasOwnProperty(person)) {
-  //       const individualAmount = memberMap[person];
-  //       const proportion = individualAmount / subtotal;
-  //       const individualTax = props.tax * proportion;
-  //       const individualTips = props.tips * proportion;
-  //       memberMap[person] += individualTax;
-  //       memberMap[person] += individualTips;
-  //     }
-  //     memberMapArray.push({
-  //       party: person,
-  //       share: memberMap[person],
-  //     });
-  //   }
-  //   setTallies(memberMapArray);
-  // };
 
   const postBill = async () => {
     const bill = {
@@ -100,8 +49,8 @@ const IndividualTotals = (props) => {
     }
   };
   
-  // const itemsWithoutIdAndSequence = items.map(({ sequenceNumber, id, ...rest }) => rest);
-  const itemsWithoutIdAndSequence = props.items.map(({ sequenceNumber, id, ...rest }) => rest);
+  // const itemsWithoutIdAndSequence = props.items.map(({ sequenceNumber, id, ...rest }) => rest);
+  const itemsWithoutIdAndSequence = props.items.map(({ id, ...rest }) => rest);
 
   // Create a formatted string for displaying the items
   const formattedItems = itemsWithoutIdAndSequence.map((item, index) => (
@@ -110,15 +59,12 @@ const IndividualTotals = (props) => {
     </div>
   ));
 
-  // Create a formatted string for displaying the Tallies
-  // Create a formatted string for displaying the Tallies
-  // const formattedTallies = tallies.map((tally, index) => (
+    // Create a formatted string for displaying the Tallies
   const formattedTallies = props.tallies.map((tally, index) => (
     <div key={index}>
       <strong>Party:</strong> {tally.party}, <strong>Amount:</strong> ${tally.share.toFixed(2)}
     </div>
   ));
-
 
   return (
     <Card className="IndividualTotal">
