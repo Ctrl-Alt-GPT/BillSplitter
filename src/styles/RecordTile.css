@@ -1,0 +1,22 @@
+.tile {
+  width: 700px;
+  /* height: 200px; */
+  min-height: 200px;
+  height: auto;
+
+  background-color: #cdd6f7;
+  border: 1px solid #a0a0a0;
+  transition: background-color 0.3s;
+  text-align: left;
+  padding: 10px;
+}
+
+.tile p {
+  display: block;
+  line-height: 1;
+}
+
+.tile:hover {
+  background-color: #a6b8f7;
+  cursor: pointer;
+}
