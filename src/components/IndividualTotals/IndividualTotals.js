@@ -6,20 +6,21 @@ import '../../styles/IndividualTotal.css';
 const IndividualTotals = (props) => {
 
   const postBill = async () => {
-    const bill = {
-      // lineItems: items,
-      lineItems: props.items,
-      // tallies: tallies,
-      tallies: props.tallies,
-    };
 
-  // const postBill = async () => {
-  //   const bill = {
-  //     lineItems: items,
-  //     tallies: tallies,
-  //     tax: props.tax,
-  //     tips: props.tips
-  //   };
+    // const bill = {
+    //   // lineItems: items,
+    //   lineItems: props.items,
+    //   // tallies: tallies,
+    //   tallies: props.tallies,
+    // };
+
+    // Incorporating tax and tips. 
+    const bill = {
+      lineItems: props.items,
+      tallies: props.tallies,
+      tax: props.tax,
+      tips: props.tips
+    };
 
 
     try {

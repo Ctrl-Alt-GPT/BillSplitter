@@ -2,6 +2,8 @@
 import { useEffect, useState } from 'react';
 import Record from './record.js';
 import '../../styles/TileContainer.css';
+import NewItemForm from '../../components/NewItem/NewItemForm.js';
+// import '../../styles/Board.css';
 
 
 const Search = () => {
@@ -26,11 +28,14 @@ const Search = () => {
   };
 
 
-  const fetchrecords = async () => {
+  const fetchAllRecords = async () => {
     
     try { 
       const response = await fetch(
         'http://localhost:3333/sean/getAllBills'
+        
+        // 'http://localhost:3333/sean/getBillById/?\'id\'=\'653fd8f7c413cde2ffb42864\''
+
         /*'https://gpt-billsplitter.com:3333/sean/getAllBills'*/, {
           method: 'GET',
         });
@@ -39,6 +44,9 @@ const Search = () => {
       }
       
       const data = await response.json();
+      if (data.length <= 0) {
+        alert("No records match the search query.")
+      }
       // setrecords(response.text());
       setrecords(data);
       console.log(JSON.stringify(records));
@@ -50,22 +58,27 @@ const Search = () => {
 
   return (
     <>
-    
-      Records:
-      <br></br>
-      <button onClick={fetchrecords}>Get Records</button>
-      <br></br>
-      <div className='container'>
-        {records.length <= 0 ? (
-          <div className="no-items">Add an item to get started.</div>
-          ) : (
-            records.map((item) => (
-              <Record key={item._id} {...item} />
-          ))
-        )}
-      </div>
-      <br></br>
-      <button onClick={clearRecords}>Clear records</button>
+      {/* <div className='board'> */}
+
+        Records:
+        <br></br>
+        <input></input>
+        <input></input>
+        <br></br>
+        <button onClick={fetchAllRecords}>Get Records</button>
+        <br></br>
+        <div className='container'>
+          {records.length <= 0 ? (
+            <div className="no-items">Add an item to get started.</div>
+            ) : (
+              records.map((item) => (
+                <Record key={item._id} {...item} />
+            ))
+          )}
+        </div>
+        <br></br>
+        <button onClick={clearRecords}>Clear records</button>
+      {/* </div> */}
     </>
   );
 };

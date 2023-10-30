@@ -7,6 +7,12 @@ const mongoose = require('mongoose');
 // Get all bill records
 const getAllBills = async (req, res) => {
   const bill = await Bill.find({}).sort({createdAt: -1});
+
+  // Testing find for certain queries. These formats work for finding specify records. 
+  // const bill = await Bill.find({'lineItems.title' : 'dinner'}).sort({createdAt: -1});
+  // const bill = await Bill.find({'lineItems.party' : 'me'}).sort({createdAt: -1});
+  // const bill = await Bill.find({'lineItems.title' : 'lunch'}).sort({createdAt: -1});
+
   res.status(200).json(bill);
 }
 
@@ -14,26 +20,27 @@ const getAllBills = async (req, res) => {
 // Needs work.
 // Get a bill by its Id
 const getBillById = async (req, res) => {
-  const id = req.params;
-  const bill = await Bill.find({'_id': id});
+
+  // const id = req.params;
+  const id = req.query;
+  console.log("id = " + JSON.stringify(id));
+  // const bill = await Bill.find({'_id': id});
+  const bill = await Bill.find({id});
   res.status(200).json(bill);
+  // console.log(JSON.stringify(bill));
 }
 
 
 
 const createBillRecord = async (req, res) => {
 
-  // ¿¿¿Not needed after eliminating useEffect to trigger postBill in individualTotals???
-  // Not ideal
-  // if (!(Object.keys(req.body.tallies).length)) {
-  //   return;
-  // }
+  // const {lineItems, tallies} = req.body;
+  // const combined = new Bill({lineItems, tallies});
 
-  const {lineItems, tallies} = req.body;
-  // const {lineItems, tallies, tax, tips } = req.body;
-  // const combined = new Bill({lineItems, tallies, tax, tips});
-  const combined = new Bill({lineItems, tallies});
-
+  // Incorporating tax and tips. 
+  const {lineItems, tallies, tax, tips } = req.body;
+  const combined = new Bill({lineItems, tallies, tax, tips});
+  
   try {
     const bill = await Bill.create(combined);
     res.status(200).json(bill);

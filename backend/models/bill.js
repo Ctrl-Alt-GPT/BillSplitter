@@ -14,16 +14,16 @@ const tallySchema = new Schema({
   share: Number,
 });
 
-const billSchema = new Schema({
-  lineItems: [lineItemSchema],
-  tallies: [tallySchema],
-}, {timestamps: true});
-
 // const billSchema = new Schema({
 //   lineItems: [lineItemSchema],
 //   tallies: [tallySchema],
-//   tax: Number,
-//   tips: Number
 // }, {timestamps: true});
+
+const billSchema = new Schema({
+  lineItems: [lineItemSchema],
+  tallies: [tallySchema],
+  tax: Number,
+  tips: Number
+}, {timestamps: true});
 
 module.exports = mongoose.model('Bill', billSchema);
