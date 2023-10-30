@@ -164,6 +164,8 @@ const Board = () => {
           <TaxTipsAddComponent 
             getTaxVal={getTaxVal} 
             getTipsVal={getTipsVal} 
+            tax={tax}
+            tips={tips}
           />
           <SplitParty total={grandTotal} />
         </div>

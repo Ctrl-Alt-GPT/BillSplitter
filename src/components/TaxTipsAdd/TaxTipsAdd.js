@@ -1,23 +1,19 @@
 'use client';
 import '../../styles/TaxTipsAdd.css';
+import { Button, InputAdornment, TextField, Grid } from '@mui/material';
+import { NumericFormat } from 'react-number-format';
 
 const TaxTipsAddComponent = (props) => {
 
-
   const inputValidation = (inputNumber) => {
-    if (inputNumber < 0) {
-      return false;
-    }
-    const x = inputNumber * 100;
-    const y = Math.floor(x);
-    return x - y > 0 ? false : true;
+    var regex = /^(\d+)?(\.\d{0,2})?$/;
+    return regex.test(inputNumber)
   }
   
   const handleTaxChange = (e) => {
     if (inputValidation(e.target.value)) {
       props.getTaxVal(e.target.value);
     }
-
   };
 
   const handleTipsChange = (e) => {
@@ -27,26 +23,55 @@ const TaxTipsAddComponent = (props) => {
   };
 
   return (
-    <form className='tax-tips-add'>
-      <div className='new-item__control'>
-        <label>Tax</label>
-        <input 
-          name='tax'
-          type="number" 
-          min="0.01" 
-          step="0.01" 
-          onChange={handleTaxChange}>
-        </input><br></br>
-        <label>Tip</label>
-        <input 
-          name='tips' 
-          type="number" 
-          min="0.01" 
-          step="0.01" 
-          onChange={handleTipsChange}>
-        </input><br></br>
-      </div>
-    </form>
+    <>
+      <NumericFormat
+        customInput={TextField}
+        label="tax"
+        onChange={handleTaxChange}
+        value={props.tax}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">$</InputAdornment>
+          ),
+        }}
+        allowNegative={false}
+        decimalScale={2}
+        fullWidth
+      />
+      <br></br>
+      <br></br>
+      <NumericFormat
+        customInput={TextField}
+        label="tips"
+        onChange={handleTipsChange}
+        value={props.tips}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">$</InputAdornment>
+          ),
+        }}
+        allowNegative={false}
+        decimalScale={2}
+        fullWidth
+      />
+    </>
+
+    // <form className='tax-tips-add'>
+    //   <div className='new-item__control'>
+    //     <label>Tax</label>
+    //     <input 
+    //       name='tax'
+    //       type="text" 
+    //       onChange={handleTaxChange}>
+    //     </input><br></br>
+    //     <label>Tip</label>
+    //     <input 
+    //       name='tips' 
+    //       type="text" 
+    //       onChange={handleTipsChange}>
+    //     </input><br></br>
+    //   </div>
+    // </form>
   );
 }
 
