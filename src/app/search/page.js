@@ -2,13 +2,9 @@
 import { useEffect, useState } from 'react';
 import Record from './record.js';
 import '../../styles/TileContainer.css';
-import NewItemForm from '../../components/NewItem/NewItemForm.js';
-// import '../../styles/Board.css';
-
 
 const Search = () => {
 
-  // const [records, setrecords] = useState('');
   const [records, setrecords] = useState([]);
   
   const clearRecords = async () => {
@@ -33,9 +29,6 @@ const Search = () => {
     try { 
       const response = await fetch(
         'http://localhost:3333/sean/getAllBills'
-        
-        // 'http://localhost:3333/sean/getBillById/?\'id\'=\'653fd8f7c413cde2ffb42864\''
-
         /*'https://gpt-billsplitter.com:3333/sean/getAllBills'*/, {
           method: 'GET',
         });
@@ -56,30 +49,62 @@ const Search = () => {
     }
   }
 
+
+  // WIP
+  const searchForRecords = async () => {
+    
+    // Use state for a variable that can be inserted as search criteria.
+    try { 
+      const response = await fetch(
+        'http://localhost:3333/sean/searchForRecords'
+        /*'https://gpt-billsplitter.com:3333/sean/searchForRecords'*/, {
+          method: 'GET',
+        });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      if (data.length <= 0) {
+        alert("No records match the search query.")
+      }
+      
+      setrecords(data);
+      console.log(JSON.stringify(records));
+      
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+
   return (
     <>
-      {/* <div className='board'> */}
-
-        Records:
-        <br></br>
-        <input></input>
-        <input></input>
-        <br></br>
-        <button onClick={fetchAllRecords}>Get Records</button>
-        <br></br>
-        <div className='container'>
-          {records.length <= 0 ? (
-            <div className="no-items">Add an item to get started.</div>
-            ) : (
-              records.map((item) => (
-                <Record key={item._id} {...item} />
-            ))
-          )}
-        </div>
-        <br></br>
-        <button onClick={clearRecords}>Clear records</button>
-      {/* </div> */}
-    </>
+      Records:
+      <br></br>
+      {/*Search field input boxes
+      <input></input>
+      <input></input>
+      */}
+      <br></br>
+      <button onClick={fetchAllRecords}>Get Records</button>
+      <br></br>
+      
+      {/* 
+      Targeted search button.
+      <button onClick={searchForRecords}>Search for records</button> 
+      */}
+      <div className='container'>
+        {records.length <= 0 ? (
+          <div className="no-items">Add an item to get started.</div>
+          ) : (
+            records.map((item) => (
+              <Record key={item._id} {...item} />
+          ))
+        )}
+      </div>
+      <br></br>
+      <button onClick={clearRecords}>Clear records</button>
+    
+  </>
   );
 };
 

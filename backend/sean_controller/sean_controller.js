@@ -16,26 +16,31 @@ const getAllBills = async (req, res) => {
   res.status(200).json(bill);
 }
 
+// Get specific records
+const searchForRecords = async (req, res) => {
+  // const { lineItems, parties } = req.query;
+  // const bill = await Bill.find({'lineItems.party' : 'katie'}).sort({createdAt: -1});
+  const searchQuery = req.query
+  console.log(JSON.stringify(searchQuery));
+  // const bill = await Bill.find({searchQuery}).sort({createdAt: -1});
+  // res.status(200).json(bill);
+}
+
 
 // Needs work.
 // Get a bill by its Id
 const getBillById = async (req, res) => {
-
-  // const id = req.params;
-  const id = req.query;
+  // const id = req.query;
+  const id = req.params.value;
   console.log("id = " + JSON.stringify(id));
-  // const bill = await Bill.find({'_id': id});
-  const bill = await Bill.find({id});
-  res.status(200).json(bill);
+  // const bill = Bill.find({ _id: mongoose.Types.ObjectId(id) });
+  // res.status(200).json(bill);
   // console.log(JSON.stringify(bill));
 }
 
 
 
 const createBillRecord = async (req, res) => {
-
-  // const {lineItems, tallies} = req.body;
-  // const combined = new Bill({lineItems, tallies});
 
   // Incorporating tax and tips. 
   const {lineItems, tallies, tax, tips } = req.body;
@@ -156,5 +161,6 @@ module.exports  = {
   updatePerson,
   getAllBills,
   clearAllBills,
-  getBillById
+  getBillById,
+  searchForRecords
 }

@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 
 const lineItemSchema = new Schema({
   title: String,
-  party: String,
+  // party: String,
+  party: [String],
   amount: String,
   id: String,
 });

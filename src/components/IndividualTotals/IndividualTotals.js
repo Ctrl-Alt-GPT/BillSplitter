@@ -7,14 +7,21 @@ const IndividualTotals = (props) => {
 
   const postBill = async () => {
 
-    // const bill = {
-    //   // lineItems: items,
-    //   lineItems: props.items,
-    //   // tallies: tallies,
-    //   tallies: props.tallies,
-    // };
 
+    // Parse the party object of lineItems so individual names can be input into the document.
     // Incorporating tax and tips. 
+    
+    // const parties = props.items.parties
+    // const memberString = itemsVals[i].party.toLowerCase();
+    // const memberArray = memberString.split(/\s*,\s*/);
+    
+    for (var i = 0; i < props.items.length; i++) {
+      const memberString = props.items[i].party.toLowerCase();
+      const memberArray = memberString.split(/\s*,\s*/);
+      props.items[i].party = memberArray;
+    }
+
+
     const bill = {
       lineItems: props.items,
       tallies: props.tallies,

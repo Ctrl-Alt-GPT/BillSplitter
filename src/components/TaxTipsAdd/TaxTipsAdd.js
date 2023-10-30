@@ -12,13 +12,23 @@ const TaxTipsAddComponent = (props) => {
   
   const handleTaxChange = (e) => {
     if (inputValidation(e.target.value)) {
-      props.getTaxVal(e.target.value);
+      if (e.target.value == '') {
+        props.getTaxVal(0);  
+      }
+      else {
+        props.getTaxVal(e.target.value);
+      }
     }
   };
 
   const handleTipsChange = (e) => {
     if (inputValidation(e.target.value)) {
-      props.getTipsVal(e.target.value);
+      if (e.target.value == '') {
+        props.getTipsVal(0);
+      }
+      else {
+        props.getTipsVal(e.target.value);  
+      }
     }
   };
 
@@ -55,23 +65,6 @@ const TaxTipsAddComponent = (props) => {
         fullWidth
       />
     </>
-
-    // <form className='tax-tips-add'>
-    //   <div className='new-item__control'>
-    //     <label>Tax</label>
-    //     <input 
-    //       name='tax'
-    //       type="text" 
-    //       onChange={handleTaxChange}>
-    //     </input><br></br>
-    //     <label>Tip</label>
-    //     <input 
-    //       name='tips' 
-    //       type="text" 
-    //       onChange={handleTipsChange}>
-    //     </input><br></br>
-    //   </div>
-    // </form>
   );
 }
 

@@ -9,7 +9,8 @@ const {
     updatePerson,
     getAllBills,
     clearAllBills,
-    getBillById
+    getBillById,
+    searchForRecords
 } = require('../sean_controller/sean_controller');
 
 router.get("/", async (req, res) => {
@@ -35,6 +36,9 @@ router.delete("/clearAllBills", clearAllBills);
 
 // GET a specific bill by its ID
 router.get("/getBillById", getBillById);
+
+// GET a specific bill by search criteria
+router.get("/searchForRecords", searchForRecords);
 
 
 
