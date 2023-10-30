@@ -1,7 +1,8 @@
 'use client';
 import { useState } from 'react';
-
 import '../../styles/NewItemForm.css';
+import { Button, InputAdornment, TextField, Grid } from '@mui/material';
+import { NumericFormat } from 'react-number-format';
 
 const NewItemForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState('');
@@ -36,42 +37,55 @@ const NewItemForm = (props) => {
   };
 
   return (
-    // TODO: Party Dropdown Menu
     <form onSubmit={submitHandler}>
-      <div className="new-item__controls">
-        <div className="new-item__control">
-          <label>Title</label>
-          <input
-            type="text"
-            value={enteredTitle}
+      <Grid container spacing={1}>
+        <Grid item md={4} sm={4} xs={12}>
+          <TextField
+            required
+            label="item name"
             onChange={titleChangeHandler}
-            required
-          />
-        </div>
-        <div className="new-item__control">
-          <label>Party</label>
-          <input
+            value={enteredTitle}
             type="text"
-            value={enteredParty}
+            fullWidth
+            id="field1"
+          />
+        </Grid>
+        <Grid item md={5} sm={5} xs={12}>
+          <TextField
+            required
+            label="parties"
             onChange={partyChangeHandler}
-            required
+            value={enteredParty}
+            type="text"
+            helperText="members, separated by commas (,)"
+            fullWidth
+            id="field2"
           />
-        </div>
-        <div className="new-item__control">
-          <label>Amount</label>
-          <input
-            type="number"
-            min="0.01"
-            step="0.01"
-            value={enteredAmount}
+        </Grid>
+        <Grid item md={3} sm={3} xs={12}>
+          <NumericFormat
+            customInput={TextField}
+            required
+            label="amount"
             onChange={amountChangeHandler}
-            required
+            value={enteredAmount}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">$</InputAdornment>
+              ),
+            }}
+            allowNegative={false}
+            decimalScale={2}
+            fullWidth
+            id="field3"
           />
-        </div>
-      </div>
-      <div className="new-item__actions">
-        <button type="submit">add item</button>
-      </div>
+        </Grid>
+        <Grid item md={12} sm={12} container justifyContent="flex-end">
+          <Button type="submit" variant="contained">
+            add item
+          </Button>
+        </Grid>
+      </Grid>
     </form>
   );
 };
