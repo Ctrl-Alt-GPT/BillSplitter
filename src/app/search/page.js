@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Record from './record.js';
 import '../../styles/TileContainer.css';
 import { Button, InputAdornment, TextField, Grid } from '@mui/material';
+import { nanoid } from 'nanoid';
 
 const prodURL = true;
 
@@ -80,6 +81,7 @@ const Search = () => {
           value={paramKey}
           type="text"
           sx={{width: 300}}
+          id="field1"
         />
         <TextField
           required
@@ -88,6 +90,7 @@ const Search = () => {
           value={paramVal}
           type="text"
           sx={{width: 300}}
+          id="field2"
         />
       </Grid>
       <br></br>
@@ -100,7 +103,7 @@ const Search = () => {
       <br></br>
       <br></br>
       <div className='container'>
-        {records.map((item) => (<Record {...item} />))}
+        {records.map((item) => (<Record key={nanoid} {...item} />))}
       </div>
       <br></br>
       <Button 
