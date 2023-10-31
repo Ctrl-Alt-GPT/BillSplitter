@@ -10,6 +10,7 @@ const IndividualTotals = (props) => {
 
     // Replacing the props parties string with an array of individual names.
     for (var i = 0; i < props.items.length; i++) {
+      // toLowerCase() not working?
       const memberString = props.items[i].party.toLowerCase();
       const memberArray = memberString.split(/\s*,\s*/);
       props.items[i].party = memberArray;
