@@ -2,25 +2,18 @@
 import Card from '../UI/Card';
 import '../../styles/IndividualTotal.css';
 
+const prodURL = true;
 
 const IndividualTotals = (props) => {
 
   const postBill = async () => {
 
-
-    // Parse the party object of lineItems so individual names can be input into the document.
-    // Incorporating tax and tips. 
-    
-    // const parties = props.items.parties
-    // const memberString = itemsVals[i].party.toLowerCase();
-    // const memberArray = memberString.split(/\s*,\s*/);
-    
+    // Replacing the props parties string with an array of individual names.
     for (var i = 0; i < props.items.length; i++) {
       const memberString = props.items[i].party.toLowerCase();
       const memberArray = memberString.split(/\s*,\s*/);
       props.items[i].party = memberArray;
     }
-
 
     const bill = {
       lineItems: props.items,
@@ -31,9 +24,12 @@ const IndividualTotals = (props) => {
 
 
     try {
-      const response = await fetch(
-        'http://localhost:3333/sean/createBill'
-        /*'https://gpt-billsplitter.com:3333/sean/createBill'*/,
+
+      var URL = 'http://localhost:3333/sean/createBill';
+      if (prodURL) 
+        URL = 'https://gpt-billsplitter.com:3333/sean/createBill';
+
+      const response = await fetch( URL ,
         {
           method: 'POST',
           headers: {
@@ -48,16 +44,12 @@ const IndividualTotals = (props) => {
       } else {
         alert("Bill has been saved.")
       }
-  
-      // const responseData = await response.json();
-      // console.log(responseData);
-    
+      
     } catch (error) {
       console.error('Error creating record.', error);
     }
   };
   
-  // const itemsWithoutIdAndSequence = props.items.map(({ sequenceNumber, id, ...rest }) => rest);
   const itemsWithoutIdAndSequence = props.items.map(({ id, ...rest }) => rest);
 
   // Create a formatted string for displaying the items

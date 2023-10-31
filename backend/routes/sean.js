@@ -13,17 +13,7 @@ const {
     searchForRecords
 } = require('../sean_controller/sean_controller');
 
-router.get("/", async (req, res) => {
-    res.send("Hello, you're on /sean route.")
-});
-
-// GET all records
-router.get("/getAll", getAllPersons);
-
-
-
-
-
+////////////////////////////////////////////////////////////////
 
 // GET all bill records
 router.get("/getAllBills", getAllBills)
@@ -40,16 +30,20 @@ router.get("/getBillById", getBillById);
 // GET a specific bill by search criteria
 router.get("/searchForRecords", searchForRecords);
 
+////////////////////////////////////////////////////////////////
 
+router.get("/", async (req, res) => {
+  res.send("Hello, you're on /sean route.")
+});
 
+// GET all records
+router.get("/getAll", getAllPersons);
 
 // GET one record
 router.get("/:id", getPerson);
 
 // CREATE a record
 router.post("/create", createPerson);
-
-
 
 // DELET a record
 router.delete("/:id", deletePerson);

@@ -18,12 +18,9 @@ const getAllBills = async (req, res) => {
 
 // Get specific records
 const searchForRecords = async (req, res) => {
-  // const { lineItems, parties } = req.query;
-  // const bill = await Bill.find({'lineItems.party' : 'katie'}).sort({createdAt: -1});
   const searchQuery = req.query
-  console.log(JSON.stringify(searchQuery));
-  // const bill = await Bill.find({searchQuery}).sort({createdAt: -1});
-  // res.status(200).json(bill);
+  const bill = await Bill.find(searchQuery).sort({createdAt: -1});
+  res.status(200).json(bill);
 }
 
 
@@ -41,11 +38,8 @@ const getBillById = async (req, res) => {
 
 
 const createBillRecord = async (req, res) => {
-
-  // Incorporating tax and tips. 
   const {lineItems, tallies, tax, tips } = req.body;
   const combined = new Bill({lineItems, tallies, tax, tips});
-  
   try {
     const bill = await Bill.create(combined);
     res.status(200).json(bill);
