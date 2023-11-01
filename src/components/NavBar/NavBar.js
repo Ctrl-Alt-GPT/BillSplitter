@@ -1,10 +1,11 @@
 import Link from 'next/link';
+import { Stack } from '@mui/material';
 
 const NavBar = () => {
   return (
-    <header>
-      <nav>
-        <Link href="/">
+    <>
+      <Stack direction="row" spacing={1}>
+      <Link href="/">
           Home
         </Link>
         <Link href="/search">
@@ -13,8 +14,8 @@ const NavBar = () => {
         <Link href="/about">
           About
         </Link>
-      </nav>
-    </header>
+      </Stack>
+    </>
   );
 };
 

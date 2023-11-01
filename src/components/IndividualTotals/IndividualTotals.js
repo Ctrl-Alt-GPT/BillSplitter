@@ -1,17 +1,18 @@
 'use client';
 import Card from '../UI/Card';
 import '../../styles/IndividualTotal.css';
+import { Button, Snackbar, Alert, Grid } from '@mui/material';
 
-const prodURL = true;
+const prodURL = false;
 
 const IndividualTotals = (props) => {
 
   const postBill = async () => {
 
-    // Replacing the props parties string with an array of individual names.
     for (var i = 0; i < props.items.length; i++) {
       // toLowerCase() not working?
-      const memberString = props.items[i].party.toLowerCase();
+      // const memberString = props.items[i].party.toLowerCase();
+      const memberString = props.items[i].party;
       const memberArray = memberString.split(/\s*,\s*/);
       props.items[i].party = memberArray;
     }
@@ -68,6 +69,7 @@ const IndividualTotals = (props) => {
   ));
 
   return (
+    
     <Card className="IndividualTotal">
       <h2>Individual Totals</h2>
       <ul>
@@ -80,12 +82,13 @@ const IndividualTotals = (props) => {
         <ul>{formattedTallies}</ul>
         <li>------------------------------------------------------</li>
       </ul>
-      <br></br>
-      <button onClick={postBill}>Save Bill</button>
+      <br></br>      
+      <Button variant="contained" onClick={postBill}>Save Bill</Button>
       <br></br>
     </Card>
+    
   );
-};
+}
 
 const formatTallies = (tallies) => {
   const tallyList = [];
