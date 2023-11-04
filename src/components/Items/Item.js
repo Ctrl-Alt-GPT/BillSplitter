@@ -1,37 +1,69 @@
 'use client';
-import Card from '../UI/Card';
 import '../../styles/Item.css';
 import '../../styles/Remove-Button.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import {
+  Card,
+  ClickAwayListener,
+  Divider,
+  IconButton,
+  Tooltip,
+} from '@mui/material';
+import { Delete, Info } from '@mui/icons-material';
 
-// const Item = ({ title, party, amount }) => {
 const Item = (props) => {
   const [arrIdx, setArrIdx] = useState(props.idx);
+  const [openTooltip, setOpenTooltip] = useState(false);
 
-  // Not sure if this is needed.
   useEffect(() => {
     setArrIdx(props.idx);
   }, [props.idx]);
 
   const removeThisItem = () => {
     props.remove(arrIdx);
-    // props.remove(props.key);
+  };
+
+  const tooltipOpenHandler = () => {
+    setOpenTooltip(true);
+  };
+
+  const tooltipCloseHandler = () => {
+    setOpenTooltip(false);
   };
 
   return (
     <Card className="item">
-      {/* <h2>{title}</h2> */}
       <h2>{props.title}</h2>
-      <div className="item__party">
-        Party: <br />
-        {/* {party} */}
-        {props.party}
-      </div>
-      {/* <div className="item__amount">${amount}</div> */}
+
       <div className="item__amount">${props.amount}</div>
-      {/* <button onClick={props.remove}>Remove</button> */}
-      <button className="remove-button" onClick={removeThisItem}></button>
+      <Divider orientation="vertical" flexItem sx={{ marginX: 1 }} />
+
+      <ClickAwayListener onClickAway={tooltipCloseHandler}>
+        <Tooltip
+          PopperProps={{ disablePortal: true }}
+          onClose={tooltipCloseHandler}
+          open={openTooltip}
+          disableFocusListener
+          disableHoverListener
+          disableTouchListener
+          title={props.party}
+        >
+          <IconButton
+            aria-label="Info"
+            size="small"
+            onClick={tooltipOpenHandler}
+          >
+            <Info fontSize="inherit" />
+          </IconButton>
+        </Tooltip>
+      </ClickAwayListener>
+
+      <Tooltip title="Delete">
+        <IconButton aria-label="Delete" size="small" onClick={removeThisItem}>
+          <Delete fontSize="inherit" />
+        </IconButton>
+      </Tooltip>
     </Card>
   );
 };
