@@ -11,15 +11,14 @@ const Items = (props) => {
         {props.datas.length <= 0 ? (
           <div className="no-items">Add an item to get started.</div>
         ) : (
-          allItems.map((item) => (
+          props.datas.map((item) => (
             <Item
               id={item.id}
               key={item.id}
               title={item.title}
               party={item.party}
               amount={item.amount}
-              removeItem={props.remove}
-              idx={allItems[allItems.length - 1].sequenceNumber}
+              removeItem={props.removeItem}
             />
           ))
         )}

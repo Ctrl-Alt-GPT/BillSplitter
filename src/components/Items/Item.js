@@ -13,7 +13,6 @@ import { Delete, Info } from '@mui/icons-material';
 
 const Item = (props) => {
   const [openTooltip, setOpenTooltip] = useState(false);
-
   const [myId, setIdx] = useState(props.id);
 
   const removeThisItem = () => {
