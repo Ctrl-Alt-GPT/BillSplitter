@@ -13,7 +13,9 @@ import SplitParty from '../SplitParty/SplitParty';
 
 const DEFAULT_ITEMS = [];
 
-const Board = () => {
+const Board = (props) => {
+
+  // const { lineItems, taxes, tipValues } = props.match.params;
 
   const [tallies, setTallies] = useState([]);
   const [items, setItems] = useState(DEFAULT_ITEMS);
@@ -126,14 +128,14 @@ const Board = () => {
   };
 
   // Group items by party name
-  const groupedItems = {};
-  items.forEach((item) => {
-    const party = item.party;
-    if (!groupedItems[party]) {
-      groupedItems[party] = [];
-    }
-    groupedItems[party].push(item);
-  });
+  // const groupedItems = {};
+  // items.forEach((item) => {
+  //   const party = item.party;
+  //   if (!groupedItems[party]) {
+  //     groupedItems[party] = [];
+  //   }
+  //   groupedItems[party].push(item);
+  // });
 
   return (
     <Card className="board">
@@ -176,6 +178,9 @@ const Board = () => {
               tax={tax} 
               tips={tips}
               tallies={tallies}
+              clearTax={getTaxVal}
+              clearTips={getTipsVal}
+              clearItems={setItems}
             />
           </div>
         </div>

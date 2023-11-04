@@ -1,54 +1,70 @@
 'use client';
+import { useEffect, useState } from 'react';
 import Card from '../UI/Card';
 import '../../styles/IndividualTotal.css';
-import { Button, Snackbar, Alert, Grid } from '@mui/material';
+import { Button, Alert } from '@mui/material';
 
 const prodURL = false;
 
 const IndividualTotals = (props) => {
 
+  const [showAlert, setShowAlert] = useState(false);
+
+  useEffect(() => {
+    setShowAlert(false);
+  }, [props.items.length > 0])
+
   const postBill = async () => {
 
-    for (var i = 0; i < props.items.length; i++) {
-      // toLowerCase() not working?
-      // const memberString = props.items[i].party.toLowerCase();
-      const memberString = props.items[i].party;
-      const memberArray = memberString.split(/\s*,\s*/);
-      props.items[i].party = memberArray;
-    }
+    if (props.items.length > 0) {
+      setShowAlert(false);
+      const itemsCopy = [...props.items];
 
-    const bill = {
-      lineItems: props.items,
-      tallies: props.tallies,
-      tax: props.tax,
-      tips: props.tips
-    };
-
-
-    try {
-
-      var URL = 'http://localhost:3333/sean/createBill';
-      if (prodURL) 
-        URL = 'https://gpt-billsplitter.com:3333/sean/createBill';
-
-      const response = await fetch( URL ,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(bill),
+      for (let i = 0; i < itemsCopy.length; i++) { 
+        if (typeof itemsCopy[i].party === "string") {
+          const memberString = itemsCopy[i].party.toLowerCase();
+          const memberArray = memberString.split(/\s*,\s*/);
+          itemsCopy[i].party = memberArray;
         }
-      );
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      } else {
-        alert("Bill has been saved.")
       }
+
+      const bill = {
+        lineItems: itemsCopy,
+        tallies: props.tallies,
+        tax: props.tax,
+        tips: props.tips
+      };
       
-    } catch (error) {
-      console.error('Error creating record.', error);
+      try {
+        var URL = 'http://localhost:3333/sean/createBill';
+        if (prodURL) 
+          URL = 'https://gpt-billsplitter.com:3333/sean/createBill';
+
+        const response = await fetch( URL ,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(bill),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        } else {
+          alert("Bill has been saved.")
+        }
+        
+      } catch (error) {
+        console.error('Error creating record.', error);
+      }
+      props.clearTax(0);
+      props.clearTips(0);
+      props.clearItems([]);
+    }
+    else {
+      setShowAlert(true);
     }
   };
   
@@ -85,6 +101,12 @@ const IndividualTotals = (props) => {
       <br></br>      
       <Button variant="contained" onClick={postBill}>Save Bill</Button>
       <br></br>
+      <br></br>
+      {showAlert == true ?
+        <Alert 
+          severity="warning">You must add an item in order to save the record.
+        </Alert> : null
+      }
     </Card>
     
   );
