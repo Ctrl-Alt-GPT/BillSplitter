@@ -2,7 +2,6 @@
 import '../../styles/Item.css';
 import '../../styles/Remove-Button.css';
 import { useState } from 'react';
-import { useEffect } from 'react';
 import {
   Card,
   ClickAwayListener,
@@ -13,15 +12,12 @@ import {
 import { Delete, Info } from '@mui/icons-material';
 
 const Item = (props) => {
-  const [arrIdx, setArrIdx] = useState(props.idx);
   const [openTooltip, setOpenTooltip] = useState(false);
 
-  useEffect(() => {
-    setArrIdx(props.idx);
-  }, [props.idx]);
+  const [myId, setIdx] = useState(props.id);
 
   const removeThisItem = () => {
-    props.remove(arrIdx);
+    props.removeItem(myId);
   };
 
   const tooltipOpenHandler = () => {
