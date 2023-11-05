@@ -10,15 +10,32 @@ import DisplayTotal from '../DisplayTotal/DisplayTotal';
 import TaxTipsAddComponent from '../TaxTipsAdd/TaxTipsAdd';
 import IndividualTotals from '../IndividualTotals/IndividualTotals';
 import SplitParty from '../SplitParty/SplitParty';
+import { useSearchParams } from 'next/navigation';
+import { Search } from '@mui/icons-material';
 
 const DEFAULT_ITEMS = [];
 
-const Board = (props) => {
+const Board = () => {
 
-  // const { lineItems, taxes, tipValues } = props.match.params;
+  const [items, setItems] = useState(DEFAULT_ITEMS);
+
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams !== undefined) {
+      const parsedData = JSON.parse(searchParams.get('search'));
+
+      if (parsedData && parsedData.lineItems) {
+        const lineItems = parsedData.lineItems;
+        setItems(lineItems);
+        console.log(JSON.stringify(items));
+      }
+    }
+    
+  }, [searchParams]);
+
 
   const [tallies, setTallies] = useState([]);
-  const [items, setItems] = useState(DEFAULT_ITEMS);
   const [tax, setTax] = useState(0);
   const [tips, setTips] = useState(0);
 
@@ -148,20 +165,15 @@ const Board = (props) => {
         />
         <h1>Bill Splitter</h1>
       </header>
-     
       <NewItem onAddItems={addItemHandler} />
-      
-      <Items datas={items} removeItem={getRemoveIdx}/>
-                  
+      <Items datas={items} removeItem={getRemoveIdx}/>          
       <DisplayTotal
         datas={items}
         taxData={tax}
         tipsData={tips}
         calculatedGrandTotal={calculatedGrandTotalHandler}
       />
-     
      <div className="card-content">
-        
         <div className="left-content">
           <TaxTipsAddComponent 
             getTaxVal={getTaxVal} 
@@ -171,19 +183,18 @@ const Board = (props) => {
           />
           <SplitParty total={grandTotal} />
         </div>
-        
-          <div className="right-content">
-            <IndividualTotals 
-              items={items} 
-              tax={tax} 
-              tips={tips}
-              tallies={tallies}
-              clearTax={getTaxVal}
-              clearTips={getTipsVal}
-              clearItems={setItems}
-            />
-          </div>
+        <div className="right-content">
+          <IndividualTotals 
+            items={items} 
+            tax={tax} 
+            tips={tips}
+            tallies={tallies}
+            clearTax={getTaxVal}
+            clearTips={getTipsVal}
+            clearItems={setItems}
+          />
         </div>
+      </div>
     </Card>
   );
 };

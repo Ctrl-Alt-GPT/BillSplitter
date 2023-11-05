@@ -85,15 +85,6 @@ const Search = () => {
       <br></br>
       <Grid container spacing={1}>
         <NestedList getParamKey={getParamKey}/>
-        {/* <TextField
-          required
-          label="Category"
-          onChange={handleParamKeyChange}
-          value={paramKey}
-          type="text"
-          sx={{width: 300}}
-          id="field1" 
-        /> */}
         <TextField
           required
           label="Input"

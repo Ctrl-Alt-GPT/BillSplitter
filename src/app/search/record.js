@@ -7,35 +7,39 @@ import { useEffect, useState } from 'react';
 
 const Record = (props) => {
 
-  // onClick->link back to home page and populate items array with record
-  // info and tax tips with record info. Consolidate the party array into a string. 
   const [items, setLineItems] = useState({});
 
    useEffect(() => {
     
-    // Change this later. Need a deep copy?
-    const recordCopy = [props];
-    // console.log(JSON.stringify(recordCopy));
+    const updatedLineItems = props.lineItems.map((item) => ({
+      ...item,
+      party: item.party.toString(),
+    }));
 
-    for (let i = 0; i < recordCopy[0].lineItems.length; i++) {
-      recordCopy[0].lineItems[i].party = recordCopy[0].lineItems[i].party.toString(); 
-      console.log(JSON.stringify(recordCopy[0].lineItems[i].party));
-    }
-
-    const data = { 
-      lineItems: recordCopy.lineItems,
+    const data = {
+      lineItems: updatedLineItems,
       taxes: JSON.stringify(props.tax),
-      tipValues: JSON.stringify(props.tips)
-     };
-
-    setLineItems({data});
+      tipValues: JSON.stringify(props.tips),
+    };
+     
+    setLineItems(data);
+    // console.log(JSON.stringify(data));
    }, [])
     
   return (
     <>
       <div className="tile" >
-        {/* <Link href="/"> Edit </Link> */}
-        {/* <Link href={`/${items.lineItems}/${items.taxes}/${items.tipValues}`}>Edit</Link>         */}
+        
+        <Link
+          href={{
+            pathname: '/',
+            query: {
+              search: JSON.stringify(items)
+            }
+          }}>
+          Edit
+        </Link>
+
         <p>ID : {props._id}</p>
         <p>Line Items : {JSON.stringify(props.lineItems)}</p>
         <p>Tallies : {JSON.stringify(props.tallies)}</p>
