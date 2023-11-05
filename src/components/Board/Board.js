@@ -10,34 +10,45 @@ import DisplayTotal from '../DisplayTotal/DisplayTotal';
 import TaxTipsAddComponent from '../TaxTipsAdd/TaxTipsAdd';
 import IndividualTotals from '../IndividualTotals/IndividualTotals';
 import SplitParty from '../SplitParty/SplitParty';
-import { useSearchParams } from 'next/navigation';
-import { Search } from '@mui/icons-material';
+// import { useSearchParams } from 'next/navigation';
 
 const DEFAULT_ITEMS = [];
 
-const Board = () => {
+const Board = (props) => {
 
   const [items, setItems] = useState(DEFAULT_ITEMS);
-
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    if (searchParams !== undefined) {
-      const parsedData = JSON.parse(searchParams.get('search'));
-
-      if (parsedData && parsedData.lineItems) {
-        const lineItems = parsedData.lineItems;
-        setItems(lineItems);
-        console.log(JSON.stringify(items));
-      }
-    }
-    
-  }, [searchParams]);
-
-
-  const [tallies, setTallies] = useState([]);
   const [tax, setTax] = useState(0);
   const [tips, setTips] = useState(0);
+  // const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (props !== undefined) {
+      setItems(props.items);
+      const taxes = props.taxes == undefined ? 0 : props.taxes;
+      setTax(taxes);
+      const tipVals = props.tipVals == undefined ? 0 : props.tipVals;
+      setTips(tipVals);
+    }
+  }, [props]);
+
+  // useEffect(() => {
+  //   if (searchParams !== undefined) {
+  //     const parsedData = JSON.parse(searchParams.get('search'));
+
+  //     if (parsedData && parsedData.lineItems) {
+  //       // const lineItems = parsedData.lineItems;
+  //       // console.log(JSON.stringify(lineItems));
+  //       setItems(parsedData.lineItems);
+  //       const tax = parsedData.taxes == undefined ? 0 : parsedData.taxes;
+  //       setTax(tax);
+  //       const tips = parsedData.tipValues == undefined ? 0 : parsedData.tipValues;
+  //       setTips(tips);
+  //       // console.log(JSON.stringify(items));
+  //     }
+  //   }
+  // }, [searchParams]);
+
+  const [tallies, setTallies] = useState([]);
 
   const splitBill = (itemsVals, taxVals, tipsVals) => {
     var subtotal = 0;

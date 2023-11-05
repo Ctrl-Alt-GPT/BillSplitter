@@ -32,7 +32,9 @@ const Record = (props) => {
         
         <Link
           href={{
-            pathname: '/',
+            // pathname: '/',
+            pathname: '/edit',
+            // pathname: '/home',
             query: {
               search: JSON.stringify(items)
             }
