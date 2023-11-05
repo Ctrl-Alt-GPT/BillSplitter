@@ -9,8 +9,8 @@ const Record = (props) => {
 
   const [items, setLineItems] = useState({});
 
-   useEffect(() => {
-    
+  useEffect(() => {
+  
     const updatedLineItems = props.lineItems.map((item) => ({
       ...item,
       party: item.party.toString(),
@@ -21,10 +21,10 @@ const Record = (props) => {
       taxes: JSON.stringify(props.tax),
       tipValues: JSON.stringify(props.tips),
     };
-     
+      
     setLineItems(data);
-    // console.log(JSON.stringify(data));
-   }, [])
+  // console.log(JSON.stringify(data));
+  }, [])
     
   return (
     <>

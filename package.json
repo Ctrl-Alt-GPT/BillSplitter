@@ -20,6 +20,7 @@
     "react": "latest",
     "react-dom": "latest",
     "react-number-format": "^5.3.1",
+    "react-router-dom": "^6.18.0",
     "sharp": "^0.32.6"
   },
   "devDependencies": {
