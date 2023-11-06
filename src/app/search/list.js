@@ -20,7 +20,7 @@ export default function NestedList(props) {
     props.getParamKey(e);
     setOpen(false);
     setPrimaryFieldText(fieldText);
-    console.log(e);
+    // console.log(e);
   }
 
   return (
@@ -33,7 +33,7 @@ export default function NestedList(props) {
 
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 2 }} onClick={() => categoryClick('party', "People")}>
+          <ListItemButton sx={{ pl: 2 }} onClick={() => categoryClick('party', "People") }>
             <ListItemIcon>
               <GroupOutlined />
             </ListItemIcon>
@@ -45,7 +45,7 @@ export default function NestedList(props) {
             </ListItemIcon>
             <ListItemText primary="Foods" />
           </ListItemButton>
-          <ListItemButton sx={{ pl: 2 }} onClick={() => categoryClick('', 'Search Field')} >
+          <ListItemButton sx={{ pl: 2 }} onClick={() => {categoryClick('', 'Search Field'); props.clearParamVal()}} >
             <ListItemIcon>
               <ClearRounded />
             </ListItemIcon>

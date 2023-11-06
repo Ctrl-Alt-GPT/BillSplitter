@@ -36,6 +36,7 @@ const IndividualTotals = (props) => {
       };
       
       try {
+        
         var URL = 'http://localhost:3333/sean/createBill';
         if (prodURL) 
           URL = 'https://gpt-billsplitter.com:3333/sean/createBill';

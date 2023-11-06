@@ -7,12 +7,6 @@ const mongoose = require('mongoose');
 // Get all bill records
 const getAllBills = async (req, res) => {
   const bill = await Bill.find({}).sort({createdAt: -1});
-
-  // Testing find for certain queries. These formats work for finding specify records. 
-  // const bill = await Bill.find({'lineItems.title' : 'dinner'}).sort({createdAt: -1});
-  // const bill = await Bill.find({'lineItems.party' : 'me'}).sort({createdAt: -1});
-  // const bill = await Bill.find({'lineItems.title' : 'lunch'}).sort({createdAt: -1});
-
   res.status(200).json(bill);
 }
 
@@ -23,16 +17,21 @@ const searchForRecords = async (req, res) => {
   res.status(200).json(bill);
 }
 
-
-// Needs work.
-// Get a bill by its Id
 const getBillById = async (req, res) => {
-  // const id = req.query;
-  const id = req.params.value;
-  console.log("id = " + JSON.stringify(id));
-  // const bill = Bill.find({ _id: mongoose.Types.ObjectId(id) });
-  // res.status(200).json(bill);
-  // console.log(JSON.stringify(bill));
+
+  const {id} = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: "Invalid ID"});
+  }
+
+  const bill = await Bill.findById(id);
+
+  if (!bill) {
+    return res.status(404).json({error: "Bill not found"});
+  }
+
+  res.status(200).json(bill);
 }
 
 
@@ -59,6 +58,25 @@ const clearAllBills = async (req, res) => {
   }
 }
 
+
+
+// Delete a bill record
+const deleteBill = async (req, res) => {
+  const {id} = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: "Invalid ID"});
+  }
+
+  const recordToDelete = await Bill.findByIdAndDelete(id);
+
+  if (!recordToDelete) {
+    return res.status(400).json({error: "No person to delete"})
+  }
+
+  res.status(200).json(recordToDelete);
+
+}
 
 
 
@@ -156,5 +174,6 @@ module.exports  = {
   getAllBills,
   clearAllBills,
   getBillById,
+  deleteBill,
   searchForRecords
 }

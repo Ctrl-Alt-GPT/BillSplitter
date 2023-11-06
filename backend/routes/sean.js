@@ -10,7 +10,8 @@ const {
     getAllBills,
     clearAllBills,
     getBillById,
-    searchForRecords
+    searchForRecords,
+    deleteBill
 } = require('../sean_controller/sean_controller');
 
 ////////////////////////////////////////////////////////////////
@@ -25,10 +26,13 @@ router.post("/createBill", createBillRecord);
 router.delete("/clearAllBills", clearAllBills);
 
 // GET a specific bill by its ID
-router.get("/getBillById", getBillById);
+router.get("/getBillById/:id", getBillById);
 
 // GET a specific bill by search criteria
 router.get("/searchForRecords", searchForRecords);
+
+// DELET a record
+router.delete("/:id", deleteBill);
 
 ////////////////////////////////////////////////////////////////
 

@@ -20,6 +20,12 @@ const Search = () => {
   const [paramVal, setParamVal] = useState('');
   const [showRecordWarning, setShowRecordWarning] = useState(false);
 
+  const removeRecord = (removeMe) => {
+    const revisedRecords = records.filter((record) => record._id !== removeMe);
+    console.log(JSON.stringify(revisedRecords));
+    setrecords(revisedRecords);
+  }
+
   const handleParamKeyChange = (e) => {
     const val = e.target.value.toLowerCase();
     setParamKey(val);
@@ -27,12 +33,17 @@ const Search = () => {
 
   const getParamKey = (category) => {
     setParamKey(category);
-    console.log(category);
+    // console.log(category);
   }
   
   const handleParamValChange = (e) => {
-    const val = e.target.value.toLowerCase();
+    // const val = e.target.value.toLowerCase();
+    const val = e.target.value;
     setParamVal(val);
+  }
+
+  const clearParamVal = () => {
+    setParamVal('');
   }
 
   const clearRecords = async () => {
@@ -41,7 +52,6 @@ const Search = () => {
     if (prodURL)
       URL = 'https://gpt-billsplitter.com:3333/sean/clearAllBills';  
     
-
     try {
       const response = await fetch( URL, {method: 'DELETE',});
       if (!response.ok) {
@@ -72,7 +82,6 @@ const Search = () => {
       const data = await response.json();
       setrecords(data);
       if (data.length <= 0) {
-        // alert("No records match the search query.");
         setShowRecordWarning(true);
       }
     } catch (error) {
@@ -84,7 +93,7 @@ const Search = () => {
     <>
       <br></br>
       <Grid container spacing={1}>
-        <NestedList getParamKey={getParamKey}/>
+        <NestedList getParamKey={getParamKey} clearParamVal={clearParamVal}/>
         <TextField
           required
           label="Input"
@@ -107,7 +116,11 @@ const Search = () => {
       <div className='container'>
         {records.length > 0 ? (
           records.map((item) => (
-            <Record key={nanoid()} {...item}/>
+            <Record 
+              key={nanoid()} 
+              {...item} 
+              removeRecord={removeRecord}
+            />
           ))) : null
         }
         {showRecordWarning == true ? 
