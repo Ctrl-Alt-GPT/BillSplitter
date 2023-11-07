@@ -54,6 +54,7 @@ const IndividualTotals = (props) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         } else {
+          // Add the bill ID to the alert.
           alert("Bill has been saved.")
         }
         

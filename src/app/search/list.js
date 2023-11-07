@@ -6,7 +6,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import { ClearRounded, GroupOutlined, RestaurantRounded } from '@mui/icons-material';
+import { ClearRounded, GroupOutlined, RestaurantRounded, NumbersRounded } from '@mui/icons-material';
 
 export default function NestedList(props) {
   const [open, setOpen] = useState(false);
@@ -33,17 +33,23 @@ export default function NestedList(props) {
 
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 2 }} onClick={() => categoryClick('party', "People") }>
+          <ListItemButton sx={{ pl: 2 }} onClick={() => {categoryClick('party', "People"); props.clearParamVal()}}>
             <ListItemIcon>
               <GroupOutlined />
             </ListItemIcon>
             <ListItemText primary="People" />
           </ListItemButton>
-          <ListItemButton sx={{ pl: 2 }} onClick={ () => categoryClick('title', "Foods")} >
+          <ListItemButton sx={{ pl: 2 }} onClick={ () => {categoryClick('title', "Foods"); props.clearParamVal()}} >
             <ListItemIcon>
               <RestaurantRounded />
             </ListItemIcon>
             <ListItemText primary="Foods" />
+          </ListItemButton>
+          <ListItemButton sx={{ pl: 2 }} onClick={ () => {categoryClick('_id', "ID"); props.clearParamVal()}} >
+            <ListItemIcon>
+              <NumbersRounded />
+            </ListItemIcon>
+            <ListItemText primary="ID" />
           </ListItemButton>
           <ListItemButton sx={{ pl: 2 }} onClick={() => {categoryClick('', 'Search Field'); props.clearParamVal()}} >
             <ListItemIcon>

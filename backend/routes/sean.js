@@ -25,11 +25,16 @@ router.post("/createBill", createBillRecord);
 // DELETE all bill records
 router.delete("/clearAllBills", clearAllBills);
 
-// GET a specific bill by its ID
-router.get("/getBillById/:id", getBillById);
-
 // GET a specific bill by search criteria
 router.get("/searchForRecords", searchForRecords);
+
+
+// // GET a specific bill by its ID
+// router.get("/getBillById/:id", getBillById);
+
+// GET a specific bill by its ID
+router.get("/:id", getBillById);
+
 
 // DELET a record
 router.delete("/:id", deleteBill);

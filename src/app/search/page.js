@@ -1,9 +1,9 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Record from './record.js';
 import '../../styles/TileContainer.css';
 import './list.js'
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import { 
   Button, 
   TextField, 
@@ -15,20 +15,15 @@ const prodURL = false;
 
 const Search = () => {
 
-  const [records, setrecords] = useState([]);
+  const [records, setRecords] = useState([]);
   const [paramKey, setParamKey] = useState('');
   const [paramVal, setParamVal] = useState('');
   const [showRecordWarning, setShowRecordWarning] = useState(false);
 
   const removeRecord = (removeMe) => {
     const revisedRecords = records.filter((record) => record._id !== removeMe);
-    console.log(JSON.stringify(revisedRecords));
-    setrecords(revisedRecords);
-  }
-
-  const handleParamKeyChange = (e) => {
-    const val = e.target.value.toLowerCase();
-    setParamKey(val);
+    // console.log(JSON.stringify(revisedRecords));
+    setRecords(revisedRecords);
   }
 
   const getParamKey = (category) => {
@@ -47,6 +42,10 @@ const Search = () => {
   }
 
   const clearRecords = async () => {
+    setRecords('');
+  }
+
+  const deleteAllRecords = async () => {
 
     var URL = 'http://localhost:3333/sean/clearAllBills';
     if (prodURL)
@@ -57,7 +56,7 @@ const Search = () => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      setrecords('');
+      setRecords('');
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -72,16 +71,25 @@ const Search = () => {
     
     if (paramKey != '' && paramVal != '') {
       URL += '/?lineItems.' + paramKey + "=" + paramVal;
+
+      if (paramKey == '_id') {
+        URL = 'http://localhost:3333/sean/' + paramVal;
+        if (prodURL)
+          URL = 'https://gpt-billsplitter.com:3333/sean/' + paramVal;
+      } 
     }
         
     try { 
       const response = await fetch(URL, {method: 'GET'});
       if (!response.ok) {
+        setRecords('');
+        setShowRecordWarning(true);
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      setrecords(data);
-      if (data.length <= 0) {
+      setRecords(data);
+      if (data.length <= 0 || !response.ok) {
+        // setRecords('');
         setShowRecordWarning(true);
       }
     } catch (error) {
@@ -105,36 +113,41 @@ const Search = () => {
         />
       </Grid>
       <br></br>
-      <Button 
-        type="submit" 
-        variant="contained" 
-        onClick={searchForRecords}>
-        Search 
-      </Button>
+      <Grid container spacing={1} justifyContent="left">
+        <Grid item>
+          <Button type="submit" 
+            variant="contained" 
+            onClick={searchForRecords}>
+            Search
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button          
+            type="submit" 
+            variant="contained" 
+            onClick={clearRecords}>
+            Clear
+          </Button>
+        </Grid>
+      </Grid>
       <br></br>
       <br></br>
       <div className='container'>
         {records.length > 0 ? (
           records.map((item) => (
             <Record 
-              key={nanoid()} 
+              key={item._id}
               {...item} 
               removeRecord={removeRecord}
             />
           ))) : null
         }
         {showRecordWarning == true ? 
-          <Alert 
-            severity="warning">No records match the search query.
-          </Alert>: null}
-        </div>
-      <br></br>
-      <Button 
-        type="submit" 
-        variant="contained" 
-        onClick={clearRecords}>
-        Clear records 
-      </Button>       
+        <Alert 
+          severity="warning">No records match the search query.
+        </Alert>: null}
+      </div>
+    <br></br>      
   </>
   );
 };

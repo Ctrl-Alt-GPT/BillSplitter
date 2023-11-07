@@ -20,21 +20,16 @@ const searchForRecords = async (req, res) => {
 const getBillById = async (req, res) => {
 
   const {id} = req.params;
-
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({error: "Invalid ID"});
   }
-
   const bill = await Bill.findById(id);
-
   if (!bill) {
     return res.status(404).json({error: "Bill not found"});
+    
   }
-
-  res.status(200).json(bill);
+  res.status(200).json([bill]);
 }
-
-
 
 const createBillRecord = async (req, res) => {
   const {lineItems, tallies, tax, tips } = req.body;

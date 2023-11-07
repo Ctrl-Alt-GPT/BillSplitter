@@ -34,9 +34,10 @@ const Record = (props) => {
 
   const deleteRecord = async () => {
 
-    console.log("Delete record called.");
+    // console.log("Delete record called.");
     props.removeRecord(props._id);
 
+    // Uncomment to make permanent changes to DB.
     // var URL = 'http://localhost:3333/sean/' + props._id;
     // if (prodURL)
       // URL = 'https://gpt-billsplitter.com:3333/sean/' + props._id;  
@@ -60,9 +61,7 @@ const Record = (props) => {
             <CardActions>
               <Link
               href={{
-                // pathname: '/',
                 pathname: '/edit',
-                // pathname: '/home',
                 query: {
                   search: JSON.stringify(items)
                 }
@@ -94,35 +93,6 @@ const Record = (props) => {
           </CardActions>
         </Card>
       </div>
-
-      {/* <div className="tile" >
-        
-
-
-        <Link
-          href={{
-            // pathname: '/',
-            pathname: '/edit',
-            // pathname: '/home',
-            query: {
-              search: JSON.stringify(items)
-            }
-          }}>
-          Edit
-        </Link>
-
-        <p>ID : {props._id}</p>
-        <p>Line Items : {JSON.stringify(props.lineItems)}</p>
-        <p>Tallies : {JSON.stringify(props.tallies)}</p>
-        <p>Tax : {JSON.stringify(props.tax)}</p>
-        <p>Tips : {JSON.stringify(props.tips)}</p>
-        <p>Created On : {JSON.stringify(props.createdAt)}</p>
-        
-        <Button>
-          Delete
-        </Button>
-        
-      </div> */}
     </>
   )
 }
