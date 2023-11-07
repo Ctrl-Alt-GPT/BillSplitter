@@ -4,10 +4,10 @@ import Card from '../UI/Card';
 import '../../styles/IndividualTotal.css';
 import { Button, Alert } from '@mui/material';
 
-const prodURL = false;
+const prodURL = true;
 
 const IndividualTotals = (props) => {
-
+s
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
