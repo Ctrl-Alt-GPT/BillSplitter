@@ -7,7 +7,7 @@ import { Button, Alert } from '@mui/material';
 const prodURL = true;
 
 const IndividualTotals = (props) => {
-s
+
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
