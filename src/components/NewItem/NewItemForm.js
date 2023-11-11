@@ -7,7 +7,7 @@ import { NumericFormat } from 'react-number-format';
 const NewItemForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredParty, setEnteredParty] = useState('');
-  const [enteredAmount, setEnteredAmount] = useState('');
+  const [enteredAmount, setEnteredAmount] = useState(0);
 
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
@@ -18,7 +18,11 @@ const NewItemForm = (props) => {
   };
 
   const amountChangeHandler = (event) => {
-    setEnteredAmount(event.target.value);
+    let val = event.target.value;
+    if (val.startsWith('0')) {
+      val = val.slice(1);
+    }
+    setEnteredAmount(Number(val));
   };
 
   const submitHandler = (event) => {

@@ -1,13 +1,6 @@
 'use client';
 import '../../styles/TaxTipsAdd.css';
-import {
-  Button,
-  InputAdornment,
-  TextField,
-  Grid,
-  Card,
-  CardContent,
-} from '@mui/material';
+import { InputAdornment, TextField, Card, CardContent } from '@mui/material';
 import { NumericFormat } from 'react-number-format';
 
 const TaxTipsAddComponent = (props) => {
@@ -21,7 +14,11 @@ const TaxTipsAddComponent = (props) => {
       if (e.target.value == '') {
         props.getTaxVal(0);
       } else {
-        props.getTaxVal(e.target.value);
+        let val = e.target.value;
+        if (val.startsWith('0')) {
+          val = val.slice(1);
+        }
+        props.getTaxVal(val);
       }
     }
   };
@@ -31,7 +28,11 @@ const TaxTipsAddComponent = (props) => {
       if (e.target.value == '') {
         props.getTipsVal(0);
       } else {
-        props.getTipsVal(e.target.value);
+        let val = e.target.value;
+        if (val.startsWith('0')) {
+          val = val.slice(1);
+        }
+        props.getTipsVal(val);
       }
     }
   };
