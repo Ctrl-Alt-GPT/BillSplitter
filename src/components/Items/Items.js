@@ -2,14 +2,16 @@
 import Item from './Item';
 import '../../styles/Items.css';
 import '../../styles/Blue-Button.css';
-import { Card, CardContent } from '@mui/material';
+import { Box, Card, CardContent } from '@mui/material';
 
 const Items = (props) => {
   return (
-    <Card>
+    <Card sx={{ height: '100%' }}>
       <CardContent>
         {props.datas.length <= 0 ? (
-          <div className="no-items">Add an item to get started.</div>
+          <Box sx={{ textAlign: 'center', color: 'lightgray', padding: 1 }}>
+            Add an item to get started.
+          </Box>
         ) : (
           props.datas.map((item) => (
             <Item

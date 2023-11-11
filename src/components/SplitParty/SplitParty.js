@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../styles/SplitParty.css';
+import { Card, CardContent } from '@mui/material';
 import SplitPartyForm from './SplitPartyForm';
 
 const SplitParty = (props) => {
@@ -11,18 +11,16 @@ const SplitParty = (props) => {
   };
 
   return (
-    <React.Fragment>
-      <div className="backdrop">
-        {calculatedSplit === 0 ? (
-          <div className="content">
-            Enter the amount of people in the party:
-          </div>
-        ) : (
-          <div className="content">Calculated split: ${calculatedSplit}</div>
-        )}
+    <Card sx={{ height: '100%' }}>
+      {calculatedSplit === 0 ? (
+        <CardContent>Enter the amount of people in the party:</CardContent>
+      ) : (
+        <CardContent>Calculated split: ${calculatedSplit}</CardContent>
+      )}
+      <CardContent>
         <SplitPartyForm onPartyAmountSubmit={partyAmountSubmitHandler} />
-      </div>
-    </React.Fragment>
+      </CardContent>
+    </Card>
   );
 };
 

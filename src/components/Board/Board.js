@@ -1,21 +1,17 @@
 'use client';
 import { useEffect, useState } from 'react';
-import Card from '../UI/Card';
+import { Card, CardContent, Grid } from '@mui/material';
 import Items from '../Items/Items';
 import '../../styles/Board.css';
 import NewItem from '../NewItem/NewItem';
-import Image from 'next/image';
-import ctrlaltgptlogo from '../../../public/ctrlaltgptlogo-nobg.png';
 import DisplayTotal from '../DisplayTotal/DisplayTotal';
 import TaxTipsAddComponent from '../TaxTipsAdd/TaxTipsAdd';
 import IndividualTotals from '../IndividualTotals/IndividualTotals';
 import SplitParty from '../SplitParty/SplitParty';
-// import { useSearchParams } from 'next/navigation';
 
 const DEFAULT_ITEMS = [];
 
 const Board = (props) => {
-
   const [items, setItems] = useState(DEFAULT_ITEMS);
   const [tax, setTax] = useState(0);
   const [tips, setTips] = useState(0);
@@ -92,22 +88,22 @@ const Board = (props) => {
 
   useEffect(() => {
     splitBill(items, tax, tips);
-  }, [items, tax, tips])
-  
+  }, [items, tax, tips]);
+
   const getTaxVal = (taxVal) => {
     setTax(taxVal);
-  }
+  };
 
   const getTipsVal = (tipsVal) => {
     setTips(tipsVal);
-  }
-  
+  };
+
   const [removeIdx, setRemoveIdx] = useState(0);
   const getRemoveIdx = (removeThis) => {
     setRemoveIdx(removeThis);
-  }
+  };
 
-  useEffect(()=> {
+  useEffect(() => {
     removeItem(removeIdx);
   }, [removeIdx]);
 
@@ -121,7 +117,7 @@ const Board = (props) => {
   const calculatedGrandTotalHandler = (total) => {
     setGrandTotal(total);
   };
-  
+
   const addItemHandler = (item) => {
     let parties = Array.isArray(item.party) ? item.party : [item.party];
     parties = parties.map((party) => party.trim());
@@ -166,46 +162,53 @@ const Board = (props) => {
   // });
 
   return (
-    <Card className="board">
-      <header>
-        <Image
-          src={ctrlaltgptlogo}
-          alt="Ctrl+Alt+GPT logo"
-          width={75}
-          height={75}
-        />
-        <h1>Bill Splitter</h1>
-      </header>
-      <NewItem onAddItems={addItemHandler} />
-      <Items datas={items} removeItem={getRemoveIdx}/>          
-      <DisplayTotal
-        datas={items}
-        taxData={tax}
-        tipsData={tips}
-        calculatedGrandTotal={calculatedGrandTotalHandler}
-      />
-     <div className="card-content">
-        <div className="left-content">
-          <TaxTipsAddComponent 
-            getTaxVal={getTaxVal} 
-            getTipsVal={getTipsVal} 
+    <Card
+      sx={{
+        p: 2,
+        maxWidth: 0.85,
+        minHeight: '90vh',
+        marginX: 'auto',
+        backgroundColor: 'rgb(232, 237, 255)',
+      }}
+    >
+      <Grid container spacing={1}>
+        <Grid item md={12}>
+          <NewItem onAddItems={addItemHandler} />
+        </Grid>
+        <Grid item md={10} sm={8} xs={12}>
+          <Items datas={items} removeItem={getRemoveIdx} />
+        </Grid>
+        <Grid item md={2} sm={4} xs={12}>
+          <TaxTipsAddComponent
+            getTaxVal={getTaxVal}
+            getTipsVal={getTipsVal}
             tax={tax}
             tips={tips}
           />
+        </Grid>
+        <Grid item md={6} sm={6} xs={12} order={{ xs: 2, sm: 4 }}>
           <SplitParty total={grandTotal} />
-        </div>
-        <div className="right-content">
-          <IndividualTotals 
-            items={items} 
-            tax={tax} 
+        </Grid>
+        <Grid item md={6} sm={6} xs={12} order={{ xs: 1, sm: 5 }}>
+          <DisplayTotal
+            datas={items}
+            taxData={tax}
+            tipsData={tips}
+            calculatedGrandTotal={calculatedGrandTotalHandler}
+          />
+        </Grid>
+        <Grid item md={12} sm={12} xs={12} order={{ xs: 3, sm: 6 }}>
+          <IndividualTotals
+            items={items}
+            tax={tax}
             tips={tips}
             tallies={tallies}
             clearTax={getTaxVal}
             clearTips={getTipsVal}
             clearItems={setItems}
           />
-        </div>
-      </div>
+        </Grid>
+      </Grid>
     </Card>
   );
 };
