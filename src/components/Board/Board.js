@@ -165,7 +165,7 @@ const Board = (props) => {
     <Card
       sx={{
         p: 2,
-        maxWidth: 0.85,
+        maxWidth: 0.9,
         minHeight: '90vh',
         marginX: 'auto',
         backgroundColor: 'rgb(232, 237, 255)',
