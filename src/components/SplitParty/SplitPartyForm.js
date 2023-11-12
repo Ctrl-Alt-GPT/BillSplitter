@@ -1,30 +1,22 @@
-import { useState } from 'react';
 import '../../styles/NewItemForm.css';
 import '../../styles/NewItem.css';
+import { NumericFormat } from 'react-number-format';
+import { TextField } from '@mui/material';
 
-const SplitPartyForm = (props) => {
-  const [enteredParty, setEnteredParty] = useState('');
-
+const SplitPartyForm = ({ onPartyAmountSubmit }) => {
   const partyChangeHandler = (event) => {
-    setEnteredParty(event.target.value);
-  };
-
-  const submitHandler = (event) => {
-    event.preventDefault();
-    props.onPartyAmountSubmit(enteredParty);
+    onPartyAmountSubmit(event.target.value);
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      <div className="new-item__controls">
-        <div className="new-item__control">
-          <input type="number" min="2" step="1" onChange={partyChangeHandler} />
-        </div>
-        <button className="blue-button" type="submit">
-          calculate
-        </button>
-      </div>
-    </form>
+    <NumericFormat
+      customInput={TextField}
+      label="party amount"
+      onChange={partyChangeHandler}
+      allowNegative={false}
+      decimalScale={0}
+      fullWidth
+    />
   );
 };
 

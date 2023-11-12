@@ -186,10 +186,10 @@ const Board = (props) => {
             tips={tips}
           />
         </Grid>
-        <Grid item md={6} sm={6} xs={12} order={{ xs: 2, sm: 4 }}>
+        <Grid item md={4} sm={5} xs={12} order={{ xs: 2, sm: 4 }}>
           <SplitParty total={grandTotal} />
         </Grid>
-        <Grid item md={6} sm={6} xs={12} order={{ xs: 1, sm: 5 }}>
+        <Grid item md={8} sm={7} xs={12} order={{ xs: 1, sm: 5 }}>
           <DisplayTotal
             datas={items}
             taxData={tax}
