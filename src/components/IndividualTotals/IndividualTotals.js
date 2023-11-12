@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
-import '../../styles/IndividualTotal.css';
-import { Button, Alert, Card } from '@mui/material';
+import '../../styles/Item.css';
+import { Button, Alert, Card, CardContent, Divider, Box } from '@mui/material';
 
 const prodURL = true;
 
@@ -73,32 +73,44 @@ const IndividualTotals = (props) => {
 
   // Create a formatted string for displaying the Tallies
   const formattedTallies = props.tallies.map((tally, index) => (
-    <div key={index}>
-      <strong>Party:</strong> {tally.party}, <strong>Amount:</strong> $
-      {tally.share.toFixed(2)}
-    </div>
+    <Card
+      key={index}
+      sx={{
+        display: 'flex',
+        justifyContent: 'space-around',
+        p: '1rem',
+        marginY: '0.5rem',
+        marginX: 'auto',
+        backgroundColor: '#f1f3fe',
+        maxWidth: '50%',
+      }}
+    >
+      <Box sx={{ fontSize: '1rem', fontWeight: 'bold', flex: 1 }}>
+        {tally.party}
+      </Box>
+      <Box sx={{ fontSize: '1rem', flex: 1 }}>${tally.share.toFixed(2)}</Box>
+    </Card>
   ));
 
   return (
     <Card>
-      <h2>Individual Totals</h2>
-      <ul>
-        <li>Tallies</li>
-        <li>------------------------------------------------------</li>
-        <ul>{formattedTallies}</ul>
-        <li>------------------------------------------------------</li>
-      </ul>
-      <br></br>
-      <Button variant="contained" onClick={postBill}>
-        Save Bill
-      </Button>
-      <br></br>
-      <br></br>
-      {showAlert == true ? (
-        <Alert severity="warning">
-          You must add an item in order to save the record.
-        </Alert>
-      ) : null}
+      <CardContent sx={{ textAlign: 'center' }}>
+        Individual Total:
+        {formattedTallies}
+      </CardContent>
+      <Divider></Divider>
+      <CardContent sx={{ textAlign: 'center' }}>
+        <Button variant="contained" onClick={postBill}>
+          Save Bill
+        </Button>
+        {showAlert == true ? (
+          <CardContent>
+            <Alert severity="warning">
+              You must add an item in order to save the record.
+            </Alert>
+          </CardContent>
+        ) : null}
+      </CardContent>
     </Card>
   );
 };
