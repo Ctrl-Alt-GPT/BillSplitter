@@ -56,7 +56,7 @@ const Record = (props) => {
   return (
     <>
       <div className="tile" >
-        <Card sx={{ width:'100%', height: '100%'}} variant="outlined" >
+       <Card sx={{ width: '100%', height: '100%'}} variant="outlined">
           <CardContent>
             <CardActions>
               <Link
@@ -66,36 +66,56 @@ const Record = (props) => {
                   search: JSON.stringify(items)
                 }
               }}>
-              Edit
-            </Link>
+               <Button size="medium">Edit</Button>
+              </Link>
             </CardActions>
-            <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-              ID : {props._id}
+            <Typography variant="h6" gutterBottom>
+              Receipt ID: {props._id} <br />
+              ------------------------------------------------------
             </Typography>
-            <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-              Line Items : {JSON.stringify(props.lineItems)}
-            </Typography>
-            <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-              Tallies : {JSON.stringify(props.tallies)}
-            </Typography>
-            <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-              Tax : {JSON.stringify(props.tax)}
-            </Typography>
-            <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-              Tips : {JSON.stringify(props.tips)}
-            </Typography>
-            <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-              Created On : {JSON.stringify(props.createdAt)}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small" onClick={deleteRecord}>Delete</Button>
-          </CardActions>
-        </Card>
-      </div>
-    </>
-  )
-}
+            <Typography variant="body1" color="text.secondary" paragraph>
+            <strong>Line Items:</strong>
+             <ul>
+               {props.lineItems.map((item, index) => (
+                 <li key={index}>
+                   <strong>Title:</strong> {item.title} <br />
+                   <strong>Party:</strong> {item.party.join(', ')} <br />
+                   <strong>Amount:</strong> {item.amount} <br />
+                   <br />
+                 </li>
+               ))}
+             </ul>
+          </Typography>
+          <Typography variant="body1" color="text.secondary" paragraph>
+            <strong>Tallies:</strong>
+            <ul>
+              {props.tallies.map((tally, index) => (
+                <li key={index}>
+                  <strong>Party:</strong> {tally.party.charAt(0).toUpperCase() + tally.party.slice(1)} <br />
+                  <strong>Share:</strong> {tally.share.toFixed(2)} <br />
+                  <br />
+                </li>
+              ))}
+            </ul>
+          </Typography>
+          <Typography variant="body1" color="text.secondary" paragraph>
+            <strong>Tax:</strong> {JSON.stringify(props.tax)}
+          </Typography>
+          <Typography variant="body1" color="text.secondary" paragraph>
+            <strong>Tips:</strong> {JSON.stringify(props.tips)}
+          </Typography>
+          <Typography variant="body1" color="text.secondary" paragraph>
+            <strong>Created On:</strong> {new Date(props.createdAt).toLocaleString()}
+          </Typography>
 
+        </CardContent>
+        <CardActions>
+          <Button size="medium" onClick={deleteRecord}>Delete</Button>
+        </CardActions>
+      </Card>
+    </div>
+    </>
+  );
+}
 
 export default Record;

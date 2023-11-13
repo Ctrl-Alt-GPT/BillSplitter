@@ -14,8 +14,27 @@ const NewItemForm = (props) => {
   };
 
   const partyChangeHandler = (event) => {
-    setEnteredParty(event.target.value);
+    // Capitalize the first letter of the entered party name
+    const originalParty = event.target.value;
+    const cursorPosition = event.target.selectionStart;
+  
+    // Adjust the cursor position after removing characters
+    const adjustedCursorPosition =
+      originalParty.length - originalParty.slice(cursorPosition).length;
+  
+    const capitalizedParty = originalParty
+      .toLowerCase()
+      .split(',')
+      .map((part) => part.trim())
+      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+      .join(', ');
+  
+    setEnteredParty(capitalizedParty);
+  
+    // Set the adjusted cursor position after updating the state
+    event.target.setSelectionRange(adjustedCursorPosition, adjustedCursorPosition);
   };
+  
 
   const amountChangeHandler = (event) => {
     let val = event.target.value;
