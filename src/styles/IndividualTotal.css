@@ -5,7 +5,7 @@
     margin: 10px;
     width: 25rem;
     max-height: fit-content;
-    flex-shrink: 0;
+    /* flex-shrink: 0; */
     border-radius: 3.125rem;
     box-shadow: none;
   }

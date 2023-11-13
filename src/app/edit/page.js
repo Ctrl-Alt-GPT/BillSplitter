@@ -1,8 +1,6 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-// import Item from '../../components/Items/Item';
-// import Card from '../../components/UI/Card';
 import '../../styles/Items.css';
 import '../../styles/Card.css';
 import Board from '../../components/Board/Board';
@@ -26,9 +24,8 @@ const Edit = () => {
     }
   }, [searchParams]);
 
-
   return (
-    <>
+    <> 
       <Board 
         items={items} 
         taxes={tax}

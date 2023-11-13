@@ -1,9 +1,8 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Record from './record.js';
 import '../../styles/TileContainer.css';
 import './list.js'
-// import { nanoid } from 'nanoid';
 import { 
   Button, 
   TextField, 
@@ -11,7 +10,7 @@ import {
   Alert } from '@mui/material';
 import NestedList from './list.js';
 
-const prodURL = true;
+const prodURL = false;
 
 const Search = () => {
 
@@ -89,7 +88,6 @@ const Search = () => {
       const data = await response.json();
       setRecords(data);
       if (data.length <= 0 || !response.ok) {
-        // setRecords('');
         setShowRecordWarning(true);
       }
     } catch (error) {

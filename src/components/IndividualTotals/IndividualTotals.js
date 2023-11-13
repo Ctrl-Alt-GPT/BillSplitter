@@ -4,7 +4,7 @@ import Card from '../UI/Card';
 import '../../styles/IndividualTotal.css';
 import { Button, Alert } from '@mui/material';
 
-const prodURL = true;
+const prodURL = false;
 
 const IndividualTotals = (props) => {
 
@@ -12,7 +12,8 @@ const IndividualTotals = (props) => {
 
   useEffect(() => {
     setShowAlert(false);
-  }, [props.items.length > 0])
+  // }, [props.items.length > 0])
+  }, [props.items.length])
 
   const postBill = async () => {
 
@@ -113,25 +114,6 @@ const IndividualTotals = (props) => {
     
   );
 }
-
-const formatTallies = (tallies) => {
-  const tallyList = [];
-  for (const person in tallies) {
-    if (tallies.hasOwnProperty(person)) {
-      const tallyValue = tallies[person];
-      if (typeof tallyValue === 'number') {
-        const formattedAmount = tallyValue.toFixed(2); // Format to two decimal places
-        tallyList.push(`${person}: ${formattedAmount}`);
-      } else {
-        tallyList.push(`${person}: ${tallyValue}`);
-      }
-    }
-  }
-  return (
-    <ul>
-      {tallyList.map((tally, index) => ( <li key={index}>{tally}</li>))} </ul>
-  );
-};
 
 
 export default IndividualTotals;

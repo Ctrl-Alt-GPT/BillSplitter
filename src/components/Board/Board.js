@@ -19,8 +19,7 @@ const Board = (props) => {
   const [items, setItems] = useState(DEFAULT_ITEMS);
   const [tax, setTax] = useState(0);
   const [tips, setTips] = useState(0);
-  // const searchParams = useSearchParams();
-
+  
   useEffect(() => {
     if (props !== undefined) {
       setItems(props.items);
@@ -31,22 +30,7 @@ const Board = (props) => {
     }
   }, [props]);
 
-  // useEffect(() => {
-  //   if (searchParams !== undefined) {
-  //     const parsedData = JSON.parse(searchParams.get('search'));
 
-  //     if (parsedData && parsedData.lineItems) {
-  //       // const lineItems = parsedData.lineItems;
-  //       // console.log(JSON.stringify(lineItems));
-  //       setItems(parsedData.lineItems);
-  //       const tax = parsedData.taxes == undefined ? 0 : parsedData.taxes;
-  //       setTax(tax);
-  //       const tips = parsedData.tipValues == undefined ? 0 : parsedData.tipValues;
-  //       setTips(tips);
-  //       // console.log(JSON.stringify(items));
-  //     }
-  //   }
-  // }, [searchParams]);
 
   const [tallies, setTallies] = useState([]);
 
@@ -194,7 +178,16 @@ const Board = (props) => {
           />
           <SplitParty total={grandTotal} />
         </div>
-        <div className="right-content">
+        <IndividualTotals 
+            items={items} 
+            tax={tax} 
+            tips={tips}
+            tallies={tallies}
+            clearTax={getTaxVal}
+            clearTips={getTipsVal}
+            clearItems={setItems}
+      />
+        {/* <div className="right-content">
           <IndividualTotals 
             items={items} 
             tax={tax} 
@@ -204,7 +197,7 @@ const Board = (props) => {
             clearTips={getTipsVal}
             clearItems={setItems}
           />
-        </div>
+        </div> */}
       </div>
     </Card>
   );

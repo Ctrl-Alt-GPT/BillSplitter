@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
 
-const prodURL = true;
+const prodURL = false;
 
 const Record = (props) => {
 
@@ -17,24 +17,25 @@ const Record = (props) => {
 
   useEffect(() => {
   
+    // console.log(JSON.stringify(props));
+
     const updatedLineItems = props.lineItems.map((item) => ({
       ...item,
       party: item.party.toString(),
     }));
 
     const data = {
+      _id: props._id,
       lineItems: updatedLineItems,
       taxes: JSON.stringify(props.tax),
       tipValues: JSON.stringify(props.tips),
     };
       
     setLineItems(data);
-  // console.log(JSON.stringify(data));
   }, []);
 
   const deleteRecord = async () => {
 
-    // console.log("Delete record called.");
     props.removeRecord(props._id);
 
     // Uncomment to make permanent changes to DB.
@@ -58,31 +59,39 @@ const Record = (props) => {
       <div className="tile" >
         <Card sx={{ width:'100%', height: '100%'}} variant="outlined" >
           <CardContent>
-            <CardActions>
               <Link
-              href={{
+                href={{
                 pathname: '/edit',
-                query: {
-                  search: JSON.stringify(items)
-                }
+                query: { search: JSON.stringify(items) }
               }}>
               Edit
             </Link>
-            </CardActions>
+            <br></br>
+            <br></br>
             <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-              ID : {props._id}
+              ID : {items._id}
+            </Typography>
+            <Typography sx={{ fontSize: 16 }} component={'span'} color="text.secondary" gutterBottom>
+              Line Items : 
+              {props.lineItems.map((item, index) => (
+                <div key={index}>
+                  {JSON.stringify(item.title)} ${JSON.stringify(item.amount)}: {JSON.stringify(item.party)}
+                </div>
+              ))}
+            </Typography>
+            <Typography sx={{ fontSize: 16 }} component={'span'} color="text.secondary" gutterBottom>
+              Tallies :
+              {props.tallies.map((item, index) => (
+                <div key={index}>
+                  {JSON.stringify(item.party)} : ${JSON.stringify(item.share.toFixed(2))}
+                </div>
+              ))}
             </Typography>
             <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-              Line Items : {JSON.stringify(props.lineItems)}
+              Tax : ${JSON.stringify(props.tax)}
             </Typography>
             <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-              Tallies : {JSON.stringify(props.tallies)}
-            </Typography>
-            <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-              Tax : {JSON.stringify(props.tax)}
-            </Typography>
-            <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-              Tips : {JSON.stringify(props.tips)}
+              Tips : ${JSON.stringify(props.tips)}
             </Typography>
             <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
               Created On : {JSON.stringify(props.createdAt)}
