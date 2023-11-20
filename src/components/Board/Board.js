@@ -15,7 +15,6 @@ const Board = (props) => {
   const [items, setItems] = useState(DEFAULT_ITEMS);
   const [tax, setTax] = useState(0);
   const [tips, setTips] = useState(0);
-  // const searchParams = useSearchParams();
 
   useEffect(() => {
     if (props !== undefined) {
@@ -26,23 +25,6 @@ const Board = (props) => {
       setTips(tipVals);
     }
   }, [props]);
-
-  // useEffect(() => {
-  //   if (searchParams !== undefined) {
-  //     const parsedData = JSON.parse(searchParams.get('search'));
-
-  //     if (parsedData && parsedData.lineItems) {
-  //       // const lineItems = parsedData.lineItems;
-  //       // console.log(JSON.stringify(lineItems));
-  //       setItems(parsedData.lineItems);
-  //       const tax = parsedData.taxes == undefined ? 0 : parsedData.taxes;
-  //       setTax(tax);
-  //       const tips = parsedData.tipValues == undefined ? 0 : parsedData.tipValues;
-  //       setTips(tips);
-  //       // console.log(JSON.stringify(items));
-  //     }
-  //   }
-  // }, [searchParams]);
 
   const [tallies, setTallies] = useState([]);
 
@@ -145,23 +127,8 @@ const Board = (props) => {
     }
   };
 
-  const addPartyHandler = (partyName) => {
-    setParties((prevParties) => {
-      return [...prevParties, partyName];
-    });
-  };
-
-  // Group items by party name
-  // const groupedItems = {};
-  // items.forEach((item) => {
-  //   const party = item.party;
-  //   if (!groupedItems[party]) {
-  //     groupedItems[party] = [];
-  //   }
-  //   groupedItems[party].push(item);
-  // });
-
   return (
+    <> 
     <Card
       sx={{
         p: 2,
@@ -210,6 +177,7 @@ const Board = (props) => {
         </Grid>
       </Grid>
     </Card>
+    </>
   );
 };
 

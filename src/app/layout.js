@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Bill Splitter',
-  description: 'Splitting bill never been easier!',
+  description: 'Splitting the bill has never been easier!',
 };
 
 export default function RootLayout({ children }) {

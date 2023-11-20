@@ -8,6 +8,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
+import { nanoid } from 'nanoid';
 
 const prodURL = true;
 
@@ -23,18 +24,17 @@ const Record = (props) => {
     }));
 
     const data = {
+      id: props._id,
       lineItems: updatedLineItems,
+      tallies: props.tallies,
       taxes: JSON.stringify(props.tax),
       tipValues: JSON.stringify(props.tips),
+      createdOn: props.createdAt
     };
-      
     setLineItems(data);
-  // console.log(JSON.stringify(data));
   }, []);
 
   const deleteRecord = async () => {
-
-    // console.log("Delete record called.");
     props.removeRecord(props._id);
 
     // Uncomment to make permanent changes to DB.
@@ -52,40 +52,50 @@ const Record = (props) => {
     // }
   }
 
-    
   return (
     <>
       <div className="tile" >
         <Card sx={{ width:'100%', height: '100%'}} variant="outlined" >
           <CardContent>
-            <CardActions>
               <Link
-              href={{
-                pathname: '/edit',
-                query: {
-                  search: JSON.stringify(items)
-                }
-              }}>
+              // Dynamic route:
+                href={'/edit/' + props._id}
+              //   href={{
+              //     pathname: '/edit',
+              //     query: {
+              //       search: JSON.stringify(items)
+              //     }
+              // }}
+              >
               Edit
             </Link>
-            </CardActions>
             <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
               ID : {props._id}
             </Typography>
-            <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-              Line Items : {JSON.stringify(props.lineItems)}
+            <Typography sx={{ fontSize: 16 }} component={'span'} color="text.secondary" gutterBottom>
+              Line Items : 
+              {props.lineItems.map((item) => (
+                <div key={nanoid()}>
+                  {item.title} ${item.amount}: {JSON.stringify(item.party)}
+                </div>
+              ))}
+            </Typography>
+            <Typography sx={{ fontSize: 16 }} component={'span'} color="text.secondary" gutterBottom>
+              Tallies: 
+              {props.tallies.map((item) => (
+                <div key={nanoid()}>
+                  {item.party},  ${item.share.toFixed(2)}
+                </div>
+              ))}
             </Typography>
             <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-              Tallies : {JSON.stringify(props.tallies)}
+              Tax : ${JSON.stringify(props.tax)}
             </Typography>
             <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-              Tax : {JSON.stringify(props.tax)}
+              Tips : ${JSON.stringify(props.tips)}
             </Typography>
             <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-              Tips : {JSON.stringify(props.tips)}
-            </Typography>
-            <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-              Created On : {JSON.stringify(props.createdAt)}
+              Created On : {props.createdAt}
             </Typography>
           </CardContent>
           <CardActions>
