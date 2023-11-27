@@ -62,7 +62,7 @@ const NavBar = () => {
             >
               <MenuIcon />
             </IconButton>
-            {/* <Menu
+            <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
@@ -83,17 +83,21 @@ const NavBar = () => {
               {pages.map((page) => (
                 <MenuItem
                   key={page}
-                  // href={"/" + page} 
-                           
-                  // onClick={() => {
-                  //   router.push('/' + page);
-                  //   // handleCloseNavMenu();
-                  // }}
+                  onClick={() => {
+                    handleCloseNavMenu();
+                  }}
                 >
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography
+                    component="a"
+                    href={'/' + page}
+                    textAlign="center"
+                    sx={{ color: 'inherit', textDecoration: 'none' }}
+                  >
+                    {page}
+                  </Typography>
                 </MenuItem>
               ))}
-            </Menu> */}
+            </Menu>
           </Box>
           <ReceiptIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
@@ -120,7 +124,6 @@ const NavBar = () => {
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
-                // href={page}
                 href={'/' + page}
               >
                 {page}
