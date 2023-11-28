@@ -173,6 +173,7 @@ const Board = (props) => {
               clearTax={getTaxVal}
               clearTips={getTipsVal}
               clearItems={setItems}
+              editable={props.editable}
             />
           </Grid>
         </Grid>

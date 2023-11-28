@@ -45,7 +45,7 @@ const DynamicEdit = ({ params }) => {
       {showNotFound == true ? (
         <Alert severity="warning">ID: {id} was not found.</Alert>
       ) : (
-        <Board items={items} taxes={tax} tipVals={tips} />
+        <Board items={items} taxes={tax} tipVals={tips} editable={true} />
       )}
     </>
   );

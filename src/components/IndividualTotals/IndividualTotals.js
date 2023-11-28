@@ -61,6 +61,56 @@ const IndividualTotals = (props) => {
     }
   };
 
+  // TODO: Update Bill
+  const updateBill = async () => {
+    if (props.items.length > 0) {
+      setShowAlert(false);
+      const itemsCopy = [...props.items];
+
+      for (let i = 0; i < itemsCopy.length; i++) {
+        if (typeof itemsCopy[i].party === 'string') {
+          const memberString = itemsCopy[i].party.toLowerCase();
+          const memberArray = memberString.split(/\s*,\s*/);
+          itemsCopy[i].party = memberArray;
+        }
+      }
+
+      const bill = {
+        lineItems: itemsCopy,
+        tallies: props.tallies,
+        tax: props.tax,
+        tips: props.tips,
+      };
+
+      try {
+        var URL = 'http://localhost:3333/sean/updateBill';
+        if (prodURL) URL = 'https://gpt-billsplitter.com:3333/sean/updateBill';
+
+        const response = await fetch(URL, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(bill),
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        } else {
+          // Add the bill ID to the alert.
+          alert('Bill has been saved.');
+        }
+      } catch (error) {
+        console.error('Error creating record.', error);
+      }
+      props.clearTax(0);
+      props.clearTips(0);
+      props.clearItems([]);
+    } else {
+      setShowAlert(true);
+    }
+  };
+
   const itemsWithoutIdAndSequence = props.items.map(({ id, ...rest }) => rest);
 
   // Create a formatted string for displaying the items
@@ -100,12 +150,18 @@ const IndividualTotals = (props) => {
       </CardContent>
       <Divider></Divider>
       <CardContent sx={{ textAlign: 'center' }}>
-        <Button variant="contained" onClick={postBill}>
-          Save Bill
-        </Button>
+        {props.editable ? (
+          <Button variant="contained" onClick={updateBill}>
+            Update Bill
+          </Button>
+        ) : (
+          <Button variant="contained" onClick={postBill}>
+            Save Bill
+          </Button>
+        )}
         {showAlert == true ? (
           <CardContent>
-            <Alert severity="warning">
+            <Alert variant="outlined" severity="warning">
               You must add an item in order to save the record.
             </Alert>
           </CardContent>
