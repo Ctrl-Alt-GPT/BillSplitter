@@ -128,55 +128,55 @@ const Board = (props) => {
   };
 
   return (
-    <> 
-    <Card
-      sx={{
-        p: 2,
-        maxWidth: 0.9,
-        minHeight: '90vh',
-        marginX: 'auto',
-        backgroundColor: 'rgb(232, 237, 255)',
-      }}
-    >
-      <Grid container spacing={1}>
-        <Grid item md={12}>
-          <NewItem onAddItems={addItemHandler} />
+    <>
+      <Card
+        sx={{
+          p: 2,
+          maxWidth: 0.9,
+          minHeight: '90vh',
+          marginX: 'auto',
+          backgroundColor: 'rgb(141, 165, 252)',
+        }}
+      >
+        <Grid container spacing={1}>
+          <Grid item md={12}>
+            <NewItem onAddItems={addItemHandler} />
+          </Grid>
+          <Grid item md={10} sm={8} xs={12}>
+            <Items datas={items} removeItem={getRemoveIdx} />
+          </Grid>
+          <Grid item md={2} sm={4} xs={12}>
+            <TaxTipsAddComponent
+              getTaxVal={getTaxVal}
+              getTipsVal={getTipsVal}
+              tax={tax}
+              tips={tips}
+            />
+          </Grid>
+          <Grid item md={4} sm={5} xs={12} order={{ xs: 2, sm: 4 }}>
+            <SplitParty total={grandTotal} />
+          </Grid>
+          <Grid item md={8} sm={7} xs={12} order={{ xs: 1, sm: 5 }}>
+            <DisplayTotal
+              datas={items}
+              taxData={tax}
+              tipsData={tips}
+              calculatedGrandTotal={calculatedGrandTotalHandler}
+            />
+          </Grid>
+          <Grid item md={12} sm={12} xs={12} order={{ xs: 3, sm: 6 }}>
+            <IndividualTotals
+              items={items}
+              tax={tax}
+              tips={tips}
+              tallies={tallies}
+              clearTax={getTaxVal}
+              clearTips={getTipsVal}
+              clearItems={setItems}
+            />
+          </Grid>
         </Grid>
-        <Grid item md={10} sm={8} xs={12}>
-          <Items datas={items} removeItem={getRemoveIdx} />
-        </Grid>
-        <Grid item md={2} sm={4} xs={12}>
-          <TaxTipsAddComponent
-            getTaxVal={getTaxVal}
-            getTipsVal={getTipsVal}
-            tax={tax}
-            tips={tips}
-          />
-        </Grid>
-        <Grid item md={4} sm={5} xs={12} order={{ xs: 2, sm: 4 }}>
-          <SplitParty total={grandTotal} />
-        </Grid>
-        <Grid item md={8} sm={7} xs={12} order={{ xs: 1, sm: 5 }}>
-          <DisplayTotal
-            datas={items}
-            taxData={tax}
-            tipsData={tips}
-            calculatedGrandTotal={calculatedGrandTotalHandler}
-          />
-        </Grid>
-        <Grid item md={12} sm={12} xs={12} order={{ xs: 3, sm: 6 }}>
-          <IndividualTotals
-            items={items}
-            tax={tax}
-            tips={tips}
-            tallies={tallies}
-            clearTax={getTaxVal}
-            clearTips={getTipsVal}
-            clearItems={setItems}
-          />
-        </Grid>
-      </Grid>
-    </Card>
+      </Card>
     </>
   );
 };
