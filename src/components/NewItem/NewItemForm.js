@@ -29,8 +29,10 @@ const NewItemForm = (props) => {
     event.preventDefault();
 
     const itemData = {
-      title: enteredTitle,
-      party: enteredParty,
+      title: enteredTitle.toLowerCase(),
+      party: enteredParty.toLowerCase(),
+      // title: enteredTitle,
+      // party: enteredParty,
       amount: enteredAmount,
     };
 

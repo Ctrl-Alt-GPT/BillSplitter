@@ -16,7 +16,7 @@ const SplitParty = (props) => {
   return (
     <Card sx={{ height: '100%', textAlign: 'center' }}>
       {calculatedSplit === 0 ? (
-        <CardContent>Enter the amount of people in the party:</CardContent>
+        <CardContent>Split the bill evenly:</CardContent>
       ) : (
         <CardContent>Calculated split: ${calculatedSplit}</CardContent>
       )}
