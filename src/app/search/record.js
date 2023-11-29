@@ -56,7 +56,11 @@ const Record = (props) => {
   return (
     <>
       <div className="tile" >
-       <Card sx={{ width: '100%', height: '100%'}} variant="outlined">
+       <Card sx={{ width: '100%',
+                   height: '100%',
+                   overflow: 'auto',
+                   backgroundColor: 'white',
+                  }} elevation={10}>
           <CardContent>
             <CardActions>
               <Link
