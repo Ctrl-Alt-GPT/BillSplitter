@@ -11,7 +11,7 @@ const SplitPartyForm = ({ onPartyAmountSubmit }) => {
   return (
     <NumericFormat
       customInput={TextField}
-      label="party amount"
+      label="number of people in the party*"
       onChange={partyChangeHandler}
       allowNegative={false}
       decimalScale={0}

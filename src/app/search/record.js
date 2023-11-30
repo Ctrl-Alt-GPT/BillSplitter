@@ -8,6 +8,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
+import { nanoid } from 'nanoid';
 
 const prodURL = true;
 
@@ -23,18 +24,17 @@ const Record = (props) => {
     }));
 
     const data = {
+      id: props._id,
       lineItems: updatedLineItems,
+      tallies: props.tallies,
       taxes: JSON.stringify(props.tax),
       tipValues: JSON.stringify(props.tips),
+      createdOn: props.createdAt
     };
-      
     setLineItems(data);
-  // console.log(JSON.stringify(data));
   }, []);
 
   const deleteRecord = async () => {
-
-    // console.log("Delete record called.");
     props.removeRecord(props._id);
 
     // Uncomment to make permanent changes to DB.
@@ -52,7 +52,6 @@ const Record = (props) => {
     // }
   }
 
-    
   return (
     <>
       <div className="tile" >
@@ -63,15 +62,20 @@ const Record = (props) => {
                   }} elevation={10}>
           <CardContent>
             <CardActions>
-              <Link
-              href={{
-                pathname: '/edit',
-                query: {
-                  search: JSON.stringify(items)
-                }
-              }}>
-               <Button size="medium">Edit</Button>
-              </Link>
+              
+            <Link
+              // Dynamic route:
+                href={'/edit/' + props._id}
+              //   href={{
+              //     pathname: '/edit',
+              //     query: {
+              //       search: JSON.stringify(items)
+              //     }
+              // }}
+              >
+              <Button size="medium">Edit</Button>
+            </Link>
+              
             </CardActions>
             <Typography variant="h6" gutterBottom>
               Receipt ID: {props._id} <br />

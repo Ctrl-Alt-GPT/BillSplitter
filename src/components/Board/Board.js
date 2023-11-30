@@ -15,7 +15,6 @@ const Board = (props) => {
   const [items, setItems] = useState(DEFAULT_ITEMS);
   const [tax, setTax] = useState(0);
   const [tips, setTips] = useState(0);
-  // const searchParams = useSearchParams();
 
   useEffect(() => {
     if (props !== undefined) {
@@ -26,23 +25,6 @@ const Board = (props) => {
       setTips(tipVals);
     }
   }, [props]);
-
-  // useEffect(() => {
-  //   if (searchParams !== undefined) {
-  //     const parsedData = JSON.parse(searchParams.get('search'));
-
-  //     if (parsedData && parsedData.lineItems) {
-  //       // const lineItems = parsedData.lineItems;
-  //       // console.log(JSON.stringify(lineItems));
-  //       setItems(parsedData.lineItems);
-  //       const tax = parsedData.taxes == undefined ? 0 : parsedData.taxes;
-  //       setTax(tax);
-  //       const tips = parsedData.tipValues == undefined ? 0 : parsedData.tipValues;
-  //       setTips(tips);
-  //       // console.log(JSON.stringify(items));
-  //     }
-  //   }
-  // }, [searchParams]);
 
   const [tallies, setTallies] = useState([]);
 
@@ -145,71 +127,57 @@ const Board = (props) => {
     }
   };
 
-  const addPartyHandler = (partyName) => {
-    setParties((prevParties) => {
-      return [...prevParties, partyName];
-    });
-  };
-
-  // Group items by party name
-  // const groupedItems = {};
-  // items.forEach((item) => {
-  //   const party = item.party;
-  //   if (!groupedItems[party]) {
-  //     groupedItems[party] = [];
-  //   }
-  //   groupedItems[party].push(item);
-  // });
-
   return (
-    <Card
-      sx={{
-        p: 2,
-        maxWidth: 0.9,
-        minHeight: '90vh',
-        marginX: 'auto',
-        backgroundColor: 'rgb(232, 237, 255)',
-      }}
-    >
-      <Grid container spacing={1}>
-        <Grid item md={12}>
-          <NewItem onAddItems={addItemHandler} />
+    <>
+      <Card
+        sx={{
+          p: 2,
+          maxWidth: 0.9,
+          minHeight: '90vh',
+          marginX: 'auto',
+          backgroundColor: 'rgb(141, 165, 252)',
+        }}
+      >
+        <Grid container spacing={1}>
+          <Grid item md={12}>
+            <NewItem onAddItems={addItemHandler} />
+          </Grid>
+          <Grid item md={10} sm={8} xs={12}>
+            <Items datas={items} removeItem={getRemoveIdx} />
+          </Grid>
+          <Grid item md={2} sm={4} xs={12}>
+            <TaxTipsAddComponent
+              getTaxVal={getTaxVal}
+              getTipsVal={getTipsVal}
+              tax={tax}
+              tips={tips}
+            />
+          </Grid>
+          <Grid item md={4} sm={5} xs={12} order={{ xs: 2, sm: 4 }}>
+            <SplitParty total={grandTotal} />
+          </Grid>
+          <Grid item md={8} sm={7} xs={12} order={{ xs: 1, sm: 5 }}>
+            <DisplayTotal
+              datas={items}
+              taxData={tax}
+              tipsData={tips}
+              calculatedGrandTotal={calculatedGrandTotalHandler}
+            />
+          </Grid>
+          <Grid item md={12} sm={12} xs={12} order={{ xs: 3, sm: 6 }}>
+            <IndividualTotals
+              items={items}
+              tax={tax}
+              tips={tips}
+              tallies={tallies}
+              clearTax={getTaxVal}
+              clearTips={getTipsVal}
+              clearItems={setItems}
+            />
+          </Grid>
         </Grid>
-        <Grid item md={10} sm={8} xs={12}>
-          <Items datas={items} removeItem={getRemoveIdx} />
-        </Grid>
-        <Grid item md={2} sm={4} xs={12}>
-          <TaxTipsAddComponent
-            getTaxVal={getTaxVal}
-            getTipsVal={getTipsVal}
-            tax={tax}
-            tips={tips}
-          />
-        </Grid>
-        <Grid item md={4} sm={5} xs={12} order={{ xs: 2, sm: 4 }}>
-          <SplitParty total={grandTotal} />
-        </Grid>
-        <Grid item md={8} sm={7} xs={12} order={{ xs: 1, sm: 5 }}>
-          <DisplayTotal
-            datas={items}
-            taxData={tax}
-            tipsData={tips}
-            calculatedGrandTotal={calculatedGrandTotalHandler}
-          />
-        </Grid>
-        <Grid item md={12} sm={12} xs={12} order={{ xs: 3, sm: 6 }}>
-          <IndividualTotals
-            items={items}
-            tax={tax}
-            tips={tips}
-            tallies={tallies}
-            clearTax={getTaxVal}
-            clearTips={getTipsVal}
-            clearItems={setItems}
-          />
-        </Grid>
-      </Grid>
-    </Card>
+      </Card>
+    </>
   );
 };
 

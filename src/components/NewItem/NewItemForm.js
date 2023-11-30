@@ -14,27 +14,8 @@ const NewItemForm = (props) => {
   };
 
   const partyChangeHandler = (event) => {
-    // Capitalize the first letter of the entered party name
-    const originalParty = event.target.value;
-    const cursorPosition = event.target.selectionStart;
-  
-    // Adjust the cursor position after removing characters
-    const adjustedCursorPosition =
-      originalParty.length - originalParty.slice(cursorPosition).length;
-  
-    const capitalizedParty = originalParty
-      .toLowerCase()
-      .split(',')
-      .map((part) => part.trim())
-      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-      .join(', ');
-  
-    setEnteredParty(capitalizedParty);
-  
-    // Set the adjusted cursor position after updating the state
-    event.target.setSelectionRange(adjustedCursorPosition, adjustedCursorPosition);
+    setEnteredParty(event.target.value);
   };
-  
 
   const amountChangeHandler = (event) => {
     let val = event.target.value;
@@ -48,8 +29,10 @@ const NewItemForm = (props) => {
     event.preventDefault();
 
     const itemData = {
-      title: enteredTitle,
-      party: enteredParty,
+      title: enteredTitle.toLowerCase(),
+      party: enteredParty.toLowerCase(),
+      // title: enteredTitle,
+      // party: enteredParty,
       amount: enteredAmount,
     };
 
