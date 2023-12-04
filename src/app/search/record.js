@@ -55,9 +55,15 @@ const Record = (props) => {
   return (
     <>
       <div className="tile" >
-        <Card sx={{ width:'100%', height: '100%'}} variant="outlined" >
+       <Card sx={{ width: '100%',
+                   height: '100%',
+                   overflow: 'auto',
+                   backgroundColor: 'white',
+                  }} elevation={10}>
           <CardContent>
-              <Link
+            <CardActions>
+              
+            <Link
               // Dynamic route:
                 href={'/edit/' + props._id}
               //   href={{
@@ -67,45 +73,57 @@ const Record = (props) => {
               //     }
               // }}
               >
-              Edit
+              <Button size="medium">Edit</Button>
             </Link>
-            <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-              ID : {props._id}
+              
+            </CardActions>
+            <Typography variant="h6" gutterBottom>
+              Receipt ID: {props._id} <br />
+              ------------------------------------------------------
             </Typography>
-            <Typography sx={{ fontSize: 16 }} component={'span'} color="text.secondary" gutterBottom>
-              Line Items : 
-              {props.lineItems.map((item) => (
-                <div key={nanoid()}>
-                  {item.title} ${item.amount}: {JSON.stringify(item.party)}
-                </div>
+            <Typography variant="body1" color="text.secondary" paragraph>
+            <strong>Line Items:</strong>
+             <ul>
+               {props.lineItems.map((item, index) => (
+                 <li key={index}>
+                   <strong>Title:</strong> {item.title} <br />
+                   <strong>Party:</strong> {item.party.join(', ')} <br />
+                   <strong>Amount:</strong> {item.amount} <br />
+                   <br />
+                 </li>
+               ))}
+             </ul>
+          </Typography>
+          <Typography variant="body1" color="text.secondary" paragraph>
+            <strong>Tallies:</strong>
+            <ul>
+              {props.tallies.map((tally, index) => (
+                <li key={index}>
+                  <strong>Party:</strong> {tally.party.charAt(0).toUpperCase() + tally.party.slice(1)} <br />
+                  <strong>Share:</strong> {tally.share.toFixed(2)} <br />
+                  <br />
+                </li>
               ))}
-            </Typography>
-            <Typography sx={{ fontSize: 16 }} component={'span'} color="text.secondary" gutterBottom>
-              Tallies: 
-              {props.tallies.map((item) => (
-                <div key={nanoid()}>
-                  {item.party},  ${item.share.toFixed(2)}
-                </div>
-              ))}
-            </Typography>
-            <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-              Tax : ${JSON.stringify(props.tax)}
-            </Typography>
-            <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-              Tips : ${JSON.stringify(props.tips)}
-            </Typography>
-            <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
-              Created On : {props.createdAt}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small" onClick={deleteRecord}>Delete</Button>
-          </CardActions>
-        </Card>
-      </div>
-    </>
-  )
-}
+            </ul>
+          </Typography>
+          <Typography variant="body1" color="text.secondary" paragraph>
+            <strong>Tax:</strong> {JSON.stringify(props.tax)}
+          </Typography>
+          <Typography variant="body1" color="text.secondary" paragraph>
+            <strong>Tips:</strong> {JSON.stringify(props.tips)}
+          </Typography>
+          <Typography variant="body1" color="text.secondary" paragraph>
+            <strong>Created On:</strong> {new Date(props.createdAt).toLocaleString()}
+          </Typography>
 
+        </CardContent>
+        <CardActions>
+          <Button size="medium" onClick={deleteRecord}>Delete</Button>
+        </CardActions>
+      </Card>
+    </div>
+    </>
+  );
+}
 
 export default Record;

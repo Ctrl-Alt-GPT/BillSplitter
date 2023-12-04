@@ -71,6 +71,11 @@ const IndividualTotals = (props) => {
     </div>
   ));
 
+  // Helper function to capitalize the first letter of a string
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   // Create a formatted string for displaying the Tallies
   const formattedTallies = props.tallies.map((tally, index) => (
     <Card
@@ -86,7 +91,7 @@ const IndividualTotals = (props) => {
       }}
     >
       <Box sx={{ fontSize: '1rem', fontWeight: 'bold', flex: 1 }}>
-        {tally.party}
+        {capitalizeFirstLetter(tally.party)}
       </Box>
       <Box sx={{ fontSize: '1rem', flex: 1 }}>${tally.share.toFixed(2)}</Box>
     </Card>
